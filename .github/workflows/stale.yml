@@ -1,5 +1,5 @@
  - name: Upload a Build Artifact
-  uses: actions/upload-artifact@v4.3.1
+  uses: actions/cache@v4.0.2
   with:
     # Artifact name
     name: # optional, default is artifact
