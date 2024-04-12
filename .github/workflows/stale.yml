@@ -1,4 +1,4 @@
-            - name: Teamwork GitHub Sync
+name: Teamwork GitHub Sync
   # You may pin to the exact commit or the version.
   uses: Teamwork/github-sync@42dcac69eb5a41fad0d518efeb6aecf1e45f8d01
   uses: Teamwork/github-sync@v1.3.3
