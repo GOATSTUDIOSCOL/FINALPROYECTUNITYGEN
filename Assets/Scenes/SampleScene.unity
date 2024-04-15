@@ -747,7 +747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6238501540685585019, guid: cbf0e9dae6421f041a3049aadc2b4ec9, type: 3}
       propertyPath: m_Name
-      value: TestLobby
+      value: LobbyManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbf0e9dae6421f041a3049aadc2b4ec9, type: 3}

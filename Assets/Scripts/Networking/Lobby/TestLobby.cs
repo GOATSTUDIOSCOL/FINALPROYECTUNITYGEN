@@ -12,7 +12,7 @@ public class TestLobby : MonoBehaviour
 {
 
     private Lobby hostLobby;
-    private const float MAX_HEART_BEAT_TIME = 0.15f;
+    private const float MAX_HEART_BEAT_TIME = 15f;
     private float currentHeartBeatTimer = 0;
     bool isStarted = false;
     int players = 0;
@@ -37,12 +37,14 @@ public class TestLobby : MonoBehaviour
 
     private void Update()
     {
-        HandleLobbyHeartBeat();
+        //HandleLobbyHeartBeat();
     }
 
 
-    public void isAvaliableToStart()
+    public async void isAvaliableToStart()
     {
+        hostLobby = await LobbyService.Instance.GetLobbyAsync(hostLobby.Id);
+        Debug.Log("players: " + hostLobby.Players.Count + " hostid: " + hostLobby.HostId + " playerid:" + AuthenticationService.Instance.PlayerId);
         if (!isStarted && hostLobby != null && hostLobby.Players.Count == 2 && AuthenticationService.Instance.PlayerId == hostLobby.HostId)
         {
             NetworkManager.Singleton.StartHost();
@@ -70,9 +72,9 @@ public class TestLobby : MonoBehaviour
                     {"GameMode", new DataObject(DataObject.VisibilityOptions.Public, "CaptureTheFlag")}
                 }
             };
-            Lobby hostLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, lobbyOptions);
+            hostLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, lobbyOptions);
 
-            Debug.Log("Created lobby: " + hostLobby.Name + " " + hostLobby.MaxPlayers + " code: " + hostLobby.LobbyCode);
+            Debug.Log("Created lobby: " + hostLobby.Name + " " + hostLobby.MaxPlayers + " code: " + hostLobby.LobbyCode + " id: " + hostLobby.Id);
             PrintPlayers(hostLobby);
         }
         catch (LobbyServiceException exp)
@@ -132,12 +134,11 @@ public class TestLobby : MonoBehaviour
             Debug.Log("Exception Message: " + exp.Message);
         }
     }
-
     public async void QuickJoinLobby()
     {
         try
         {
-            await Lobbies.Instance.QuickJoinLobbyAsync();
+            hostLobby = await Lobbies.Instance.QuickJoinLobbyAsync();
             Debug.Log("Quick Join Lobby");
         }
         catch (LobbyServiceException exp)
