@@ -6,6 +6,7 @@ using Unity.Services.Authentication;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using Unity.VisualScripting;
+using Unity.Netcode;
 
 public class TestLobby : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class TestLobby : MonoBehaviour
     private Lobby hostLobby;
     private const float MAX_HEART_BEAT_TIME = 0.15f;
     private float currentHeartBeatTimer = 0;
+    bool isStarted = false;
+    int players = 0;
 
     private string playerName;
 
@@ -37,6 +40,22 @@ public class TestLobby : MonoBehaviour
         HandleLobbyHeartBeat();
     }
 
+
+    public void isAvaliableToStart()
+    {
+        if (!isStarted && hostLobby != null && hostLobby.Players.Count == 2 && AuthenticationService.Instance.PlayerId == hostLobby.HostId)
+        {
+            NetworkManager.Singleton.StartHost();
+            isStarted = true;
+            Debug.Log("Host started");
+        }
+        else if (!isStarted && hostLobby != null && hostLobby.Players.Count == 2)
+        {
+            NetworkManager.Singleton.StartClient();
+            isStarted = true;
+            Debug.Log("Client started");
+        }
+    }
     public async void CreateLobby()
     {
         try
@@ -51,7 +70,7 @@ public class TestLobby : MonoBehaviour
                     {"GameMode", new DataObject(DataObject.VisibilityOptions.Public, "CaptureTheFlag")}
                 }
             };
-            Lobby hostLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, lobbyOptions);
+            hostLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, lobbyOptions);
 
             Debug.Log("Created lobby: " + hostLobby.Name + " " + hostLobby.MaxPlayers + " code: " + hostLobby.LobbyCode);
             PrintPlayers(hostLobby);

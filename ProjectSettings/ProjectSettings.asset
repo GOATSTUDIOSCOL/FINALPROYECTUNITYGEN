@@ -817,11 +817,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: c85bb527-1350-4a40-82f5-fb3ac0ad53bd
+  cloudProjectId: 820222ff-265f-4d07-b3f1-5961a8fc72f8
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: ScapeRoom(Final project Generation)
-  organizationId: carlos-2009850
+  organizationId: juanhernandeznz
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
