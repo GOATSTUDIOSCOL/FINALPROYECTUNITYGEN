@@ -797,7 +797,12 @@ PlayerSettings:
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
   cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Purchasing: 0
+    UDP: 0
     UNet: 1
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -812,11 +817,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 4823b0e7-df22-4b42-a6d3-ff7805b957e2
+  cloudProjectId: c85bb527-1350-4a40-82f5-fb3ac0ad53bd
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: ScapeRoom(Final project Generation)
-  organizationId: nickparro
+  organizationId: carlos-2009850
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
