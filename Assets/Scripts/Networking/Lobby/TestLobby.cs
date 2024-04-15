@@ -70,7 +70,7 @@ public class TestLobby : MonoBehaviour
                     {"GameMode", new DataObject(DataObject.VisibilityOptions.Public, "CaptureTheFlag")}
                 }
             };
-            hostLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, lobbyOptions);
+            Lobby hostLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, lobbyOptions);
 
             Debug.Log("Created lobby: " + hostLobby.Name + " " + hostLobby.MaxPlayers + " code: " + hostLobby.LobbyCode);
             PrintPlayers(hostLobby);
