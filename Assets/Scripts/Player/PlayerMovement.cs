@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     #region MovementVariables
     [Header("Movement Settings")]
     public float speed = 5f;
+    public Transform playerCamera;
     #endregion
 
     #region JumpVariables
@@ -60,7 +61,12 @@ public class PlayerMovement : MonoBehaviour
     public void Move()
     {
         Vector2 input = move.ReadValue<Vector2>();
-        rb.AddForce(new Vector3(input.x, 0f, input.y) * speed);
+        if (input.magnitude > 0f)
+        {
+            float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            rb.MovePosition(rb.position + moveDir.normalized * speed * 2f * Time.deltaTime);
+        }
     }
 
     public void Jump(InputAction.CallbackContext callbackContext)
