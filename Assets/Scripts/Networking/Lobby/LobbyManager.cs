@@ -15,6 +15,7 @@ public class LobbyManager : MonoBehaviour
     private const float MAX_HEART_BEAT_TIME = 15f;
     public const string KEY_PLAYER_NAME = "PlayerName";
     public const string KEY_PLAYER_CHARACTER = "Character";
+    public const string KEY_START_GAME = "CodeForStart";
 
 
     public event EventHandler OnLeftLobby;
@@ -36,15 +37,12 @@ public class LobbyManager : MonoBehaviour
     private float heartbeatTimer = 0;
     private float lobbyPollTimer;
     private float refreshLobbyListTimer = 5f;
-    private float ableToStartGameTimer = 5f;
     private Lobby joinedLobby;
     private string playerName;
-    private bool IsStarted;
 
     private void Awake()
     {
         Instance = this;
-        IsStarted = false;
     }
 
     private void Update()
@@ -53,17 +51,6 @@ public class LobbyManager : MonoBehaviour
         // HandleRefreshLobbyList();
         // HandleLobbyHeartBeat();
         HandleLobbyPolling();
-        HandleStartGame();
-    }
-
-    private void HandleStartGame()
-    {
-        ableToStartGameTimer -= Time.deltaTime;
-        if (ableToStartGameTimer < 0)
-        {
-            StartGame();
-            ableToStartGameTimer = 5f;
-        }
     }
 
     public async void Authentication(string playerName)
@@ -98,27 +85,27 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    public bool ArePlayersCompleted()
+    public async void StartGame()
     {
-        if (joinedLobby == null) return false;
-
-        return joinedLobby.Players.Count == joinedLobby.MaxPlayers;
-    }
-    public void StartGame()
-    {
-        if (!IsStarted && ArePlayersCompleted())
+        if (IsLobbyHost())
         {
-            if (IsLobbyHost())
+            try
             {
-                NetworkManager.Singleton.StartHost();
-                IsStarted = true;
+                Debug.Log("Started Game");
+                string relayCode = await RelayManager.Instance.CreateRelay();
+
+                Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
+                {
+                    Data = new Dictionary<string, DataObject> {
+                        {KEY_START_GAME, new DataObject(DataObject.VisibilityOptions.Member, relayCode)}
+                    }
+                });
+                Hide();
             }
-            else
+            catch (LobbyServiceException exp)
             {
-                NetworkManager.Singleton.StartClient();
-                IsStarted = true;
+                Debug.Log("Message " + exp.Message);
             }
-            Hide();
         }
     }
 
@@ -131,6 +118,9 @@ public class LobbyManager : MonoBehaviour
         {
             Player = player,
             IsPrivate = isPrivate,
+            Data = new Dictionary<string, DataObject> {
+                {KEY_START_GAME, new DataObject(DataObject.VisibilityOptions.Member, "0")}
+            },
         };
 
         Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
@@ -342,6 +332,17 @@ public class LobbyManager : MonoBehaviour
 
                     joinedLobby = null;
                 }
+
+                if (joinedLobby.Data[KEY_START_GAME].Value != "0")
+                {
+                    if (!IsLobbyHost())
+                    {
+                        RelayManager.Instance.JoinRelay(joinedLobby.Data[KEY_START_GAME].Value);
+                    }
+                    joinedLobby = null;
+                    Hide();
+                }
+
             }
         }
     }
