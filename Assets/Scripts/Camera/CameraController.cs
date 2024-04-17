@@ -1,9 +1,22 @@
+using Unity.Netcode;
 using UnityEngine;
+using Cinemachine;
 
-public class CameraController : MonoBehaviour
+public class CameraController : NetworkBehaviour
 {
     public float mouseSensitivity = 100f;
     private float xRotation = 0f;
+    public CinemachineVirtualCamera cvc;
+
+
+    public override void OnNetworkSpawn()
+    {
+        if (!IsOwner)
+        {
+            cvc.Priority = -1;
+            gameObject.SetActive(false);
+        }
+    }
 
     void FixedUpdate()
     {
