@@ -11,6 +11,7 @@ public class PlayerMovement : NetworkBehaviour
     [Header("Movement Settings")]
     public float speed = 5f;
     public Transform playerCamera;
+    public Transform head;
     #endregion
 
     #region JumpVariables
@@ -22,6 +23,7 @@ public class PlayerMovement : NetworkBehaviour
 
     #region Components
     private PlayerInputActions playerControls;
+    private Animator animator;
     private Rigidbody rb;
     #endregion
 
@@ -53,7 +55,8 @@ public class PlayerMovement : NetworkBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        FindObjectOfType<CinemachineVirtualCamera>().Follow = transform;
+        animator = GetComponent<Animator>();
+        FindObjectOfType<CinemachineVirtualCamera>().Follow = head.transform;
     }
 
     private void OnEnable()
@@ -77,13 +80,17 @@ public class PlayerMovement : NetworkBehaviour
     public void Move()
     {
         Vector2 input = move.ReadValue<Vector2>();
-        if (input.magnitude > 0f && playerCamera)
+        animator.SetFloat("moveX", input.x);
+        animator.SetFloat("moveY", input.y);
+        if (input.magnitude > 0f)
         {
-            float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            moveDir = transform.TransformDirection(moveDir); // Transform the direction relative to player's rotation
             rb.MovePosition(rb.position + moveDir.normalized * speed * 2f * Time.deltaTime);
         }
     }
+
 
     public void Jump(InputAction.CallbackContext callbackContext)
     {

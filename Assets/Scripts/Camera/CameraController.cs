@@ -1,6 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UIElements;
 
 public class CameraController : NetworkBehaviour
 {
@@ -20,16 +21,33 @@ public class CameraController : NetworkBehaviour
 
     void FixedUpdate()
     {
-        Move();
+        RotatePlayer();
+        RotateCamera();
     }
 
-    private void Move()
+
+    private void RotateCamera()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        transform.localRotation = Quaternion.Euler(xRotation, transform.localRotation.eulerAngles.y + mouseX, 0f);
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+    }
+
+    private void RotatePlayer()
+    {
+        if (Input.GetAxis("Mouse X") != 0)
+        {
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+            Quaternion deltaRotation = Quaternion.Euler(0f, mouseX, 0f);
+            Quaternion currentRotation = transform.parent.GetComponent<Rigidbody>().rotation;
+            Quaternion newRotation = deltaRotation * currentRotation;
+            transform.parent.GetComponent<Rigidbody>().MoveRotation(newRotation);
+        }
+        else
+        {
+            transform.parent.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        }
     }
 }
 
