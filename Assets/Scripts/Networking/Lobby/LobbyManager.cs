@@ -18,6 +18,7 @@ public class LobbyManager : MonoBehaviour
 
 
     public event EventHandler OnLeftLobby;
+    public event EventHandler OnCompletedPlayers;
     public event EventHandler<LobbyEventArgs> OnJoinedLobby;
     public event EventHandler<LobbyEventArgs> OnJoinedLobbyUpdate;
     public event EventHandler<LobbyEventArgs> OnKickedFromLobby;
@@ -35,12 +36,15 @@ public class LobbyManager : MonoBehaviour
     private float heartbeatTimer = 0;
     private float lobbyPollTimer;
     private float refreshLobbyListTimer = 5f;
+    private float ableToStartGameTimer = 5f;
     private Lobby joinedLobby;
     private string playerName;
+    private bool IsStarted;
 
     private void Awake()
     {
         Instance = this;
+        IsStarted = false;
     }
 
     private void Update()
@@ -48,11 +52,18 @@ public class LobbyManager : MonoBehaviour
         // Enable when release the final product
         // HandleRefreshLobbyList();
         // HandleLobbyHeartBeat();
-        if (joinedLobby != null && joinedLobby.Players.Count == joinedLobby.MaxPlayers)
-        {
-            IsAvaliableToStart();
-        }
         HandleLobbyPolling();
+        HandleStartGame();
+    }
+
+    private void HandleStartGame()
+    {
+        ableToStartGameTimer -= Time.deltaTime;
+        if (ableToStartGameTimer < 0)
+        {
+            StartGame();
+            ableToStartGameTimer = 5f;
+        }
     }
 
     public async void Authentication(string playerName)
@@ -87,19 +98,31 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-
-    public void IsAvaliableToStart()
+    public bool ArePlayersCompleted()
     {
-        Debug.Log("IS COMPETED " + IsLobbyHost());
-        if (IsLobbyHost())
+        if (joinedLobby == null) return false;
+
+        return joinedLobby.Players.Count == joinedLobby.MaxPlayers;
+    }
+    public void StartGame()
+    {
+        if (!IsStarted && ArePlayersCompleted())
         {
-            NetworkManager.Singleton.StartHost();
-        }
-        else
-        {
-            NetworkManager.Singleton.StartClient();
+            if (IsLobbyHost())
+            {
+                NetworkManager.Singleton.StartHost();
+                IsStarted = true;
+            }
+            else
+            {
+                NetworkManager.Singleton.StartClient();
+                IsStarted = true;
+            }
+            Hide();
         }
     }
+
+
     public async void CreateLobby(string lobbyName, int maxPlayers = 2, bool isPrivate = false)
     {
         Player player = GetPlayer();
@@ -253,7 +276,6 @@ public class LobbyManager : MonoBehaviour
         });
 
         OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
-
     }
 
     public async void LeaveLobby()
@@ -338,5 +360,15 @@ public class LobbyManager : MonoBehaviour
         }
         return false;
     }
+
+    private void Hide()
+    {
+        gameObject.SetActive(false);
+    }
+
+    // private void Show()
+    // {
+    //     gameObject.SetActive(true);
+    // }
 
 }
