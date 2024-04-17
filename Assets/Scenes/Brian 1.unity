@@ -270,7 +270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4915051987913821256, guid: 7e5952756b9b7514ebad87de95a4d7c6, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 878182608
+      value: 1811386983
       objectReference: {fileID: 0}
     - target: {fileID: 4915051987913821256, guid: 7e5952756b9b7514ebad87de95a4d7c6, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
@@ -339,7 +339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4915051987913821256, guid: 7e5952756b9b7514ebad87de95a4d7c6, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2542839907
+      value: 2374002688
       objectReference: {fileID: 0}
     - target: {fileID: 4915051987913821256, guid: 7e5952756b9b7514ebad87de95a4d7c6, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
@@ -474,6 +474,50 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1032908653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1032908655}
+  - component: {fileID: 1032908654}
+  m_Layer: 0
+  m_Name: RelayManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1032908654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032908653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dccc9658440c354eb3121a2380b5ee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1032908655
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032908653}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.9069278, y: 24.699135, z: -58.12455}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1182477015
 GameObject:
   m_ObjectHideFlags: 0
