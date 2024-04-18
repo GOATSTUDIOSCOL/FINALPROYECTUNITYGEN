@@ -10,7 +10,7 @@ https://github.com/GOATSTUDIOSCOL/final-unity-generation-project
 The build can be downloaded from our organization Itch.io page
 https://soybri.itch.io/hazmat 
 
-Our Team can be contacted on this links:
+Our Team can be contacted on the following links:
 
 https://github.com/Kertiax 
 https://github.com/brian-cve
