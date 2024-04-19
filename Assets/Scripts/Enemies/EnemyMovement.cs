@@ -6,15 +6,12 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] NavMeshAgent aiNav;
-    [SerializeField] PlayerMovement[] players;
-    [SerializeField] PlayerMovement nearestPlayer;
+    public PlayerMovement[] players;
+    [SerializeField] float attackRange = 2.0f;
+    public Animator enemyAnim;
     [SerializeField] float speed = 2f;
-
     
-    //public Animator enemyAnim;
-    public bool isDead=false;
-    public float damageDistance = 5f;
-    //[SerializeField] GameObject playerObj, camJumpscare;
+    [SerializeField] float waitintgBeforeHuntingTime = 2f;
     void Start()
     {
         aiNav.speed = speed;
@@ -24,8 +21,9 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update() {
         aiNav.speed = speed;
+
     }
-    void UpdateNearestPlayer()
+    public void UpdateNearestPlayer()
     {
         if (players.Length == 0)
             return;
@@ -43,56 +41,25 @@ public class EnemyMovement : MonoBehaviour
             }
         }
 
-        if (nearestPlayer != null && aiNav != null && !isDead)
+        if (nearestPlayer != null && aiNav != null)
         {
             aiNav.SetDestination(nearestPlayer.transform.position);
+            enemyAnim.SetBool("isWalking", true);
         }
     }
 
-    void OnCollisionEnter(Collision other) 
+    public void OnPlayerKilled()
     {
-        PlayerMovement player = other.gameObject.GetComponent<PlayerMovement>();
-        if (player != null)
-        {
-            Destroy(player.gameObject); // Destruye al jugador
-            StartCoroutine(UpdatePlayersAfterDelay());
-        }
+        enemyAnim.SetBool("isWalking", false);
+        StartCoroutine(UpdatePlayersAfterDelay());
     }
+
      IEnumerator UpdatePlayersAfterDelay()
     {
-        yield return new WaitForEndOfFrame(); // Espera hasta el final del frame para asegurar que el jugador esté completamente destruido
-        UpdatePlayerList(); // Actualiza la lista de jugadores
+        yield return new WaitForSeconds(waitintgBeforeHuntingTime); // Espera hasta el final del frame para asegurar que el jugador esté completamente destruido
+        players = FindObjectsOfType<PlayerMovement>();
         UpdateNearestPlayer(); // Busca un nuevo jugador más cercano
     }
-
-    void UpdatePlayerList()
-    {
-        players = FindObjectsOfType<PlayerMovement>(); // Vuelve a encontrar todos los jugadores activos
-    }
-    
 }
-
-    // void Update()
-    // {
-    //     aiNav.destination = enemyDestination;
-    //     actualSpeed = aiNav.speed;
-    //     //HurtPlayer();
-    // }
-  
-    // void HurtPlayer()
-    // {   
-    //     if(!isDead){
-    //     float distanceToPlayer = Vector3.Distance(transform.position, playerPos.position);
-    //     if (distanceToPlayer <= damageDistance)
-    //     {
-    //         isDead = true;
-            
-    //         StartCoroutine("GamePlayerOver");
-    //         playerObj.SetActive(false);
-    //         camJumpscare.SetActive(true);
-    //         enemyAnim.SetTrigger("jumpscare");
-    //     }
-    //     }
-    // }
 
   
