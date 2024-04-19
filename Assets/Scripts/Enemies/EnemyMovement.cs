@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Unity.Netcode;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovement : NetworkBehaviour
 {
     [SerializeField] NavMeshAgent aiNav;
     public PlayerMovement[] players;
@@ -12,16 +13,29 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float speed = 2f;
     
     [SerializeField] float waitintgBeforeHuntingTime = 2f;
-    void Start()
+    // void Start()
+    // {
+    //     aiNav.speed = speed;
+    //     players = FindObjectsOfType<PlayerMovement>();
+    //     InvokeRepeating("UpdateNearestPlayer", 0.5f, 2f); // Actualiza cada 0.5 segundos
+    // }
+
+    public override void OnNetworkSpawn()
     {
         aiNav.speed = speed;
         players = FindObjectsOfType<PlayerMovement>();
-        InvokeRepeating("UpdateNearestPlayer", 0.5f, 2f); // Actualiza cada 0.5 segundos
+        InvokeRepeating("UpdateNearestPlayer", 0.5f, 2f);
+
+        NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnected;
+
     }
 
+    private void ClientDisconnected(ulong u)
+    {
+        players = null;
+    }
     private void Update() {
         aiNav.speed = speed;
-
     }
     public void UpdateNearestPlayer()
     {
