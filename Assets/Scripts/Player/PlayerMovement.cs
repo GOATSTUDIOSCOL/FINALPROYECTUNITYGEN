@@ -1,11 +1,17 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
+using Unity.Netcode;
+using Unity.VisualScripting;
+using System.Collections.Generic;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     #region MovementVariables
     [Header("Movement Settings")]
     public float speed = 5f;
+    public Transform playerCamera;
+    public Transform head;
     #endregion
 
     #region JumpVariables
@@ -17,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     #region Components
     private PlayerInputActions playerControls;
+    private Animator animator;
     private Rigidbody rb;
     #endregion
 
@@ -29,14 +36,27 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     #endregion
 
+    public Transform hand;
+
+    public override void OnNetworkSpawn()
+    {
+        if (!IsOwner)
+        {
+            enabled = false; 
+            return;
+        }
+    }
     private void Awake()
     {
         playerControls = new PlayerInputActions();
+
     }
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+        FindObjectOfType<CinemachineVirtualCamera>().Follow = head.transform;
     }
 
     private void OnEnable()
@@ -60,8 +80,17 @@ public class PlayerMovement : MonoBehaviour
     public void Move()
     {
         Vector2 input = move.ReadValue<Vector2>();
-        rb.AddForce(new Vector3(input.x, 0f, input.y) * speed);
+        animator.SetFloat("moveX", input.x);
+        animator.SetFloat("moveY", input.y);
+        if (input.magnitude > 0f)
+        {
+            float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            moveDir = transform.TransformDirection(moveDir); // Transform the direction relative to player's rotation
+            rb.MovePosition(rb.position + moveDir.normalized * speed * 2f * Time.deltaTime);
+        }
     }
+
 
     public void Jump(InputAction.CallbackContext callbackContext)
     {
