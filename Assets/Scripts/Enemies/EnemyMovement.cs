@@ -13,21 +13,21 @@ public class EnemyMovement : NetworkBehaviour
     [SerializeField] float speed = 2f;
     
     [SerializeField] float waitintgBeforeHuntingTime = 2f;
-    // void Start()
-    // {
-    //     aiNav.speed = speed;
-    //     players = FindObjectsOfType<PlayerMovement>();
-    //     InvokeRepeating("UpdateNearestPlayer", 0.5f, 2f); // Actualiza cada 0.5 segundos
-    // }
 
     public override void OnNetworkSpawn()
     {
         aiNav.speed = speed;
-        players = FindObjectsOfType<PlayerMovement>();
-        InvokeRepeating("UpdateNearestPlayer", 0.5f, 2f);
+        //players = FindObjectsOfType<PlayerMovement>();
+        //InvokeRepeating("UpdateNearestPlayer", 0.5f, 2f);
 
         NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnected;
     }
+
+    void Start()
+     {
+         players = FindObjectsOfType<PlayerMovement>();
+         InvokeRepeating("UpdateNearestPlayer", 0.5f, 2f); // Actualiza cada 0.5 segundos
+     }
 
     private void ClientDisconnected(ulong u)
     {
