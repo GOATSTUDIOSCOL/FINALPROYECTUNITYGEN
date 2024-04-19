@@ -1388,6 +1388,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218283235}
   m_Mesh: {fileID: 2296440066875284552, guid: e9c032a8f01f98d42949277ad1bbaa3b, type: 3}
+--- !u!1 &1227000709 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3009370515687889141, guid: 61982cab0fd68af42aafa4dbbaf68397, type: 3}
+  m_PrefabInstance: {fileID: 3009370516612895600}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1227000717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227000709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1276807519
 GameObject:
   m_ObjectHideFlags: 0
@@ -2222,6 +2239,10 @@ PrefabInstance:
     - target: {fileID: 1908426838564414062, guid: 9cd978663ece3074b9b120b955cecda6, type: 3}
       propertyPath: m_Name
       value: Cyborg1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1908426838564414062, guid: 9cd978663ece3074b9b120b955cecda6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cd978663ece3074b9b120b955cecda6, type: 3}
@@ -12903,6 +12924,10 @@ PrefabInstance:
     - target: {fileID: 3009370515687889141, guid: 61982cab0fd68af42aafa4dbbaf68397, type: 3}
       propertyPath: m_Name
       value: EnemyActivation
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009370515687889141, guid: 61982cab0fd68af42aafa4dbbaf68397, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3009370515687889142, guid: 61982cab0fd68af42aafa4dbbaf68397, type: 3}
       propertyPath: enemy
