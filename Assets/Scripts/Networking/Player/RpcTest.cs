@@ -34,7 +34,7 @@ public class RpcTest : NetworkBehaviour
     [Rpc(SendTo.Server)]
     void TestServerRpc(int value, ulong sourceNetworkObjectId)
     {
-        Debug.Log($"Server Received the RPC #{value} on NetworkObject #{sourceNetworkObjectId}");
+        //Debug.Log($"Server Received the RPC #{value} on NetworkObject #{sourceNetworkObjectId}");
         TestClientRpc(value, sourceNetworkObjectId);
     }
 

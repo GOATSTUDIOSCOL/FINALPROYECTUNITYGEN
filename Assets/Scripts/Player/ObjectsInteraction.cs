@@ -34,7 +34,7 @@ public class ObjectsInteraction : NetworkBehaviour
     {
         interact = playerControls.Player.Interact;
         interact.Enable();
-        interact.performed += Interact;
+        interact.performed += InteractFront;
     }
 
     private void SetThrowInput()
@@ -44,7 +44,7 @@ public class ObjectsInteraction : NetworkBehaviour
         throwAction.performed += ThrowObject;
     }
 
-    
+
     void GrabObject(GameObject obj)
     {
         PickupObjectServerRpc(obj.GetComponent<NetworkObject>().NetworkObjectId);
@@ -79,9 +79,8 @@ public class ObjectsInteraction : NetworkBehaviour
             heldObject.GetComponent<NetworkTransform>().InLocalSpace = false;
             heldObject = null;
             isHoldingObject = false;
-            Debug.Log("Drop On Server!");
         }
-        
+
     }
 
     void ReleaseObject()
@@ -114,7 +113,7 @@ public class ObjectsInteraction : NetworkBehaviour
     {
         if (!isHoldingObject)
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);
             foreach (Collider collider in colliders)
             {
                 if (collider.CompareTag("Grabbable"))
@@ -124,7 +123,6 @@ public class ObjectsInteraction : NetworkBehaviour
                 }
                 else if (collider.CompareTag("Item"))
                 {
-                    Debug.Log("Add item");
                     InventoryManager.instance.AddItemToInventory(collider.GetComponent<Item>().inventoryItem);
                     RpcTest.instance.TestDespawnObjectRpc(collider.GetComponent<NetworkObject>().NetworkObjectId);
                 }
@@ -135,5 +133,37 @@ public class ObjectsInteraction : NetworkBehaviour
             ReleaseObject();
         }
     }
-  
+
+    public float interactionRange = 5f;
+    public LayerMask interactableLayer;
+
+    public void InteractFront(InputAction.CallbackContext callbackContext)
+    {
+        if (!isHoldingObject)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(GetComponent<PlayerMovement>().playerCamera.transform.position, GetComponent<PlayerMovement>().playerCamera.transform.forward, out hit, interactionRange, interactableLayer))
+            {
+                GameObject hitObject = hit.collider.gameObject;
+                if (hitObject.CompareTag("Grabbable"))
+                {
+                    GrabObject(hitObject);
+                }
+                else if (hitObject.CompareTag("Item"))
+                {
+                    InventoryManager.instance.AddItemToInventory(hitObject.GetComponent<Item>().inventoryItem);
+                    RpcTest.instance.TestDespawnObjectRpc(hitObject.GetComponent<NetworkObject>().NetworkObjectId);
+                }
+            }
+        }
+        else
+        {
+            ReleaseObject();
+        }
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(GetComponent<PlayerMovement>().playerCamera.transform.position, GetComponent<PlayerMovement>().playerCamera.transform.forward * interactionRange);
+    }
 }

@@ -34,6 +34,10 @@ public class InventoryManager : MonoBehaviour
     {
         if (inventoryDatabase.items.Contains(item))
         {
+            if (item.itemName == "Key")
+            {
+                GameManager.instance.AddKeyRpc();
+            }
             item.quantity++;
         }
         else
