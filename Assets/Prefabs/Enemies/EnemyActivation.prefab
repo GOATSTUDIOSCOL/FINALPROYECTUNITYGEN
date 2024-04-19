@@ -16,13 +16,14 @@ GameObject:
   - component: {fileID: 3009370515687889148}
   - component: {fileID: 3009370515687889142}
   - component: {fileID: 8909982656850288624}
+  - component: {fileID: 1227000717}
   m_Layer: 0
   m_Name: EnemyActivation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3009370515687889147
 Transform:
   m_ObjectHideFlags: 0
@@ -115,7 +116,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 14
   m_CollisionDetection: 0
 --- !u!114 &3009370515687889148
 MonoBehaviour:
@@ -129,8 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2566308327
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 3223788573
+  InScenePlacedSourceGlobalObjectIdHash: 2566308327
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -150,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaa254ee41d3b434395ebdad832e911f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1908426838564414062, guid: 9cd978663ece3074b9b120b955cecda6, type: 3}
+  enemy: {fileID: 0}
   players: []
 --- !u!114 &8909982656850288624
 MonoBehaviour:
@@ -183,3 +184,15 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &1227000717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3009370515687889141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
