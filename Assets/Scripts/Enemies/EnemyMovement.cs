@@ -27,7 +27,6 @@ public class EnemyMovement : NetworkBehaviour
         InvokeRepeating("UpdateNearestPlayer", 0.5f, 2f);
 
         NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnected;
-
     }
 
     private void ClientDisconnected(ulong u)

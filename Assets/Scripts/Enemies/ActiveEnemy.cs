@@ -14,10 +14,8 @@ public class ActiveEnemy : NetworkBehaviour
             enabled=false;
             return;
         }
-
         NetworkManager.Singleton.OnClientConnectedCallback += ClientConnected;
         NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnected;
-
     }
 
     void ClientConnected(ulong u)
