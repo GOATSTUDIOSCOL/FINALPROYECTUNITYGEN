@@ -11,7 +11,6 @@ using System;
 public class LobbyManager : MonoBehaviour
 {
     public static LobbyManager Instance { get; private set; }
-
     private const float MAX_HEART_BEAT_TIME = 15f;
     public const string KEY_PLAYER_NAME = "PlayerName";
     public const string KEY_PLAYER_CHARACTER = "Character";
@@ -110,7 +109,7 @@ public class LobbyManager : MonoBehaviour
     }
 
 
-    public async void CreateLobby(string lobbyName, int maxPlayers = 2, bool isPrivate = false)
+    public async void CreateLobby(string lobbyName, int maxPlayers = 5, bool isPrivate = false)
     {
         Player player = GetPlayer();
 

@@ -20,6 +20,7 @@ public class LobbyListSingleUI : MonoBehaviour
         joinLobbyBtn.onClick.AddListener(() =>
         {
             LobbyManager.Instance.JoinLobby(lobby);
+            VivoxAuthentication.Instance.LoginToVivox();
         });
     }
 
