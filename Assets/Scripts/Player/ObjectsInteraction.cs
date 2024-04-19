@@ -3,6 +3,7 @@ using UnityEngine;
 using Cinemachine;
 using Unity.Netcode;
 using Unity.Netcode.Components;
+using Unity.VisualScripting;
 
 public class ObjectsInteraction : NetworkBehaviour
 {
@@ -12,6 +13,7 @@ public class ObjectsInteraction : NetworkBehaviour
     private InputAction interact;
     private InputAction throwAction;
     private PlayerInputActions playerControls;
+    public float pickUpRange = 5f;
     public override void OnNetworkSpawn()
     {
         if (!IsOwner)
@@ -34,7 +36,7 @@ public class ObjectsInteraction : NetworkBehaviour
     {
         interact = playerControls.Player.Interact;
         interact.Enable();
-        interact.performed += InteractFront;
+        interact.performed += Interact;
     }
 
     private void SetThrowInput()
@@ -132,38 +134,5 @@ public class ObjectsInteraction : NetworkBehaviour
         {
             ReleaseObject();
         }
-    }
-
-    public float interactionRange = 5f;
-    public LayerMask interactableLayer;
-
-    public void InteractFront(InputAction.CallbackContext callbackContext)
-    {
-        if (!isHoldingObject)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(GetComponent<PlayerMovement>().playerCamera.transform.position, GetComponent<PlayerMovement>().playerCamera.transform.forward, out hit, interactionRange, interactableLayer))
-            {
-                GameObject hitObject = hit.collider.gameObject;
-                if (hitObject.CompareTag("Grabbable"))
-                {
-                    GrabObject(hitObject);
-                }
-                else if (hitObject.CompareTag("Item"))
-                {
-                    InventoryManager.instance.AddItemToInventory(hitObject.GetComponent<Item>().inventoryItem);
-                    RpcTest.instance.TestDespawnObjectRpc(hitObject.GetComponent<NetworkObject>().NetworkObjectId);
-                }
-            }
-        }
-        else
-        {
-            ReleaseObject();
-        }
-    }
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(GetComponent<PlayerMovement>().playerCamera.transform.position, GetComponent<PlayerMovement>().playerCamera.transform.forward * interactionRange);
     }
 }
