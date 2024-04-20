@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 using Unity.Netcode;
-using Unity.VisualScripting;
-using System.Collections.Generic;
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -12,13 +10,6 @@ public class PlayerMovement : NetworkBehaviour
     public float speed = 5f;
     public Transform playerCamera;
     public Transform head;
-    #endregion
-
-    #region JumpVariables
-    [Header("Jump Settings")]
-    [SerializeField] private float jumpForce = 10f;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundMask;
     #endregion
 
     #region Components
@@ -62,19 +53,16 @@ public class PlayerMovement : NetworkBehaviour
     private void OnEnable()
     {
         SetMoveInput();
-        SetJumpInput();
     }
 
     private void OnDisable()
     {
         move.Disable();
-        jump.Disable();
     }
 
     private void FixedUpdate()
     {
         Move();
-        CheckGround();
     }
 
     public void Move()
@@ -91,30 +79,9 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-
-    public void Jump(InputAction.CallbackContext callbackContext)
-    {
-        if (isGrounded)
-        {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        }
-    }
-
-    private void CheckGround()
-    {
-        isGrounded = Physics.CheckSphere(groundCheck.position, 0.1f, groundMask);
-    }
-
     private void SetMoveInput()
     {
         move = playerControls.Player.Move;
         move.Enable();
-    }
-
-    private void SetJumpInput()
-    {
-        jump = playerControls.Player.Jump;
-        jump.Enable();
-        jump.performed += Jump;
     }
 }

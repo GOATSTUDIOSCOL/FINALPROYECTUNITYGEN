@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2454570872520462573}
   - component: {fileID: 7924313599651562768}
   - component: {fileID: -2583967405174830873}
+  - component: {fileID: 871608397}
   m_Layer: 0
   m_Name: Key
   m_TagString: Item
@@ -31,7 +32,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5257016245242524007}
-  m_LocalRotation: {x: 0.386896, y: 0, z: -0, w: 0.9221234}
+  m_LocalRotation: {x: 0.38689604, y: 0, z: 0, w: 0.9221234}
   m_LocalPosition: {x: -1.049, y: 0.74, z: 17.521}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
@@ -114,8 +115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1116355315
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 2374002688
+  InScenePlacedSourceGlobalObjectIdHash: 1116355315
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -168,7 +169,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &7924313599651562768
 MonoBehaviour:
@@ -195,3 +196,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.58118767, y: 1.2728419, z: 0.31867862}
   m_Center: {x: -0.035565227, y: -0.04994881, z: -0.041277174}
+--- !u!114 &871608397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5257016245242524007}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 1, g: 0.9530152, b: 0, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

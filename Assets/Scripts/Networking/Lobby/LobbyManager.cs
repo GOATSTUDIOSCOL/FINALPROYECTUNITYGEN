@@ -7,6 +7,8 @@ using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using Unity.Netcode;
 using System;
+using System.Threading.Tasks;
+using Unity.Services.Vivox;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -62,11 +64,11 @@ public class LobbyManager : MonoBehaviour
 
         AuthenticationService.Instance.SignedIn += () =>
         {
-            Debug.Log("Signed in! " + AuthenticationService.Instance.PlayerId);
             RefreshLobbyList();
         };
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        await VivoxService.Instance.InitializeAsync();
     }
 
     private void HandleRefreshLobbyList()
@@ -129,6 +131,8 @@ public class LobbyManager : MonoBehaviour
         OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
 
         Debug.Log("Created Lobby " + lobby.Name + " players " + lobby.MaxPlayers);
+
+        VivoxAuthentication.Instance.StartVivox();
     }
 
     public async void ListLobbies()
@@ -175,6 +179,7 @@ public class LobbyManager : MonoBehaviour
             Lobby lobby = await Lobbies.Instance.QuickJoinLobbyAsync();
             joinedLobby = lobby;
             Debug.Log("Quick Join Lobby");
+            VivoxAuthentication.Instance.StartVivox();
             OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
         }
         catch (LobbyServiceException exp)
@@ -257,14 +262,21 @@ public class LobbyManager : MonoBehaviour
 
     public async void JoinLobby(Lobby lobby)
     {
-        Player player = GetPlayer();
-
-        joinedLobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobby.Id, new JoinLobbyByIdOptions
+        try
         {
-            Player = player
-        });
+            Player player = GetPlayer();
 
-        OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
+            joinedLobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobby.Id, new JoinLobbyByIdOptions
+            {
+                Player = player
+            });
+            VivoxAuthentication.Instance.StartVivox();
+            OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log("Error joining lobby " + e);
+        }
     }
 
     public async void LeaveLobby()
@@ -319,32 +331,39 @@ public class LobbyManager : MonoBehaviour
                 float lobbyPollTimerMax = 1.1f;
                 lobbyPollTimer = lobbyPollTimerMax;
 
-                joinedLobby = await LobbyService.Instance.GetLobbyAsync(joinedLobby.Id);
+                var updatedLobby = await LobbyService.Instance.GetLobbyAsync(joinedLobby.Id);
 
-                OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = joinedLobby });
-
-                if (!IsPlayerInLobby())
+                if (updatedLobby != null)
                 {
-                    Debug.Log("Kicked from Lobby!");
+                    joinedLobby = updatedLobby;
 
-                    OnKickedFromLobby?.Invoke(this, new LobbyEventArgs { lobby = joinedLobby });
+                    OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = joinedLobby });
 
-                    joinedLobby = null;
-                }
-
-                if (joinedLobby.Data[KEY_START_GAME].Value != "0")
-                {
-                    if (!IsLobbyHost())
+                    if (!IsPlayerInLobby())
                     {
-                        RelayManager.Instance.JoinRelay(joinedLobby.Data[KEY_START_GAME].Value);
-                    }
-                    joinedLobby = null;
-                    Hide();
-                }
+                        Debug.Log("Kicked from Lobby!");
 
+                        OnKickedFromLobby?.Invoke(this, new LobbyEventArgs { lobby = joinedLobby });
+
+                        joinedLobby = null;
+                    }
+                    else
+                    {
+                        if (joinedLobby.Data.ContainsKey(KEY_START_GAME) && joinedLobby.Data[KEY_START_GAME].Value != "0")
+                        {
+                            if (!IsLobbyHost())
+                            {
+                                RelayManager.Instance.JoinRelay(joinedLobby.Data[KEY_START_GAME].Value);
+                            }
+                            joinedLobby = null;
+                            Hide();
+                        }
+                    }
+                }
             }
         }
     }
+
 
     private bool IsPlayerInLobby()
     {

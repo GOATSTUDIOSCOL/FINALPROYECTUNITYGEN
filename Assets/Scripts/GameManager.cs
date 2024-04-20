@@ -64,7 +64,6 @@ public class GameManager : NetworkBehaviour
     public void AddKeyRpc()
     {
         keys.Value++;
-        Debug.Log("Keys: " + keys.Value);
         keysText.text = "Keys: " + keys.Value.ToString();
     }
 }

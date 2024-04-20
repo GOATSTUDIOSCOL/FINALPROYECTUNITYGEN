@@ -3,7 +3,6 @@ using UnityEngine;
 using Cinemachine;
 using Unity.Netcode;
 using Unity.Netcode.Components;
-using Unity.VisualScripting;
 
 public class ObjectsInteraction : NetworkBehaviour
 {
@@ -14,6 +13,9 @@ public class ObjectsInteraction : NetworkBehaviour
     private InputAction throwAction;
     private PlayerInputActions playerControls;
     public float pickUpRange = 5f;
+    private CinemachineVirtualCamera playerCamera;
+    public float interactDistance = 5f;
+    public float interactRadius = 1f;
     public override void OnNetworkSpawn()
     {
         if (!IsOwner)
@@ -30,6 +32,8 @@ public class ObjectsInteraction : NetworkBehaviour
     {
         SetInteractInput();
         SetThrowInput();
+        playerCamera = FindObjectOfType<CinemachineVirtualCamera>();
+
     }
 
     private void SetInteractInput()
@@ -115,18 +119,18 @@ public class ObjectsInteraction : NetworkBehaviour
     {
         if (!isHoldingObject)
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);
-            foreach (Collider collider in colliders)
+            RaycastHit hit;
+            Vector3 rayOrigin = playerCamera.Follow.position;
+            if (Physics.SphereCast(rayOrigin, interactRadius, playerCamera.transform.forward, out hit, interactDistance))
             {
-                if (collider.CompareTag("Grabbable"))
+                if (hit.collider.CompareTag("Grabbable"))
                 {
-                    GrabObject(collider.gameObject);
-                    break;
+                    GrabObject(hit.collider.gameObject);
                 }
-                else if (collider.CompareTag("Item"))
+                else if (hit.collider.CompareTag("Item"))
                 {
-                    InventoryManager.instance.AddItemToInventory(collider.GetComponent<Item>().inventoryItem);
-                    RpcTest.instance.TestDespawnObjectRpc(collider.GetComponent<NetworkObject>().NetworkObjectId);
+                    InventoryManager.instance.AddItemToInventory(hit.collider.GetComponent<Item>().inventoryItem);
+                    RpcTest.instance.DespawnObjectRpc(hit.collider.GetComponent<NetworkObject>().NetworkObjectId);
                 }
             }
         }

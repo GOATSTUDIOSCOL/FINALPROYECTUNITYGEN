@@ -39,7 +39,7 @@ public class RpcTest : NetworkBehaviour
     }
 
     [Rpc(SendTo.Server)]
-    public void TestDespawnObjectRpc(ulong sourceNetworkObjectId)
+    public void DespawnObjectRpc(ulong sourceNetworkObjectId)
     {
         NetworkObject[] networkObjects = FindObjectsOfType<NetworkObject>();
 
