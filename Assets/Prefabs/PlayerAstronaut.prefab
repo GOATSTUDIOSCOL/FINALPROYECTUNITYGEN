@@ -1481,7 +1481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd381fa38593cdf4ebe0f94e41fd26a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 4
   playerCamera: {fileID: 2021333642821942833}
   head: {fileID: 2423224829649619402}
   hand: {fileID: 2021333642821942833}

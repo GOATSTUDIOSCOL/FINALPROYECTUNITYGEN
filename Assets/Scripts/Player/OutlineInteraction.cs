@@ -30,7 +30,7 @@ public class OutlineInteraction : MonoBehaviour
                     Outline outlineComponent = hit.collider.GetComponent<Outline>();
                     if (outlineComponent != null)
                     {
-                        outlineComponent.enabled = true;
+                        outlineComponent.OutlineWidth = 10;
                         highlightedObjects.Add(outlineComponent);
                     }
                 }
@@ -47,7 +47,7 @@ public class OutlineInteraction : MonoBehaviour
         {
             if (!ObjectIsStillHighlighted(outline, hits))
             {
-                outline.enabled = false;
+                outline.OutlineWidth = 0;
                 highlightedObjects.Remove(outline);
             }
         }
