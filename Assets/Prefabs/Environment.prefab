@@ -57138,8 +57138,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.012919136, y: 0.013237116, z: 0.014701952}
-  m_Center: {x: 0.000000030200745, y: -0.00044206777, z: 0.0073509957}
+  m_Size: {x: 0.015843144, y: 0.015975822, z: 0.018067153}
+  m_Center: {x: -0.00068898854, y: -0.00015562402, z: 0.007350996}
 --- !u!4 &3367523969524173557 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2a6079e7d7c46264d93ec4018d234336, type: 3}
@@ -65030,8 +65030,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.036132324, y: 0.035878316, z: 0.050078254}
-  m_Center: {x: 0.0005865799, y: 0.013962314, z: -0.009485935}
+  m_Size: {x: 0.03963105, y: 0.04348278, z: 0.050078247}
+  m_Center: {x: 0.00094269967, y: 0.013619128, z: -0.009485928}
 --- !u!4 &3367523969050750635 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ea74eb1c1df4df74eb289c8040ea5b5d, type: 3}
@@ -65643,8 +65643,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 29.137
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6450158, guid: 34b8a5bfe71cc1844b2d95a6853d2630, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 34b8a5bfe71cc1844b2d95a6853d2630, type: 3}
+--- !u!1 &2968259492967942328 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 152222, guid: 34b8a5bfe71cc1844b2d95a6853d2630, type: 3}
+  m_PrefabInstance: {fileID: 2968259492968094246}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &262106196
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2968259492967942328}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0939461, y: 2.5500014, z: 3.225569}
+  m_Center: {x: 0.12604685, y: 1.2750139, z: -0.19810101}
 --- !u!4 &2968259492968143496 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 475310, guid: 34b8a5bfe71cc1844b2d95a6853d2630, type: 3}
@@ -69597,8 +69616,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.036132324, y: 0.035878316, z: 0.050078254}
-  m_Center: {x: 0.0005866395, y: 0.013962314, z: -0.009485905}
+  m_Size: {x: 0.046990797, y: 0.043185815, z: 0.050078247}
+  m_Center: {x: -0.0030803008, y: 0.013947204, z: -0.009485902}
 --- !u!4 &3367523968752607424 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ea74eb1c1df4df74eb289c8040ea5b5d, type: 3}
@@ -72630,6 +72649,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a6079e7d7c46264d93ec4018d234336, type: 3}
+--- !u!1 &2733695528787100791 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2a6079e7d7c46264d93ec4018d234336, type: 3}
+  m_PrefabInstance: {fileID: 2968259493401524518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &847462530
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2733695528787100791}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.015171493, y: 0.018319944, z: 0.014701952}
+  m_Center: {x: -0.00041405953, y: -0.00039925706, z: 0.0073509933}
 --- !u!4 &3367523968580689613 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2a6079e7d7c46264d93ec4018d234336, type: 3}
@@ -76089,8 +76126,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.036132324, y: 0.035878316, z: 0.050078254}
-  m_Center: {x: 0.0005866991, y: 0.013962195, z: -0.00948589}
+  m_Size: {x: 0.04535318, y: 0.042788208, z: 0.050078247}
+  m_Center: {x: -0.00046702474, y: 0.013572394, z: -0.009485885}
 --- !u!4 &3367523968258429924 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ea74eb1c1df4df74eb289c8040ea5b5d, type: 3}
