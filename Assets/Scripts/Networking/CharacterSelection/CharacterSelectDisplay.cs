@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
+using Unity.Services.Authentication;
+using Unity.Services.Lobbies;
 using UnityEngine;
 
 public class CharacterSelectDisplay : NetworkBehaviour
@@ -14,7 +16,7 @@ public class CharacterSelectDisplay : NetworkBehaviour
     [SerializeField] private Transform introSpawnPoint;
 
     private GameObject introInstance;
-    private List<CharacterSelectButton> characterButtons = new();
+    private readonly List<CharacterSelectButton> characterButtons = new();
 
     private NetworkList<CharacterSelectState> players;
     private void Awake()
@@ -34,20 +36,18 @@ public class CharacterSelectDisplay : NetworkBehaviour
                 HandleClientConnected(client.ClientId);
             }
         }
-        if (IsClient)
-        {
-            Character[] allCharacters = characterDataBase.GetAllCharacters();
+        Character[] allCharacters = characterDataBase.GetAllCharacters();
 
-            foreach (Character character in allCharacters)
-            {
-                // In tutorial says var
-                CharacterSelectButton selectButtonInstance = Instantiate(selectButtonPrefab, charactersHolder);
-                selectButtonInstance.SetCharacter(this, character);
-                characterButtons.Add(selectButtonInstance);
-            }
-            players.OnListChanged += HandlePlayersStateChange;
-            Debug.Log("Client Joined");
+        foreach (Character character in allCharacters)
+        {
+            // In tutorial says var
+            CharacterSelectButton selectButtonInstance = Instantiate(selectButtonPrefab, charactersHolder);
+            selectButtonInstance.SetCharacter(this, character);
+            characterButtons.Add(selectButtonInstance);
         }
+        players.OnListChanged += HandlePlayersStateChange;
+        Debug.Log("Client Joined");
+
 
         // if (IsHost)
         // {
@@ -57,10 +57,9 @@ public class CharacterSelectDisplay : NetworkBehaviour
 
     public override void OnNetworkDespawn()
     {
-        if (IsClient)
-        {
-            players.OnListChanged -= HandlePlayersStateChange;
-        }
+
+        players.OnListChanged -= HandlePlayersStateChange;
+
 
         if (IsServer)
         {
@@ -72,7 +71,8 @@ public class CharacterSelectDisplay : NetworkBehaviour
 
     private void HandleClientConnected(ulong clientId)
     {
-        players.Add(new CharacterSelectState(clientId));
+        if (!players.Contains(new CharacterSelectState(clientId)))
+            players.Add(new CharacterSelectState(clientId));
     }
 
     private void HandleClientDisconnect(ulong clientId)
@@ -89,11 +89,12 @@ public class CharacterSelectDisplay : NetworkBehaviour
 
     public void SelectCharacter(Character character)
     {
-        characterNameText.text = character.DisplayName;
+        characterNameText.text = LobbyManager.Instance.PlayerName();
         characterInfoPanel.SetActive(true);
 
         for (int i = 0; i < players.Count; i++)
         {
+
             if (players[i].ClientId != NetworkManager.Singleton.LocalClientId) { continue; }
         }
 
@@ -126,6 +127,7 @@ public class CharacterSelectDisplay : NetworkBehaviour
 
     private void HandlePlayersStateChange(NetworkListEvent<CharacterSelectState> changeEvt)
     {
+
         for (int i = 0; i < playerCards.Length; i++)
         {
             if (players.Count > i)
@@ -136,6 +138,12 @@ public class CharacterSelectDisplay : NetworkBehaviour
             {
                 playerCards[i].DisableDisplay();
             }
+        }
+
+        foreach (var player in players)
+        {
+            if (player.ClientId != NetworkManager.Singleton.LocalClientId) { continue; }
+            break;
         }
     }
 }

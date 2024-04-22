@@ -14,6 +14,7 @@ public class LobbyManager : MonoBehaviour
 {
     public static LobbyManager Instance { get; private set; }
     private const float MAX_HEART_BEAT_TIME = 15f;
+    private const float LOBBY_POLL_TIMER_MAX = 5f;
     public const string KEY_PLAYER_NAME = "PlayerName";
     public const string KEY_PLAYER_CHARACTER = "Character";
     public const string KEY_START_GAME = "CodeForStart";
@@ -354,8 +355,8 @@ public class LobbyManager : MonoBehaviour
             lobbyPollTimer -= Time.deltaTime;
             if (lobbyPollTimer < 0f)
             {
-                float lobbyPollTimerMax = 1.1f;
-                lobbyPollTimer = lobbyPollTimerMax;
+
+                lobbyPollTimer = LOBBY_POLL_TIMER_MAX;
 
                 var updatedLobby = await LobbyService.Instance.GetLobbyAsync(joinedLobby.Id);
 
@@ -415,6 +416,8 @@ public class LobbyManager : MonoBehaviour
     {
         return GetJoinedLobby().Data[KEY_START_GAME].Value;
     }
+
+    public string PlayerName() => playerName;
 
     // private void Show()
     // {

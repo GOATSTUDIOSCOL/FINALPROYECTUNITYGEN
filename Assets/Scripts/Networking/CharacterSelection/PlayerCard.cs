@@ -26,7 +26,7 @@ public class PlayerCard : MonoBehaviour
         {
             characterIconImage.enabled = false;
         }
-        playerNameText.text = $"{state.ClientId}";
+        playerNameText.text = $"Player {state.ClientId}";
 
         visuals.SetActive(true);
     }
