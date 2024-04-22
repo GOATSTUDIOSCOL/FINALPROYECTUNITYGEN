@@ -115,6 +115,7 @@ public class LobbyManager : MonoBehaviour
     {
         Player player = GetPlayer();
 
+
         CreateLobbyOptions options = new()
         {
             Player = player,
@@ -130,9 +131,19 @@ public class LobbyManager : MonoBehaviour
 
         OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
 
+        string relayCode = await RelayManager.Instance.CreateRelay();
+
+        await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
+        {
+            Data = new Dictionary<string, DataObject> {
+                    {KEY_START_GAME, new DataObject(DataObject.VisibilityOptions.Member, relayCode)}
+                }
+        });
+
         Debug.Log("Created Lobby " + lobby.Name + " players " + lobby.MaxPlayers);
 
         VivoxAuthentication.Instance.StartVivox();
+        NetworkManager.Singleton.StartHost();
     }
 
     public async void ListLobbies()
@@ -180,6 +191,11 @@ public class LobbyManager : MonoBehaviour
             joinedLobby = lobby;
             Debug.Log("Quick Join Lobby");
             VivoxAuthentication.Instance.StartVivox();
+            bool joinerelayEvent = await RelayManager.Instance.JoinRelay(joinedLobby.Data[KEY_START_GAME].Value);
+            if (joinerelayEvent)
+            {
+                NetworkManager.Singleton.StartClient();
+            }
             OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
         }
         catch (LobbyServiceException exp)
@@ -271,6 +287,16 @@ public class LobbyManager : MonoBehaviour
                 Player = player
             });
             VivoxAuthentication.Instance.StartVivox();
+
+            if (joinedLobby.Data.ContainsKey(KEY_START_GAME))
+            {
+                bool joinerelayEvent = await RelayManager.Instance.JoinRelay(joinedLobby.Data[KEY_START_GAME].Value);
+                if (joinerelayEvent)
+                {
+                    NetworkManager.Singleton.StartClient();
+                }
+            }
+
             OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
         }
         catch (LobbyServiceException e)
@@ -347,18 +373,18 @@ public class LobbyManager : MonoBehaviour
 
                         joinedLobby = null;
                     }
-                    else
-                    {
-                        if (joinedLobby.Data.ContainsKey(KEY_START_GAME) && joinedLobby.Data[KEY_START_GAME].Value != "0")
-                        {
-                            if (!IsLobbyHost())
-                            {
-                                RelayManager.Instance.JoinRelay(joinedLobby.Data[KEY_START_GAME].Value);
-                            }
-                            joinedLobby = null;
-                            Hide();
-                        }
-                    }
+                    // else
+                    // {
+                    //     if (joinedLobby.Data.ContainsKey(KEY_START_GAME) && joinedLobby.Data[KEY_START_GAME].Value != "0")
+                    //     {
+                    //         if (!IsLobbyHost())
+                    //         {
+                    //             bool initRelayClient = await RelayManager.Instance.JoinRelay(joinedLobby.Data[KEY_START_GAME].Value);
+                    //         }
+                    //         // joinedLobby = null;
+                    //         // Hide();
+                    //     }
+                    // }
                 }
             }
         }
@@ -383,6 +409,11 @@ public class LobbyManager : MonoBehaviour
     private void Hide()
     {
         gameObject.SetActive(false);
+    }
+
+    public string GetRelayCode()
+    {
+        return GetJoinedLobby().Data[KEY_START_GAME].Value;
     }
 
     // private void Show()

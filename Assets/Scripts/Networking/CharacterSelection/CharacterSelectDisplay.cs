@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -10,6 +11,10 @@ public class CharacterSelectDisplay : NetworkBehaviour
     [SerializeField] private PlayerCard[] playerCards;
     [SerializeField] private TextMeshProUGUI characterNameText;
     [SerializeField] private GameObject characterInfoPanel;
+    [SerializeField] private Transform introSpawnPoint;
+
+    private GameObject introInstance;
+    private List<CharacterSelectButton> characterButtons = new();
 
     private NetworkList<CharacterSelectState> players;
     private void Awake()
@@ -18,6 +23,17 @@ public class CharacterSelectDisplay : NetworkBehaviour
     }
     public override void OnNetworkSpawn()
     {
+        if (IsServer)
+        {
+            NetworkManager.Singleton.OnClientConnectedCallback += HandleClientConnected;
+            NetworkManager.Singleton.OnClientDisconnectCallback += HandleClientDisconnect;
+            Debug.Log("Host Joined");
+
+            foreach (NetworkClient client in NetworkManager.Singleton.ConnectedClientsList)
+            {
+                HandleClientConnected(client.ClientId);
+            }
+        }
         if (IsClient)
         {
             Character[] allCharacters = characterDataBase.GetAllCharacters();
@@ -27,20 +43,16 @@ public class CharacterSelectDisplay : NetworkBehaviour
                 // In tutorial says var
                 CharacterSelectButton selectButtonInstance = Instantiate(selectButtonPrefab, charactersHolder);
                 selectButtonInstance.SetCharacter(this, character);
+                characterButtons.Add(selectButtonInstance);
             }
             players.OnListChanged += HandlePlayersStateChange;
+            Debug.Log("Client Joined");
         }
 
-        if (IsServer)
-        {
-            NetworkManager.Singleton.OnClientConnectedCallback += HandleClientConnected;
-            NetworkManager.Singleton.OnClientDisconnectCallback += HandleClientDisconnect;
-
-            foreach (NetworkClient client in NetworkManager.Singleton.ConnectedClientsList)
-            {
-                HandleClientConnected(client.ClientId);
-            }
-        }
+        // if (IsHost)
+        // {
+        //     joinCodeText.text = LobbyManager.Instance.GetRelayCode();
+        // }
     }
 
     public override void OnNetworkDespawn()
@@ -80,6 +92,18 @@ public class CharacterSelectDisplay : NetworkBehaviour
         characterNameText.text = character.DisplayName;
         characterInfoPanel.SetActive(true);
 
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (players[i].ClientId != NetworkManager.Singleton.LocalClientId) { continue; }
+        }
+
+        if (introInstance != null)
+        {
+            Destroy(introInstance);
+        }
+
+        introInstance = Instantiate(character.IntroPrefab, introSpawnPoint);
+
         SelectCharacterServerRpc(character.Id);
     }
 
@@ -88,10 +112,14 @@ public class CharacterSelectDisplay : NetworkBehaviour
     {
         for (int i = 0; i < players.Count; i++)
         {
-            if (players[i].ClientId == serverRpcParams.Receive.SenderClientId)
-            {
-                players[i] = new CharacterSelectState(players[i].ClientId, characterId);
-            }
+            if (players[i].ClientId != serverRpcParams.Receive.SenderClientId) { continue; }
+
+
+
+            players[i] = new CharacterSelectState(
+                players[i].ClientId,
+                characterId
+            );
         }
 
     }

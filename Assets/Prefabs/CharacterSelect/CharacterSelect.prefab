@@ -329,8 +329,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4206253156
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 2972747043
+  InScenePlacedSourceGlobalObjectIdHash: 1856491852
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -360,6 +360,7 @@ MonoBehaviour:
   - {fileID: 4921023078916045410}
   characterNameText: {fileID: 6054081006990948621}
   characterInfoPanel: {fileID: 6054081008689040674}
+  introSpawnPoint: {fileID: 0}
 --- !u!1 &6054081008134870793
 GameObject:
   m_ObjectHideFlags: 0

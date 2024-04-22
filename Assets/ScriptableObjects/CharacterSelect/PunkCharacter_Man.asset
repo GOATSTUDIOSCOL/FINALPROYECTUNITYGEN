@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: PunkCharacter_Man
   m_EditorClassIdentifier: 
   id: 1
-  displayName: Punk man
+  displayName: Adventurer man
   icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  introPrefab: {fileID: 3841495473497746444, guid: 99cdce1aad672744a890eb6693615961, type: 3}
