@@ -6,13 +6,12 @@ TagManager:
   tags:
   - MBS:Floor
   - MBS:Wall
-  layers:
-  - Default
-  - TransparentFX
-  - Ignore Raycast
-  - Ground
-  - Water
-  - UI
+  - Item
+  - Grabbable
+  - Phone
+  - Picture
+  - Cup
+
   - 
   - 
   - 
