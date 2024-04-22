@@ -10,7 +10,7 @@ public class AttackCollider : MonoBehaviour
         PlayerMovement player = other.gameObject.GetComponent<PlayerMovement>();
         if (player != null)
         {
-            Destroy(player.gameObject); // Destruye al jugador
+            player.gameObject.SetActive(false);
             enemyMovement.OnPlayerKilled();
         }
     }
