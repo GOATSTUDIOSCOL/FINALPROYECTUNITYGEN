@@ -8,10 +8,13 @@ public class ObjectsInteraction : NetworkBehaviour
 {
     private GameObject heldObject;
     private bool isHoldingObject = false;
-    private GameObject head;
     private InputAction interact;
     private InputAction throwAction;
     private PlayerInputActions playerControls;
+    public float pickUpRange = 5f;
+    private CinemachineVirtualCamera playerCamera;
+    public float interactDistance = 5f;
+    public float interactRadius = 1f;
     public override void OnNetworkSpawn()
     {
         if (!IsOwner)
@@ -28,6 +31,8 @@ public class ObjectsInteraction : NetworkBehaviour
     {
         SetInteractInput();
         SetThrowInput();
+        playerCamera = FindObjectOfType<CinemachineVirtualCamera>();
+
     }
 
     private void SetInteractInput()
@@ -44,10 +49,55 @@ public class ObjectsInteraction : NetworkBehaviour
         throwAction.performed += ThrowObject;
     }
 
-    
+
     void GrabObject(GameObject obj)
     {
+        isHoldingObject = true;
+        heldObject = obj;
         PickupObjectServerRpc(obj.GetComponent<NetworkObject>().NetworkObjectId);
+    }
+
+    void ReleaseObject()
+    {
+        if (heldObject != null)
+        {
+            isHoldingObject = false;
+            DropObjectServerRpc(heldObject.GetComponent<NetworkObject>().NetworkObjectId);
+        }
+    }
+
+    void ThrowObject(InputAction.CallbackContext callbackContext)
+    {
+        if (heldObject != null)
+        {
+            isHoldingObject = false;
+            ThrowObjectServerRpc(heldObject.GetComponent<NetworkObject>().NetworkObjectId);
+        }
+    }
+
+    public void Interact(InputAction.CallbackContext callbackContext)
+    {
+        if (!isHoldingObject)
+        {
+            RaycastHit hit;
+            Vector3 rayOrigin = playerCamera.Follow.position;
+            if (Physics.SphereCast(rayOrigin, interactRadius, playerCamera.transform.forward, out hit, interactDistance))
+            {
+                if (hit.collider.CompareTag("Grabbable"))
+                {
+                    GrabObject(hit.collider.gameObject);
+                }
+                else if (hit.collider.CompareTag("Item"))
+                {
+                    InventoryManager.instance.AddItemToInventory(hit.collider.GetComponent<Item>().inventoryItem);
+                    RpcTest.instance.DespawnObjectRpc(hit.collider.GetComponent<NetworkObject>().NetworkObjectId);
+                }
+            }
+        }
+        else
+        {
+            ReleaseObject();
+        }
     }
 
     [ServerRpc]
@@ -62,78 +112,30 @@ public class ObjectsInteraction : NetworkBehaviour
             pickUpObjectRigidbody.isKinematic = true;
             pickUpObjectRigidbody.interpolation = RigidbodyInterpolation.None;
             objectToPickup.GetComponent<NetworkTransform>().InLocalSpace = true;
-            isHoldingObject = true;
-            heldObject = objectToPickup.gameObject;
+            objectToPickup.transform.position = new Vector3(objectToPickup.transform.position.x, objectToPickup.transform.position.y + 2, objectToPickup.transform.position.z);
         }
     }
 
     [ServerRpc]
-    public void DropObjectServerRpc()
+    public void DropObjectServerRpc(ulong objToPickupID)
     {
-        if (heldObject != null)
-        {
-            heldObject.transform.parent = null;
-            var pickedUpObjectRigidbody = heldObject.GetComponent<Rigidbody>();
-            pickedUpObjectRigidbody.isKinematic = false;
-            pickedUpObjectRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
-            heldObject.GetComponent<NetworkTransform>().InLocalSpace = false;
-            heldObject = null;
-            isHoldingObject = false;
-            Debug.Log("Drop On Server!");
-        }
-        
+        NetworkManager.SpawnManager.SpawnedObjects.TryGetValue(objToPickupID, out var objectToPickup);
+        objectToPickup.transform.parent = null;
+        var pickedUpObjectRigidbody = objectToPickup.GetComponent<Rigidbody>();
+        pickedUpObjectRigidbody.isKinematic = false;
+        pickedUpObjectRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+        objectToPickup.GetComponent<NetworkTransform>().InLocalSpace = false;
     }
 
-    void ReleaseObject()
+    [ServerRpc]
+    public void ThrowObjectServerRpc(ulong objToPickupID)
     {
-        if (heldObject != null)
-        {
-            heldObject.GetComponent<Rigidbody>().isKinematic = false;
-            heldObject.transform.parent = null;
-            isHoldingObject = false;
-            heldObject = null;
-            DropObjectServerRpc();
-        }
+        NetworkManager.SpawnManager.SpawnedObjects.TryGetValue(objToPickupID, out var objectToPickup);
+        objectToPickup.transform.parent = null;
+        var pickedUpObjectRigidbody = objectToPickup.GetComponent<Rigidbody>();
+        pickedUpObjectRigidbody.isKinematic = false;
+        pickedUpObjectRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+        pickedUpObjectRigidbody.AddForce(transform.forward * 10f, ForceMode.Impulse);
+        objectToPickup.GetComponent<NetworkTransform>().InLocalSpace = false;
     }
-
-    void ThrowObject(InputAction.CallbackContext callbackContext)
-    {
-        if (heldObject != null)
-        {
-            Rigidbody rb = heldObject.GetComponent<Rigidbody>();
-            rb.isKinematic = false;
-            heldObject.transform.parent = null;
-            isHoldingObject = false;
-            heldObject = null;
-            rb.AddForce(head.transform.forward * 10f, ForceMode.Impulse);
-            DropObjectServerRpc();
-        }
-    }
-
-    public void Interact(InputAction.CallbackContext callbackContext)
-    {
-        if (!isHoldingObject)
-        {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
-            foreach (Collider collider in colliders)
-            {
-                if (collider.CompareTag("Grabbable"))
-                {
-                    GrabObject(collider.gameObject);
-                    break;
-                }
-                else if (collider.CompareTag("Item"))
-                {
-                    Debug.Log("Add item");
-                    InventoryManager.instance.AddItemToInventory(collider.GetComponent<Item>().inventoryItem);
-                    RpcTest.instance.TestDespawnObjectRpc(collider.GetComponent<NetworkObject>().NetworkObjectId);
-                }
-            }
-        }
-        else
-        {
-            ReleaseObject();
-        }
-    }
-  
 }

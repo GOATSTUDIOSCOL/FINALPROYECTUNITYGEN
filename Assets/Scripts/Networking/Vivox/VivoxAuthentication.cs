@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
+using Unity.Services.Authentication;
 using Unity.Services.Vivox;
 using UnityEngine;
 using UnityEngine.UI;
-using Unity.Services.Authentication;
 
 public class VivoxAuthentication : MonoBehaviour
 {
@@ -10,31 +10,50 @@ public class VivoxAuthentication : MonoBehaviour
     [SerializeField] private GameObject voicePanel;
     public static VivoxAuthentication Instance;
 
-
-
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
         }
-        joinHostButton.onClick.AddListener(() =>
+
+        /*joinHostButton.onClick.AddListener(() =>
         {
-            LoginToVivox();
-
-        });
+            StartVivox();
+        });*/
     }
 
-    public async void LoginToVivox()
+    public async void StartVivox()
     {
-        await VivoxService.Instance.InitializeAsync();
-        voicePanel.SetActive(true);
-        await JoinLobbyChannel();
+        try
+        {
+            voicePanel.SetActive(true);
+            await JoinLobbyChannel();
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("Error initializing Vivox: " + ex.Message);
+        }
     }
 
-    Task JoinLobbyChannel()
+    async Task JoinLobbyChannel()
     {
-        Debug.Log(LobbyManager.Instance.GetJoinedLobby().Name);
-        return VivoxService.Instance.JoinGroupChannelAsync(LobbyManager.Instance.GetJoinedLobby().Name, ChatCapability.AudioOnly);
+        try
+        {
+
+            var joinedLobby = LobbyManager.Instance.GetJoinedLobby();
+            if (joinedLobby != null)
+            {
+                await VivoxService.Instance.JoinGroupChannelAsync(joinedLobby.Name, ChatCapability.AudioOnly);
+            }
+            else
+            {
+                Debug.LogError("Joined lobby is null. Cannot join Vivox channel.");
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("Error joining Vivox channel: " + ex.Message);
+        }
     }
 }

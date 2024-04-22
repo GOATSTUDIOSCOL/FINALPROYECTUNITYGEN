@@ -59,7 +59,6 @@ public class AudioTapsManager : MonoBehaviour
     private void Start()
     {
         VivoxService.Instance.LoggedOut += DestroyAllEffectGameObjects;
-        Debug.Log(this.gameObject.name);
     }
 
     private void OnDestroy()

@@ -34,12 +34,12 @@ public class RpcTest : NetworkBehaviour
     [Rpc(SendTo.Server)]
     void TestServerRpc(int value, ulong sourceNetworkObjectId)
     {
-        Debug.Log($"Server Received the RPC #{value} on NetworkObject #{sourceNetworkObjectId}");
+        //Debug.Log($"Server Received the RPC #{value} on NetworkObject #{sourceNetworkObjectId}");
         TestClientRpc(value, sourceNetworkObjectId);
     }
 
     [Rpc(SendTo.Server)]
-    public void TestDespawnObjectRpc(ulong sourceNetworkObjectId)
+    public void DespawnObjectRpc(ulong sourceNetworkObjectId)
     {
         NetworkObject[] networkObjects = FindObjectsOfType<NetworkObject>();
 

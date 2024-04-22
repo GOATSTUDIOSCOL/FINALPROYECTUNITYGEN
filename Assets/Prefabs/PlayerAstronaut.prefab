@@ -645,6 +645,7 @@ GameObject:
   - component: {fileID: 2021333642821942833}
   - component: {fileID: 2021333642821942834}
   - component: {fileID: 2021333642821942836}
+  - component: {fileID: 5455192316834652132}
   m_Layer: 0
   m_Name: CAM1
   m_TagString: Untagged
@@ -660,7 +661,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2021333642821942837}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.588, z: 0.144}
+  m_LocalPosition: {x: 0, y: 1.6070001, z: 0.263}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -720,6 +721,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivity: 100
   cvc: {fileID: 2021333642821942834}
+--- !u!114 &5455192316834652132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021333642821942837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2fba25a5cd15594e8f050a11e386c80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ConfineMode: 0
+  m_BoundingVolume: {fileID: 0}
+  m_BoundingShape2D: {fileID: 0}
+  m_ConfineScreenEdges: 1
+  m_Damping: 0
 --- !u!1 &2021333643015552665
 GameObject:
   m_ObjectHideFlags: 0
@@ -930,7 +948,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2423224829649619403}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.588, z: 0.144}
+  m_LocalPosition: {x: 0, y: 1.607, z: 0.263}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1378,6 +1396,7 @@ GameObject:
   - component: {fileID: 3269736429621488206}
   - component: {fileID: 3269736429621488207}
   - component: {fileID: 3063100449741434249}
+  - component: {fileID: 3019155798947385477}
   m_Layer: 0
   m_Name: PlayerAstronaut
   m_TagString: Player
@@ -1394,7 +1413,7 @@ Transform:
   m_GameObject: {fileID: 3269736429621488201}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.18, y: 0, z: 0.59}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7639031878764114053}
@@ -1441,7 +1460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 721960837
+  GlobalObjectIdHash: 2092707623
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1462,14 +1481,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd381fa38593cdf4ebe0f94e41fd26a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 4
   playerCamera: {fileID: 2021333642821942833}
   head: {fileID: 2423224829649619402}
-  jumpForce: 10
-  groundCheck: {fileID: 7385187524996413692}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 8
   hand: {fileID: 2021333642821942833}
 --- !u!54 &3269736429621488202
 Rigidbody:
@@ -1486,7 +1500,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &3269736429621488205
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1497,10 +1511,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.16254432
-  m_Height: 1.8482468
+  m_Radius: 0.37797368
+  m_Height: 1.8482469
   m_Direction: 1
-  m_Center: {x: -0.008744806, y: 0.9313226, z: 0.08822848}
+  m_Center: {x: -0.024199527, y: 0.9313226, z: 0.18929279}
 --- !u!114 &3269736429621488204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1600,6 +1614,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55ca3b2973157934faf23ace576a377f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpRange: 5
+  interactDistance: 5
+  interactRadius: 0.5
 --- !u!114 &3063100449741434249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1612,6 +1629,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3019155798947385477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3269736429621488201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e0ab8d046b0bd4e8a2ecd23d197a55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactDistance: 5
+  interactRadius: 0.5
+  playerCamera: {fileID: 0}
 --- !u!1 &3305818726817510295
 GameObject:
   m_ObjectHideFlags: 0

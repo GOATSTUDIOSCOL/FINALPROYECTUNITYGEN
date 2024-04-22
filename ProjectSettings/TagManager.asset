@@ -8,10 +8,13 @@ TagManager:
   - MBS:Wall
   - Item
   - Grabbable
-  - Phone
-  - Picture
-  - Cup
-
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Ground
+  - Water
+  - UI
   - 
   - 
   - 
