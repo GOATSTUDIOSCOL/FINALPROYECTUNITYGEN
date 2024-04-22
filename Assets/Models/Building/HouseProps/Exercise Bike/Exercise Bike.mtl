@@ -1,0 +1,19 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl _Gainsboro_
+Ka 0.000000 0.000000 0.000000
+  Kd 0.72 0.72 0.72
+Ks 0.330000 0.330000 0.330000
+
+newmtl _DarkGray_
+Ka 0.000000 0.000000 0.000000
+  Kd 0.08 0.08 0.08
+Ks 0.330000 0.330000 0.330000
+
+newmtl _Ivory_
+Ka 0.000000 0.000000 0.000000
+  Kd 1.00 1.00 0.88
+Ks 0.330000 0.330000 0.330000
+
