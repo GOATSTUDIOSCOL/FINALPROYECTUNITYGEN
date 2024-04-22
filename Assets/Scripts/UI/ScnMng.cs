@@ -21,6 +21,11 @@ public class ScnMng : NetworkBehaviour
         SceneManager.LoadScene(1);
     }
        
+    public void GoBack()
+    {
+        DontDestroyOnLoad( target: this);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1);
+    }
 
     public void ExitGame()
     {
