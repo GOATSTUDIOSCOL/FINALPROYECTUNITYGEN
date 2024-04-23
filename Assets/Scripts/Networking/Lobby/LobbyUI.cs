@@ -36,7 +36,7 @@ public class LobbyUI : MonoBehaviour
 
         startGameButton.onClick.AddListener(() =>
         {
-            LobbyManager.Instance.StartGame();
+           // LobbyManager.Instance.StartGame();
         });
     }
 
@@ -70,6 +70,7 @@ public class LobbyUI : MonoBehaviour
     private void UpdateLobby(Lobby lobby)
     {
         ClearLobby();
+        SetStartGameButtonVisible(LobbyManager.Instance.IsLobbyHost());
 
         foreach (Player player in lobby.Players)
         {
@@ -98,6 +99,11 @@ public class LobbyUI : MonoBehaviour
             if (child == playerSingleTemplate) continue;
             Destroy(child.gameObject);
         }
+    }
+
+    public void SetStartGameButtonVisible(bool visible)
+    {
+        startGameButton.gameObject.SetActive(visible);
     }
 
     private void Hide()

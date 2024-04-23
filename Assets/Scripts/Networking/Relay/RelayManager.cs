@@ -34,7 +34,7 @@ public class RelayManager : MonoBehaviour
                 allocation.ConnectionData
             );
 
-            NetworkManager.Singleton.StartHost();
+
             return joinCode;
         }
         catch (RelayServiceException exp)
@@ -44,7 +44,7 @@ public class RelayManager : MonoBehaviour
         }
     }
 
-    public async void JoinRelay(string joinCode)
+    public async Task<bool> JoinRelay(string joinCode)
     {
         try
         {
@@ -57,13 +57,13 @@ public class RelayManager : MonoBehaviour
                 joinAllocation.ConnectionData,
                 joinAllocation.HostConnectionData
             );
-
-            NetworkManager.Singleton.StartClient();
-
+            Debug.Log("FInish client allocation");
+            return true;
         }
         catch (RelayServiceException exp)
         {
             Debug.LogError("Message" + exp.Message);
+            return false;
         }
     }
 }
