@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BoxCounter : MonoBehaviour
+public class BoxCounter : NetworkBehaviour
 {
     public TextMeshProUGUI counterText;
     public Image counterIcon; // Asume que tienes un Image UI para el ícono
@@ -14,19 +15,28 @@ public class BoxCounter : MonoBehaviour
     private string[] layers = {"Phone", "Picture", "Cup"};
     private string selectedLayer;
     [SerializeField]private int count = 0;
-    [SerializeField]private int totalCount;
+    [SerializeField]private int totalCount = 1;
     public Door door;
 
     public Sprite spritePhone, spritePicture, spriteCup;
 
-    void Start()
+    public override void OnNetworkSpawn()
     {
+        if(!IsServer)
+        {
+            enabled=false;
+            return;
+        }
         selectedLayer = layers[UnityEngine.Random.Range(0, layers.Length)];
         int layerIndex = LayerMask.NameToLayer(selectedLayer);
         totalCount = FindObjectsOfType<GameObject>().Count(g => g.layer == layerIndex);
         
         UpdateUI(0);
         SetIconForSelectedLayer(); 
+    }
+    void Start()
+    {
+        
     }
 
 
