@@ -646,7 +646,7 @@ GameObject:
   - component: {fileID: 2021333642821942834}
   - component: {fileID: 2021333642821942836}
   - component: {fileID: 5455192316834652132}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CAM1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

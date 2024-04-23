@@ -63,6 +63,7 @@ public class ObjectsInteraction : NetworkBehaviour
         {
             isHoldingObject = false;
             DropObjectServerRpc(heldObject.GetComponent<NetworkObject>().NetworkObjectId);
+            heldObject = null;
         }
     }
 
@@ -72,6 +73,7 @@ public class ObjectsInteraction : NetworkBehaviour
         {
             isHoldingObject = false;
             ThrowObjectServerRpc(heldObject.GetComponent<NetworkObject>().NetworkObjectId);
+            heldObject = null;
         }
     }
 
@@ -91,6 +93,13 @@ public class ObjectsInteraction : NetworkBehaviour
                 {
                     InventoryManager.instance.AddItemToInventory(hit.collider.GetComponent<Item>().inventoryItem);
                     RpcTest.instance.DespawnObjectRpc(hit.collider.GetComponent<NetworkObject>().NetworkObjectId);
+                } else if (hit.collider.CompareTag("BoxPuzzle"))
+                {
+                    hit.collider.GetComponent<BoxActivation>().OpenBoxRpc();
+                } else if (hit.collider.CompareTag("Door"))
+                {
+                    hit.collider.GetComponent<Door>().OpenDoorRpc();
+                    Debug.Log("Se detecto este collider " + hit.collider.gameObject.name);
                 }
             }
         }
