@@ -5,6 +5,7 @@ using Unity.Netcode;
 using Unity.Services.Authentication;
 using Unity.Services.Lobbies;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterSelectDisplay : NetworkBehaviour
 {
@@ -15,14 +16,37 @@ public class CharacterSelectDisplay : NetworkBehaviour
     [SerializeField] private TextMeshProUGUI characterNameText;
     [SerializeField] private GameObject characterInfoPanel;
     [SerializeField] private Transform introSpawnPoint;
-
+    
     private GameObject introInstance;
     private readonly List<CharacterSelectButton> characterButtons = new();
 
     private NetworkList<CharacterSelectState> players;
+
+
+    [SerializeField] private Button startGameButton;
     private void Awake()
     {
         players = new NetworkList<CharacterSelectState>();
+        startGameButton.onClick.AddListener(() =>
+        {
+            StartGame();
+        });
+    }
+    public void StartGame()
+    {
+        if (IsServer)
+        {
+            foreach (var client in players)
+            {
+                var character = characterDataBase.GetCharacterById(client.CharacterId);
+                if (character != null)
+                {
+                    var spawnPos = new Vector3(Random.Range(-3f, 3f), 0f, Random.Range(-2f, 2f));
+                    var characterInstance = Instantiate(character.PlayerPrefab, spawnPos, Quaternion.identity);
+                    characterInstance.GetComponent<NetworkObject>().SpawnAsPlayerObject(client.ClientId);
+                }
+            }
+        }
     }
     public override void OnNetworkSpawn()
     {
@@ -122,13 +146,12 @@ public class CharacterSelectDisplay : NetworkBehaviour
             if (players[i].ClientId != serverRpcParams.Receive.SenderClientId) { continue; }
 
 
-
+            Debug.Log("Character ID: " + characterId);
             players[i] = new CharacterSelectState(
                 players[i].ClientId,
                 characterId
             );
 
-            Debug.Log("CCCCCCCCCCCCCCCCCCCCCCCCCCCC");
             Debug.Log(players[i]);
             Debug.Log(playerCards.Length);
             Debug.Log("CCCCCCCCCCCCCCCCCCCCCCCCCCCC");
