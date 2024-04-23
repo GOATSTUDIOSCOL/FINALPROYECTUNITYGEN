@@ -8,6 +8,8 @@ TagManager:
   - MBS:Wall
   - Item
   - Grabbable
+  - BoxPuzzle
+  - Door
   layers:
   - Default
   - TransparentFX

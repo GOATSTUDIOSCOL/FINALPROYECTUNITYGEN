@@ -60,7 +60,7 @@ public class BoxCounter : MonoBehaviour
             UpdateUI(count);
             if(count == totalCount)
             {
-            door.isOpen = true;
+            door.OpenDoorRpc();
             }
         }
     }

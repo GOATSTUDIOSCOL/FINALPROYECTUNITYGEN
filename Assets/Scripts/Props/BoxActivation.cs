@@ -1,20 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class BoxActivation : MonoBehaviour
+public class BoxActivation : NetworkBehaviour
 {
-    [SerializeField] bool isOpen;
+    [SerializeField] bool isOpenLocal;
+    private NetworkVariable<bool> isOpen = new NetworkVariable<bool>();
     [SerializeField] Animator boxAnim;
-    // Update is called once per frame
     void Update()
     {
-        if(isOpen)
+        if(isOpen.Value)
         {
             boxAnim.SetBool("isOpen", true);
         } else
         {
             boxAnim.SetBool("isOpen", false);
         }
+    }
+
+    [Rpc(SendTo.Server)]
+    public void OpenBoxRpc()
+    {
+        isOpen.Value = true;
     }
 }

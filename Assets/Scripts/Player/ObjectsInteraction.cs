@@ -93,6 +93,12 @@ public class ObjectsInteraction : NetworkBehaviour
                 {
                     InventoryManager.instance.AddItemToInventory(hit.collider.GetComponent<Item>().inventoryItem);
                     RpcTest.instance.DespawnObjectRpc(hit.collider.GetComponent<NetworkObject>().NetworkObjectId);
+                } else if (hit.collider.CompareTag("BoxPuzzle"))
+                {
+                    hit.collider.GetComponent<BoxActivation>().OpenBoxRpc();
+                } else if (hit.collider.CompareTag("Door"))
+                {
+                    hit.collider.GetComponent<Door>().OpenDoorRpc();
                 }
             }
         }
