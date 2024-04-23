@@ -6,6 +6,9 @@ TagManager:
   tags:
   - MBS:Floor
   - MBS:Wall
+  - Item
+  - conexion
+  - Grabbable
   layers:
   - Default
   - TransparentFX

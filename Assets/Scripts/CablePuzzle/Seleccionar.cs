@@ -5,7 +5,7 @@ using UnityEngine;
 public class Seleccionar : MonoBehaviour
 {
     public GameObject objetoDetectado;
-    int cantConexiones;
+    public int cantConexiones;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
@@ -45,6 +45,7 @@ public class Seleccionar : MonoBehaviour
         {
             objetoDetectado.transform.Rotate(0,0,-90);
         }
+
         if(cantConexiones == 7)
         {
             Debug.Log("puzzle resuelto");
@@ -63,15 +64,8 @@ public class Seleccionar : MonoBehaviour
         }
     }
 
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (collision.CompareTag("conexion"))
-    //    {
-    //        objetoDetectado = collision.gameObject;
-    //    }
-    //    else
-    //    {
-    //        objetoDetectado = null;
-    //    }
-    //}
+    
+
 }
+
+
