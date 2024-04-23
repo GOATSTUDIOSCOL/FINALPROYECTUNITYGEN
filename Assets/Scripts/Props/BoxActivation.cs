@@ -18,7 +18,6 @@ public class BoxActivation : NetworkBehaviour
             boxAnim.SetBool("isOpen", false);
         }
     }
-
     [Rpc(SendTo.Server)]
     public void OpenBoxRpc()
     {

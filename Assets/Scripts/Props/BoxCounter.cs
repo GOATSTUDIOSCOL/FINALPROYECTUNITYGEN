@@ -74,7 +74,7 @@ public class BoxCounter : NetworkBehaviour
     {
         count.Value += 1;
         UpdateUI(count.Value);
-        if(count == totalCount)
+        if(count.Value == totalCount.Value)
         {
         door.OpenDoorRpc();
         }
@@ -88,7 +88,7 @@ public class BoxCounter : NetworkBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer(selectedLayer.Value.ToString()))
+        if (IsServer && other.gameObject.layer == LayerMask.NameToLayer(selectedLayer.Value.ToString()))
         {
             OnTriggerEnterRpc();
         }
