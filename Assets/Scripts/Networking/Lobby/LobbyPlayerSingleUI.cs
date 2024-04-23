@@ -26,6 +26,8 @@ public class LobbyPlayerSingleUI : MonoBehaviour
         kickPlayerButton.gameObject.SetActive(visible);
     }
 
+
+
     public void UpdatePlayer(Player player)
     {
         this.player = player;
