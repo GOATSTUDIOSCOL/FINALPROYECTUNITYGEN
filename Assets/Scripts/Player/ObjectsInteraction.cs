@@ -63,6 +63,7 @@ public class ObjectsInteraction : NetworkBehaviour
         {
             isHoldingObject = false;
             DropObjectServerRpc(heldObject.GetComponent<NetworkObject>().NetworkObjectId);
+            heldObject = null;
         }
     }
 
@@ -72,6 +73,7 @@ public class ObjectsInteraction : NetworkBehaviour
         {
             isHoldingObject = false;
             ThrowObjectServerRpc(heldObject.GetComponent<NetworkObject>().NetworkObjectId);
+            heldObject = null;
         }
     }
 
