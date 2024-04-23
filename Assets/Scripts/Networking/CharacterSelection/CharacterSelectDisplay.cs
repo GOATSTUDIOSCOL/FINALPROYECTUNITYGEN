@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.Netcode;
 using Unity.Services.Authentication;
@@ -71,8 +72,12 @@ public class CharacterSelectDisplay : NetworkBehaviour
 
     private void HandleClientConnected(ulong clientId)
     {
+
         if (!players.Contains(new CharacterSelectState(clientId)))
+        {
             players.Add(new CharacterSelectState(clientId));
+            SelectCharacter(characterDataBase.GetCharacterById(1));
+        }
     }
 
     private void HandleClientDisconnect(ulong clientId)
@@ -106,6 +111,7 @@ public class CharacterSelectDisplay : NetworkBehaviour
         introInstance = Instantiate(character.IntroPrefab, introSpawnPoint);
 
         SelectCharacterServerRpc(character.Id);
+        LobbyManager.Instance.UpdatePlayerCharacter(character.Id);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -121,6 +127,17 @@ public class CharacterSelectDisplay : NetworkBehaviour
                 players[i].ClientId,
                 characterId
             );
+
+            Debug.Log("CCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+            Debug.Log(players[i]);
+            Debug.Log(playerCards.Length);
+            Debug.Log("CCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+
+            if ((int)players[i].ClientId < playerCards.Length)
+            {
+
+                playerCards[i].UpdateDisplay(players[i]);
+            }
         }
 
     }

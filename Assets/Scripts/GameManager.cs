@@ -27,27 +27,27 @@ public class GameManager : NetworkBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // public override void OnNetworkSpawn()
-    // {
-    //     if (IsServer)
-    //     {
-    //         keys.Value = initialKeys;
-    //         NetworkManager.OnClientConnectedCallback += NetworkManager_OnClientConnectedCallback;
-    //     }
-    //     else
-    //     {
-    //         if (keys.Value != initialKeys)
-    //         {
-    //             Debug.LogWarning($"NetworkVariable was {keys.Value} upon being spawned" +
-    //                 $" when it should have been {initialKeys}");
-    //         }
-    //         else
-    //         {
-    //             Debug.Log($"NetworkVariable is {keys.Value} when spawned.");
-    //         }
-    //         keys.OnValueChanged += OnKeyValueChanged;
-    //     }
-    // }
+    public override void OnNetworkSpawn()
+    {
+        if (IsServer)
+        {
+            keys.Value = initialKeys;
+            NetworkManager.OnClientConnectedCallback += NetworkManager_OnClientConnectedCallback;
+        }
+        else
+        {
+            if (keys.Value != initialKeys)
+            {
+                Debug.LogWarning($"NetworkVariable was {keys.Value} upon being spawned" +
+                    $" when it should have been {initialKeys}");
+            }
+            else
+            {
+                Debug.Log($"NetworkVariable is {keys.Value} when spawned.");
+            }
+            keys.OnValueChanged += OnKeyValueChanged;
+        }
+    }
 
     private void NetworkManager_OnClientConnectedCallback(ulong obj)
     {

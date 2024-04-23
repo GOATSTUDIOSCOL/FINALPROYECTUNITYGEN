@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6f88b10a80a6384394299e1253b3f48, type: 3}
-  m_Name: PunkCharacter_Man
+  m_Name: AdventurerCharacter_Man
   m_EditorClassIdentifier: 
   id: 1
   displayName: Adventurer man
   icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   introPrefab: {fileID: 3841495473497746444, guid: 99cdce1aad672744a890eb6693615961, type: 3}
+  playerPrefab: {fileID: 3841495473497746444, guid: fb9b4445b1c02fe48a58aebb537723e7, type: 3}
