@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class BoxActivation : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    [SerializeField] bool isOpen;
+    [SerializeField] Animator boxAnim;
     // Update is called once per frame
     void Update()
     {
-        
+        if(isOpen)
+        {
+            boxAnim.SetBool("isOpen", true);
+        } else
+        {
+            boxAnim.SetBool("isOpen", false);
+        }
     }
 }
