@@ -99,6 +99,7 @@ public class ObjectsInteraction : NetworkBehaviour
                 } else if (hit.collider.CompareTag("Door"))
                 {
                     hit.collider.GetComponent<Door>().OpenDoorRpc();
+                    Debug.Log("Se detecto este collider " + hit.collider.gameObject.name);
                 }
             }
         }

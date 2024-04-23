@@ -27,6 +27,7 @@ public class Door : NetworkBehaviour
      [Rpc(SendTo.Server)]
     public void OpenDoorRpc()
     {
+        Debug.Log("Se envia RPC");
         isOpen.Value = true;
     }
 }
