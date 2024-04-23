@@ -3114,7 +3114,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 899154355311142789}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 899154354796208795}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &899154355437902529
 GameObject:
   m_ObjectHideFlags: 0
@@ -4443,6 +4455,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 2224548086
       objectReference: {fileID: 0}
+    - target: {fileID: 1094195870, guid: 800366e9f795daf41b02edd12b6470ae, type: 3}
+      propertyPath: startGameButton
+      value: 
+      objectReference: {fileID: 899154355311142790}
     - target: {fileID: 6054081007838777520, guid: 800366e9f795daf41b02edd12b6470ae, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
