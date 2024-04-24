@@ -1311,6 +1311,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objetoDetectado: {fileID: 0}
   cantConexiones: 0
+  isOnPuzzle: 0
+  playerMovement: {fileID: 0}
+  cameraController: {fileID: 0}
+  door: {fileID: 0}
+  parentCollider: {fileID: 790239295}
 --- !u!61 &7532826934608374215
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1574,9 +1579,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4281474146894832943}
+  - component: {fileID: 790239295}
   m_Layer: 0
   m_Name: Sistemacables
-  m_TagString: Untagged
+  m_TagString: PuzzleBrian
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1590,7 +1596,7 @@ Transform:
   m_GameObject: {fileID: 7532826935470716055}
   m_LocalRotation: {x: 0, y: -0.01745245, z: 0, w: 0.99984777}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 11.111116, y: 13.333335, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7532826934608374218}
@@ -1606,6 +1612,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -2, z: 0}
+--- !u!65 &790239295
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7532826935470716055}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.63, y: 11.28, z: 0.1}
+  m_Center: {x: 0, y: 0, z: -0.38}
 --- !u!1 &7532826935582784129
 GameObject:
   m_ObjectHideFlags: 0
