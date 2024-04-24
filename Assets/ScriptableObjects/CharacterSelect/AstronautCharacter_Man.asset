@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   displayName: Astronaut Man
-  icon: {fileID: 21300000, guid: adf651a699abcac49a98dc19197fe688, type: 3}
+  icon: {fileID: 21300000, guid: 15b1dbecc622e0048bf62eeeb220c76c, type: 3}
   introPrefab: {fileID: 3269736429621488201, guid: 26fee342bd73fe7459761de9959f4b53, type: 3}
   playerPrefab: {fileID: 3269736429621488201, guid: ca5ced9a59e6f9f4894f2bffd9e85a88, type: 3}

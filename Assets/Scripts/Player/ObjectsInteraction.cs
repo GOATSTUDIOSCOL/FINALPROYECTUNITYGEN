@@ -3,6 +3,7 @@ using UnityEngine;
 using Cinemachine;
 using Unity.Netcode;
 using Unity.Netcode.Components;
+using Unity.VisualScripting;
 
 public class ObjectsInteraction : NetworkBehaviour
 {
@@ -93,13 +94,24 @@ public class ObjectsInteraction : NetworkBehaviour
                 {
                     InventoryManager.instance.AddItemToInventory(hit.collider.GetComponent<Item>().inventoryItem);
                     RpcTest.instance.DespawnObjectRpc(hit.collider.GetComponent<NetworkObject>().NetworkObjectId);
-                } else if (hit.collider.CompareTag("BoxPuzzle"))
+                }
+                else if (hit.collider.CompareTag("BoxPuzzle"))
                 {
                     hit.collider.GetComponent<BoxActivation>().OpenBoxRpc();
-                } else if (hit.collider.CompareTag("Door"))
+                }
+                else if (hit.collider.CompareTag("Door"))
                 {
                     hit.collider.GetComponent<Door>().OpenDoorRpc();
                     Debug.Log("Se detecto este collider " + hit.collider.gameObject.name);
+                }
+                else if (hit.collider.CompareTag("PuzzleBrian"))
+                {
+                    Debug.Log("puzzle brian");
+                    hit.collider.GetComponentInChildren<Seleccionar>().isOnPuzzle = true;
+                    hit.collider.GetComponentInChildren<Seleccionar>().playerMovement = GetComponent<PlayerMovement>();
+                    hit.collider.GetComponentInChildren<Seleccionar>().cameraController = GetComponent<PlayerMovement>().playerCamera.GetComponent<CameraController>();
+                    GetComponent<PlayerMovement>().enabled = false;
+                    GetComponent<PlayerMovement>().playerCamera.GetComponent<CameraController>().enabled = false;
                 }
             }
         }

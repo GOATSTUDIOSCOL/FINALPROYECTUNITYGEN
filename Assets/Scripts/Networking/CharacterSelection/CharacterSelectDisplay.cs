@@ -16,7 +16,9 @@ public class CharacterSelectDisplay : NetworkBehaviour
     [SerializeField] private TextMeshProUGUI characterNameText;
     [SerializeField] private GameObject characterInfoPanel;
     [SerializeField] private Transform introSpawnPoint;
-    
+    [SerializeField] private GameObject lobbyPanel;
+    [SerializeField] private GameObject inventoryPanel;
+
     private GameObject introInstance;
     private readonly List<CharacterSelectButton> characterButtons = new();
 
@@ -34,6 +36,8 @@ public class CharacterSelectDisplay : NetworkBehaviour
     }
     public void StartGame()
     {
+        lobbyPanel.SetActive(false);
+        inventoryPanel.SetActive(true);
         if (IsServer)
         {
             foreach (var client in players)
@@ -41,7 +45,7 @@ public class CharacterSelectDisplay : NetworkBehaviour
                 var character = characterDataBase.GetCharacterById(client.CharacterId);
                 if (character != null)
                 {
-                    var spawnPos = new Vector3(Random.Range(-3f, 3f), 0f, Random.Range(-2f, 2f));
+                    var spawnPos = new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f));
                     var characterInstance = Instantiate(character.PlayerPrefab, spawnPos, Quaternion.identity);
                     characterInstance.GetComponent<NetworkObject>().SpawnAsPlayerObject(client.ClientId);
                 }
