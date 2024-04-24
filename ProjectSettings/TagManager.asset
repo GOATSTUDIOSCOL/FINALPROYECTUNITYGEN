@@ -10,6 +10,8 @@ TagManager:
   - Grabbable
   - BoxPuzzle
   - Door
+  - conexion
+  - PuzzleBrian
   layers:
   - Default
   - TransparentFX

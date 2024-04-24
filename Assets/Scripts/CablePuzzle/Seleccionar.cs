@@ -6,49 +6,73 @@ public class Seleccionar : MonoBehaviour
 {
     public GameObject objetoDetectado;
     public int cantConexiones;
+    public bool isOnPuzzle = false;
+    int casNumberY = 5;
+    int casNumberX = 5;
+    public PlayerMovement playerMovement;
+    public CameraController cameraController;
+    public Door door;
+    public Collider parentCollider;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (isOnPuzzle)
         {
-            if (transform.position.y != 3.4f)
+            if (Input.GetKeyDown(KeyCode.W))
             {
-                transform.position += new Vector3(0, 3.4f, 0);
-            }
-            
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            if (transform.position.y != -3.4f)
-            {
-                transform.position += new Vector3(0, -3.4f, 0);
-            }
-            
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            if(transform.position.x != -3.4F)
-            {
-                transform.position += new Vector3(-3.4F, 0, 0);
-            }
-           
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            if(transform.position.x != 3.4f)
-            {
-                transform.position += new Vector3(3.4F, 0, 0);
-            }
-           
-        }
+                if (casNumberY < 6)
+                {
+                    transform.position += new Vector3(0, 0.34f, 0);
+                    casNumberY += 3;
+                }
 
-        if (Input.GetKeyDown(KeyCode.E) & objetoDetectado != null)
-        {
-            objetoDetectado.transform.Rotate(0,0,-90);
-        }
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                if (casNumberY > 3)
+                {
+                    transform.position += new Vector3(0, -0.34f, 0);
+                    casNumberY -= 3;
+                }
 
-        if(cantConexiones == 7)
-        {
-            Debug.Log("puzzle resuelto");
+            }
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                if (casNumberX > 3)
+                {
+                    transform.position += new Vector3(0.34F, 0, 0);
+                    casNumberX -= 3;
+                }
+
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                if (casNumberX < 6)
+                {
+                    transform.position += new Vector3(-0.34F, 0, 0);
+                    casNumberX += 3;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.E) & objetoDetectado != null)
+            {
+                objetoDetectado.transform.Rotate(0, 0, -90);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                isOnPuzzle= false;
+                playerMovement.enabled = true;
+                cameraController.enabled = true;
+            }
+
+            if (cantConexiones == 7)
+            {
+                isOnPuzzle = false;
+                playerMovement.enabled = true;
+                cameraController.enabled = true;
+                door.OpenDoorRpc();
+                parentCollider.enabled = false;
+            }
         }
     }
 
@@ -64,7 +88,7 @@ public class Seleccionar : MonoBehaviour
         }
     }
 
-    
+
 
 }
 
