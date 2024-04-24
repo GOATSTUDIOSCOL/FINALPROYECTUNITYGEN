@@ -12,6 +12,11 @@ TagManager:
   - Door
   - conexion
   - PuzzleBrian
+  - ActivFuse
+  - PlateActup
+  - PlateActDwn
+  - ActivationPlate
+  - FuseBoxPzl
   layers:
   - Default
   - TransparentFX
