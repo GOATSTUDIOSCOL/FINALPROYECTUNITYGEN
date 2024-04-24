@@ -133,6 +133,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerAdventurer_Male
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 60b2c1dd9a9c44b48958eb9a52929b38, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60b2c1dd9a9c44b48958eb9a52929b38, type: 3}
 --- !u!1 &3841495473497746444 stripped
@@ -203,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2460168923
+  GlobalObjectIdHash: 3841767225
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1

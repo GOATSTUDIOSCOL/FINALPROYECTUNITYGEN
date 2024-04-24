@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6f88b10a80a6384394299e1253b3f48, type: 3}
-  m_Name: PunkCharacter_Woman
+  m_Name: AstronautCharacter_Woman
   m_EditorClassIdentifier: 
-  id: 3
-  displayName: Punk woman
-  icon: {fileID: 21300000, guid: 04338c27cff222640a38a98a67a8d99f, type: 3}
-  introPrefab: {fileID: 8080092271132238840, guid: 4f52028897733434a8cdb19dca6a9baa, type: 3}
-  playerPrefab: {fileID: 8080092271132238840, guid: 6b548d82c17bac544accf0cdd823486f, type: 3}
+  id: 5
+  displayName: Astronut woman
+  icon: {fileID: 21300000, guid: e4e2af2727fdd1342b011dd02f5fecbd, type: 3}
+  introPrefab: {fileID: 3279439203714171277, guid: b0d7e2173e2ff2e4cbc4dfa910eb638f, type: 3}
+  playerPrefab: {fileID: 3279439203714171277, guid: 70f514d3cf2f53e43943bedcc6067cdb, type: 3}
