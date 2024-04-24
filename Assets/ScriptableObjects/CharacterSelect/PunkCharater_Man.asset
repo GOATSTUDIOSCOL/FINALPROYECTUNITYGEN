@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6f88b10a80a6384394299e1253b3f48, type: 3}
-  m_Name: PunkCharacter_Woman
+  m_Name: PunkCharater_Man
   m_EditorClassIdentifier: 
-  id: 3
-  displayName: Punk woman
-  icon: {fileID: 21300000, guid: 04338c27cff222640a38a98a67a8d99f, type: 3}
-  introPrefab: {fileID: 8080092271132238840, guid: 4f52028897733434a8cdb19dca6a9baa, type: 3}
-  playerPrefab: {fileID: 8080092271132238840, guid: 6b548d82c17bac544accf0cdd823486f, type: 3}
+  id: 9
+  displayName: Punk Man
+  icon: {fileID: 21300000, guid: 40513550f9a777542ae5ee1b2db00945, type: 3}
+  introPrefab: {fileID: 4851939787253525274, guid: 93737903966db2648895dcd50bac7ca5, type: 3}
+  playerPrefab: {fileID: 4851939787253525274, guid: e44cece235b29e04f9bf8a721476c6d9, type: 3}
