@@ -16,7 +16,9 @@ public class CharacterSelectDisplay : NetworkBehaviour
     [SerializeField] private TextMeshProUGUI characterNameText;
     [SerializeField] private GameObject characterInfoPanel;
     [SerializeField] private Transform introSpawnPoint;
-    
+    [SerializeField] private GameObject lobbyPanel;
+    [SerializeField] private GameObject inventoryPanel;
+
     private GameObject introInstance;
     private readonly List<CharacterSelectButton> characterButtons = new();
 
@@ -34,6 +36,8 @@ public class CharacterSelectDisplay : NetworkBehaviour
     }
     public void StartGame()
     {
+        lobbyPanel.SetActive(false);
+        inventoryPanel.SetActive(true);
         if (IsServer)
         {
             foreach (var client in players)
