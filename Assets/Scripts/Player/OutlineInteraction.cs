@@ -25,7 +25,7 @@ public class OutlineInteraction : MonoBehaviour
             hits = Physics.SphereCastAll(rayOrigin, interactRadius, playerCamera.transform.forward, interactDistance);
             foreach (RaycastHit hit in hits)
             {
-                if (hit.collider.CompareTag("Grabbable") || hit.collider.CompareTag("Item"))
+                if (hit.collider.CompareTag("Grabbable") || hit.collider.CompareTag("Item") || hit.collider.CompareTag("ShadowPuzzle"))
                 {
                     Outline outlineComponent = hit.collider.GetComponent<Outline>();
                     if (outlineComponent != null)

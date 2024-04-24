@@ -12,6 +12,7 @@ TagManager:
   - Door
   - conexion
   - PuzzleBrian
+  - ShadowPuzzle
   layers:
   - Default
   - TransparentFX
