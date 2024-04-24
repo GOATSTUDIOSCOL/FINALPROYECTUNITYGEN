@@ -69,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d04b84326b3c2d14eb8ce732b46df2e7, type: 3}
       propertyPath: m_Name
-      value: PunkCharater_Female
+      value: PlayerPunk_Female
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d04b84326b3c2d14eb8ce732b46df2e7, type: 3}
@@ -78,19 +78,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d04b84326b3c2d14eb8ce732b46df2e7, type: 3}
   m_PrefabInstance: {fileID: 8999081344054746793}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &2091475187
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8080092271132238840}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.7289309, y: 1.9218072, z: 0.8093138}
-  m_Center: {x: 0.036275182, y: 0.9346044, z: 0.09534276}
 --- !u!95 &2091475188
 Animator:
   serializedVersion: 5
