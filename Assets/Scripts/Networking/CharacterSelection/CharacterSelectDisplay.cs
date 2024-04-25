@@ -36,8 +36,6 @@ public class CharacterSelectDisplay : NetworkBehaviour
     }
     public void StartGame()
     {
-        lobbyPanel.SetActive(false);
-        inventoryPanel.SetActive(true);
         if (IsServer)
         {
             foreach (var client in players)

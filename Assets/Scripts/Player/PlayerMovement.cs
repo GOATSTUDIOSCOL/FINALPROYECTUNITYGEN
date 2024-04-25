@@ -10,10 +10,12 @@ public class PlayerMovement : NetworkBehaviour
     public float speed = 5f;
     public Transform playerCamera;
     public Transform head;
+    public AudioClip walkSound;
     #endregion
 
     #region Components
     private PlayerInputActions playerControls;
+    private AudioSource playerAudio;
     private Animator animator;
     private Rigidbody rb;
     #endregion
@@ -48,6 +50,8 @@ public class PlayerMovement : NetworkBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         FindObjectOfType<CinemachineVirtualCamera>().Follow = head.transform;
+        playerAudio = GetComponent<AudioSource>();
+        FixUI();
     }
 
     private void OnEnable()
@@ -65,6 +69,12 @@ public class PlayerMovement : NetworkBehaviour
         Move();
     }
 
+    public void FixUI()
+    {
+        GameObject.FindGameObjectWithTag("LobbyUI").SetActive(false);
+        GameObject.FindGameObjectWithTag("InventoryUI").GetComponent<Canvas>().enabled = true;
+    }
+
     public void Move()
     {
         Vector2 input = move.ReadValue<Vector2>();
@@ -76,6 +86,13 @@ public class PlayerMovement : NetworkBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             moveDir = transform.TransformDirection(moveDir); // Transform the direction relative to player's rotation
             rb.MovePosition(rb.position + moveDir.normalized * speed * 2f * Time.deltaTime);
+            if (!playerAudio.isPlaying)
+                playerAudio.PlayOneShot(walkSound);
+        }
+        else
+        {
+            playerAudio.clip = null;
+            playerAudio.Stop();
         }
     }
 

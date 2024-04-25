@@ -36,6 +36,7 @@ public class ObjectRotator : MonoBehaviour
             if (isXInAngleRange && isYInAngleRange)
             {
                 Debug.Log("puzzle resuelto");
+                GetComponent<PlaySFX>().Play(0);
                 puzzleSolved = true;
                 isOnPuzzle = false;
                 door.OpenDoorRpc();

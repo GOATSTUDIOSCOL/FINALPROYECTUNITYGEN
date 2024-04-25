@@ -70,6 +70,7 @@ public class Seleccionar : MonoBehaviour
                 isOnPuzzle = false;
                 playerMovement.enabled = true;
                 cameraController.enabled = true;
+                GetComponent<PlaySFX>().Play(0);
                 door.OpenDoorRpc();
                 parentCollider.enabled = false;
             }

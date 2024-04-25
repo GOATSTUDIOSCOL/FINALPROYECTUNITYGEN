@@ -8,14 +8,11 @@ public class BoxActivation : NetworkBehaviour
     [SerializeField] bool isOpenLocal;
     private NetworkVariable<bool> isOpen = new NetworkVariable<bool>();
     [SerializeField] Animator boxAnim;
-    [SerializeField] AudioSource effect;
-    [SerializeField] AudioClip sndfx;
     void Update()
     {
         if(isOpen.Value)
         {
             boxAnim.SetBool("isOpen", true);
-            effect.PlayOneShot(sndfx);
         } else
         {
             boxAnim.SetBool("isOpen", false);
@@ -25,5 +22,6 @@ public class BoxActivation : NetworkBehaviour
     public void OpenBoxRpc()
     {
         isOpen.Value = true;
+        GetComponent<PlaySFX>().Play(0);
     }
 }

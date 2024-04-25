@@ -18,6 +18,8 @@ TagManager:
   - ActivationPlate
   - FuseBoxPzl
   - ShadowPuzzle
+  - LobbyUI
+  - InventoryUI
   layers:
   - Default
   - TransparentFX

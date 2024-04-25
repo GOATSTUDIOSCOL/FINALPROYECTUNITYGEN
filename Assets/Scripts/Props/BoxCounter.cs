@@ -12,7 +12,7 @@ public class BoxCounter : NetworkBehaviour
 {
     public TextMeshProUGUI counterText;
     public Image counterIcon; // Asume que tienes un Image UI para el ícono
-    private string[] layers = {"Phone", "Picture", "Cup"};
+    private string[] layers = { "Phone", "Picture", "Cup" };
     //private string selectedLayer;
     //[SerializeField]private int count = 0;
     private NetworkVariable<FixedString64Bytes> selectedLayer = new NetworkVariable<FixedString64Bytes>();
@@ -26,24 +26,20 @@ public class BoxCounter : NetworkBehaviour
     {
         if (!IsOwner)
         {
-            enabled = false; 
+            enabled = false;
             return;
         }
 
         SendStartValuesRpc();
     }
-    void Start()
-    {
-        
-    }
 
     [Rpc(SendTo.Server)]
     void SendStartValuesRpc()
     {
-        selectedLayer.Value = layers[UnityEngine.Random.Range(0, layers.Length)];
+        selectedLayer.Value = layers[UnityEngine.Random.Range(0, 1)];//layers.Length)];
         int layerIndex = LayerMask.NameToLayer(selectedLayer.Value.ToString());
         totalCount.Value = FindObjectsOfType<GameObject>().Count(g => g.layer == layerIndex);
-        
+
         UpdateUI(0);
         SetIconForSelectedLayer();
     }
@@ -55,7 +51,7 @@ public class BoxCounter : NetworkBehaviour
 
     void SetIconForSelectedLayer()
     {
-         switch (selectedLayer.Value.ToString())
+        switch (selectedLayer.Value.ToString())
         {
             case "Phone":
                 counterIcon.sprite = spritePhone;
@@ -74,9 +70,10 @@ public class BoxCounter : NetworkBehaviour
     {
         count.Value += 1;
         UpdateUI(count.Value);
-        if(count.Value == totalCount.Value)
+        if (count.Value == totalCount.Value)
         {
-        door.OpenDoorRpc();
+            door.OpenDoorRpc();
+            GetComponent<PlaySFX>().Play(0);
         }
     }
 
@@ -102,5 +99,5 @@ public class BoxCounter : NetworkBehaviour
         }
     }
 
-    
+
 }
