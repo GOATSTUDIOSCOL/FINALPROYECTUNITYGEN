@@ -184,6 +184,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a99bcb8cf2a717449ad6c7474432c74, type: 3}
+--- !u!1 &58655583 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1594006449348201715, guid: 5f6856505f5326845bb316d789a330fb, type: 3}
+  m_PrefabInstance: {fileID: 1936096741390143940}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &58655590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58655583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 1, g: 0.84050083, b: 0, a: 1}
+  outlineWidth: 0
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &76242773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2382,7 +2405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 899154355687683441, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -59.000427
+      value: -59.00049
       objectReference: {fileID: 0}
     - target: {fileID: 899154355687683442, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
       propertyPath: m_IsActive
@@ -2438,7 +2461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3772636091967311429, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -59.00067
+      value: -59.000732
       objectReference: {fileID: 0}
     - target: {fileID: 4520016887721399281, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2522,7 +2545,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5412468861287286158, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -10.999939
+      value: -11
       objectReference: {fileID: 0}
     - target: {fileID: 6054081006775171919, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
       propertyPath: m_Color.b
@@ -9278,6 +9301,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1429663502, guid: 5f6856505f5326845bb316d789a330fb, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1798091853
+      objectReference: {fileID: 0}
+    - target: {fileID: 1594006449348201715, guid: 5f6856505f5326845bb316d789a330fb, type: 3}
+      propertyPath: m_TagString
+      value: ShadowPuzzle
+      objectReference: {fileID: 0}
     - target: {fileID: 1936096740099702473, guid: 5f6856505f5326845bb316d789a330fb, type: 3}
       propertyPath: door
       value: 
@@ -9329,6 +9360,10 @@ PrefabInstance:
     - target: {fileID: 1936096741196316845, guid: 5f6856505f5326845bb316d789a330fb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1936096741196316846, guid: 5f6856505f5326845bb316d789a330fb, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3450397491
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f6856505f5326845bb316d789a330fb, type: 3}

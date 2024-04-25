@@ -17,6 +17,7 @@ TagManager:
   - PlateActDwn
   - ActivationPlate
   - FuseBoxPzl
+  - ShadowPuzzle
   layers:
   - Default
   - TransparentFX
