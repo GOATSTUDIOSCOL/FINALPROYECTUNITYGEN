@@ -13878,6 +13878,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerWithDamageSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 5355722145709062297, guid: 2fddd15e88377e741803384af58b4658, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6796766025662558196, guid: 2fddd15e88377e741803384af58b4658, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 393442902
@@ -13891,26 +13895,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3141909276025971566, guid: c237db18e3288054092fdaaba80ea970, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 25.783104
-      objectReference: {fileID: 0}
-    - target: {fileID: 3141909276025971566, guid: c237db18e3288054092fdaaba80ea970, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 49.069725
-      objectReference: {fileID: 0}
-    - target: {fileID: 3141909276025971566, guid: c237db18e3288054092fdaaba80ea970, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 99.96569
-      objectReference: {fileID: 0}
-    - target: {fileID: 3141909276025971566, guid: c237db18e3288054092fdaaba80ea970, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.99854237
-      objectReference: {fileID: 0}
-    - target: {fileID: 3141909276025971566, guid: c237db18e3288054092fdaaba80ea970, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.05397413
-      objectReference: {fileID: 0}
     - target: {fileID: 3141909277669118548, guid: c237db18e3288054092fdaaba80ea970, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -13958,10 +13942,6 @@ PrefabInstance:
     - target: {fileID: 3141909277669118550, guid: c237db18e3288054092fdaaba80ea970, type: 3}
       propertyPath: m_Name
       value: DeadTimeline
-      objectReference: {fileID: 0}
-    - target: {fileID: 3141909277669118550, guid: c237db18e3288054092fdaaba80ea970, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3141909277669118551, guid: c237db18e3288054092fdaaba80ea970, type: 3}
       propertyPath: m_SceneBindings.Array.data[3].value
