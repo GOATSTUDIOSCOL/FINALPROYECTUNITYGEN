@@ -113,15 +113,6 @@ public class ObjectsInteraction : NetworkBehaviour
                     GetComponent<PlayerMovement>().enabled = false;
                     GetComponent<PlayerMovement>().playerCamera.GetComponent<CameraController>().enabled = false;
                 }
-                else if (hit.collider.CompareTag("ShadowPuzzle"))
-                {
-                    Debug.Log("shadow puzzle");
-                    bool isSolved = hit.collider.GetComponent<ObjectRotator>().updateRotation();
-                    if (isSolved)
-                    {
-                        Debug.Log("Solved puzzle");
-                    }
-                }
             }
         }
         else
