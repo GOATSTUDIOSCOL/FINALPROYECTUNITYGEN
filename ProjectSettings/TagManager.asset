@@ -17,6 +17,7 @@ TagManager:
   - PlateActDwn
   - ActivationPlate
   - FuseBoxPzl
+  - Damage
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Cup
   - Phone
   - Picture
-  - 
+  - PostProcessing
   - 
   - 
   - 
