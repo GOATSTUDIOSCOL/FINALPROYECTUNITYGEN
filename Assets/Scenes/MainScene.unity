@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731715, g: 0.13414735, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9800,6 +9800,7 @@ GameObject:
   - component: {fileID: 2765834738832953830}
   - component: {fileID: 6550402140389891034}
   - component: {fileID: 996341113}
+  - component: {fileID: 6550402140389891035}
   m_Layer: 6
   m_Name: Camera
   m_TagString: Untagged
@@ -18876,6 +18877,14 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!81 &6550402140389891035
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2765834738832953837}
+  m_Enabled: 1
 --- !u!1001 &6764388070700367247
 PrefabInstance:
   m_ObjectHideFlags: 0

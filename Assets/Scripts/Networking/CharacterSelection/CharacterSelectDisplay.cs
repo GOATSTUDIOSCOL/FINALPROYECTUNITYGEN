@@ -46,6 +46,7 @@ public class CharacterSelectDisplay : NetworkBehaviour
                     var spawnPos = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
                     var characterInstance = Instantiate(character.PlayerPrefab, spawnPos, Quaternion.identity);
                     characterInstance.GetComponent<NetworkObject>().SpawnAsPlayerObject(client.ClientId);
+                    introInstance.SetActive(false);
                 }
             }
         }
