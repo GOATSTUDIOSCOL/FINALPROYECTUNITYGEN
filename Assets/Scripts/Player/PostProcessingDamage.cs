@@ -21,7 +21,7 @@ public class PostProcessingDamage : MonoBehaviour
         _volume = GetComponent<PostProcessVolume>();
         _volume.profile.TryGetSettings<Vignette>(out _vignette);
 
-        if(!_vignette)
+        if (!_vignette)
         {
             print("vignette empty!!!!");
         }
@@ -34,7 +34,8 @@ public class PostProcessingDamage : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        _vignette.intensity.Override(intensity);
+        if (_vignette != null)
+            _vignette.intensity.Override(intensity);
     }
 
     public void FirstDamageState()
@@ -49,7 +50,8 @@ public class PostProcessingDamage : MonoBehaviour
     }
 
     public void DeadCameraState()
-    {   intensity = 0.42f;
+    {
+        intensity = 0.42f;
         playerCamera.SetActive(false);
         deadTimeline.SetActive(true);
     }

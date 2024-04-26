@@ -90,7 +90,7 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    [Rpc(SendTo.ClientsAndHost)]
+    [Rpc(SendTo.Server)]
     public void UpdateCounterRpc(float time)
     {
         timeLeft.Value = time;
