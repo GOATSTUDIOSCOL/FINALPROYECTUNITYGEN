@@ -75,6 +75,8 @@ public class PlayerMovement : NetworkBehaviour
         GameObject.FindGameObjectWithTag("InventoryUI").GetComponent<Canvas>().enabled = true;
         GameObject.FindGameObjectWithTag("InventoryUI").GetComponentInChildren<LoadingScreen>().enabled = true;
         GameManager.instance.GetComponent<AudioSource>().Play();
+        GameManager.instance.gameStarted = true;
+        GameManager.instance.HideCursor();
     }
 
     public void Move()

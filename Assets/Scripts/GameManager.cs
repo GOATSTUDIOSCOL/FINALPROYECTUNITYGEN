@@ -12,6 +12,9 @@ public class GameManager : NetworkBehaviour
     public float initialTime = 15 * 60;
     private const int initialKeys = 0;
     public TextMeshProUGUI timeUIText;
+    public GameObject losePanel;
+    public GameObject winPanel;
+    public bool gameStarted = false;
 
     [SerializeField] private TextMeshProUGUI keysText;
 
@@ -26,17 +29,17 @@ public class GameManager : NetworkBehaviour
 
     private void Update()
     {
-        if (IsServer)
+        if (IsServer && gameStarted)
         {
             UpdateCounterRpc(timeLeft.Value -= Time.deltaTime);
 
             if (timeLeft.Value <= 0)
             {
-                Debug.Log("Game Lost!");
+                losePanel.SetActive(true);
             }
         }
     }
-    private void HideCursor()
+    public void HideCursor()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -81,6 +84,10 @@ public class GameManager : NetworkBehaviour
     {
         keys.Value++;
         keysText.text = "Keys: " + keys.Value.ToString();
+        if (keys.Value == 8)
+        {
+            winPanel.SetActive(true);
+        }
     }
 
     [Rpc(SendTo.ClientsAndHost)]
