@@ -13,6 +13,11 @@ public class Seleccionar : MonoBehaviour
     public CameraController cameraController;
     public Door door;
     public Collider parentCollider;
+    PlaySFX sfx;
+    private void Start()
+    {
+        sfx = GetComponent<PlaySFX>();
+    }
     private void Update()
     {
         if (isOnPuzzle)
@@ -23,6 +28,7 @@ public class Seleccionar : MonoBehaviour
                 {
                     transform.position += new Vector3(0, 0.34f, 0);
                     casNumberY += 3;
+                    sfx.Play(1);
                 }
 
             }
@@ -32,6 +38,7 @@ public class Seleccionar : MonoBehaviour
                 {
                     transform.position += new Vector3(0, -0.34f, 0);
                     casNumberY -= 3;
+                    sfx.Play(1);
                 }
 
             }
@@ -41,6 +48,7 @@ public class Seleccionar : MonoBehaviour
                 {
                     transform.position += new Vector3(0.34F, 0, 0);
                     casNumberX -= 3;
+                    sfx.Play(1);
                 }
 
             }
@@ -50,12 +58,14 @@ public class Seleccionar : MonoBehaviour
                 {
                     transform.position += new Vector3(-0.34F, 0, 0);
                     casNumberX += 3;
+                    sfx.Play(1);
                 }
             }
 
             if (Input.GetKeyDown(KeyCode.E) & objetoDetectado != null)
             {
                 objetoDetectado.transform.Rotate(0, 0, -90);
+                sfx.Play(2);
             }
 
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -70,7 +80,7 @@ public class Seleccionar : MonoBehaviour
                 isOnPuzzle = false;
                 playerMovement.enabled = true;
                 cameraController.enabled = true;
-                GetComponent<PlaySFX>().Play(0);
+                sfx.Play(0);
                 door.OpenDoorRpc();
                 parentCollider.enabled = false;
             }

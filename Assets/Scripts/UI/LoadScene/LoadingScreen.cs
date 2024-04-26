@@ -22,12 +22,19 @@ public class LoadingScreen : MonoBehaviour
         SetRandomImage();
     }
 
+    private void OnEnable()
+    {
+        loadingSlider.value = 0f;
+        pressToPlayText.gameObject.SetActive(false);
+        StartCoroutine(LoadLevel());
+        SetRandomImage();
+    }
+
     void Update()
     {
         if (loadingComplete && Input.GetKeyDown(KeyCode.E))
         {
-            gameObject.SetActive(false); // Apaga la pantalla de carga
-            // Aquí puedes agregar código para iniciar tu juego
+            gameObject.SetActive(false);
         }
     }
 
