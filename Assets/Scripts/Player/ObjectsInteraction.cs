@@ -15,7 +15,7 @@ public class ObjectsInteraction : NetworkBehaviour
     public float pickUpRange = 5f;
     private CinemachineVirtualCamera playerCamera;
     public float interactDistance = 5f;
-    public float interactRadius = 1f;
+    private float interactRadius = 1f;
     public override void OnNetworkSpawn()
     {
         if (!IsOwner)
@@ -82,9 +82,10 @@ public class ObjectsInteraction : NetworkBehaviour
     {
         if (!isHoldingObject)
         {
-            RaycastHit hit;
+            RaycastHit[] hits;
             Vector3 rayOrigin = playerCamera.Follow.position;
-            if (Physics.SphereCast(rayOrigin, interactRadius, playerCamera.transform.forward, out hit, interactDistance))
+            hits = Physics.SphereCastAll(rayOrigin, interactRadius, playerCamera.transform.forward, interactDistance);
+            foreach (RaycastHit hit in hits)
             {
                 if (hit.collider.CompareTag("Grabbable"))
                 {
@@ -101,12 +102,12 @@ public class ObjectsInteraction : NetworkBehaviour
                 }
                 else if (hit.collider.CompareTag("Door"))
                 {
-                    if(!hit.collider.GetComponent<Door>().hasPuzzle)
+                    if (!hit.collider.GetComponent<Door>().hasPuzzle)
                     {
                         hit.collider.GetComponent<Door>().OpenDoorRpc();
                         Debug.Log("Se detecto este collider " + hit.collider.gameObject.name);
                     }
-                    
+
                 }
                 else if (hit.collider.CompareTag("PuzzleBrian"))
                 {
@@ -129,7 +130,7 @@ public class ObjectsInteraction : NetworkBehaviour
     public void PickupObjectServerRpc(ulong objToPickupID)
     {
         NetworkManager.SpawnManager.SpawnedObjects.TryGetValue(objToPickupID, out var objectToPickup);
-        if (objectToPickup == null || objectToPickup.transform.parent != null) return;
+        if (objectToPickup == null ) return;
 
         if (objectToPickup.TryGetComponent(out NetworkObject networkObject) && networkObject.TrySetParent(transform))
         {
@@ -137,7 +138,7 @@ public class ObjectsInteraction : NetworkBehaviour
             pickUpObjectRigidbody.isKinematic = true;
             pickUpObjectRigidbody.interpolation = RigidbodyInterpolation.None;
             objectToPickup.GetComponent<NetworkTransform>().InLocalSpace = true;
-            objectToPickup.transform.position = new Vector3(objectToPickup.transform.position.x, objectToPickup.transform.position.y + 2, objectToPickup.transform.position.z);
+            objectToPickup.transform.position = new Vector3(objectToPickup.transform.position.x, objectToPickup.transform.position.y + 1.5f, objectToPickup.transform.position.z);
         }
     }
 

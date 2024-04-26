@@ -19,6 +19,7 @@ public class GameManager : NetworkBehaviour
     public bool gameStarted = false;
 
     [SerializeField] private TextMeshProUGUI keysText;
+    [SerializeField] private TextMeshProUGUI keysGoalText;
 
 
     private void Awake()
@@ -94,6 +95,7 @@ public class GameManager : NetworkBehaviour
     {
         keys.Value++;
         keysText.text = "Keys: " + keys.Value.ToString();
+        keysGoalText.text = keys.Value.ToString() + "/8";
         if (keys.Value == 8)
         {
             winPanel.SetActive(true);
