@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using TMPro;
+using Unity.Collections.LowLevel.Unsafe;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class GameManager : NetworkBehaviour
     private NetworkVariable<int> keys = new NetworkVariable<int>();
     private NetworkVariable<float> timeLeft = new NetworkVariable<float>();
     public float initialTime = 15 * 60;
+    public float localTime;
     private const int initialKeys = 0;
     public TextMeshProUGUI timeUIText;
     public GameObject losePanel;
@@ -21,23 +23,25 @@ public class GameManager : NetworkBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else
+        if (instance != null)
             Destroy(this);
+        else
+            instance = this;
     }
 
     private void Update()
     {
-        if (IsServer && gameStarted)
+        if (gameStarted && IsHost)
         {
-            UpdateCounterRpc(timeLeft.Value -= Time.deltaTime);
+            localTime = timeLeft.Value - Time.deltaTime;
+            UpdateCounterRpc(localTime);
 
             if (timeLeft.Value <= 0)
             {
                 losePanel.SetActive(true);
             }
         }
+
     }
     public void HideCursor()
     {
@@ -65,7 +69,13 @@ public class GameManager : NetworkBehaviour
                 Debug.Log($"NetworkVariable is {keys.Value} when spawned.");
             }
             keys.OnValueChanged += OnKeyValueChanged;
+            timeLeft.OnValueChanged += OnTimeValueChanged;
         }
+    }
+
+    private void OnTimeValueChanged(float previousValue, float newValue)
+    {
+        timeUIText.text = FormatTime(newValue);
     }
 
     private void NetworkManager_OnClientConnectedCallback(ulong obj)
@@ -94,8 +104,10 @@ public class GameManager : NetworkBehaviour
     public void UpdateCounterRpc(float time)
     {
         timeLeft.Value = time;
-        timeUIText.text = FormatTime(timeLeft.Value);
+        timeUIText.text = FormatTime(time);
     }
+
+
 
     string FormatTime(float totalSeconds)
     {
