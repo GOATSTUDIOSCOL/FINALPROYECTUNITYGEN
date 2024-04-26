@@ -7,6 +7,7 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager instance;
     public InventoryDatabase inventoryDatabase;
     public Image[] slots;
+    public bool hasCard = false;
 
     private void Awake()
     {
@@ -39,6 +40,11 @@ public class InventoryManager : MonoBehaviour
                 GameManager.instance.AddKeyRpc();
             }
             item.quantity++;
+
+            if (item.itemName == "Card")
+            {
+                hasCard=true;
+            }
         }
         else
         {
