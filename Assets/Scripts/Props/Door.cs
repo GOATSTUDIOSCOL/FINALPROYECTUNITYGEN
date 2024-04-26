@@ -6,6 +6,7 @@ using UnityEngine;
 public class Door : NetworkBehaviour
 {
     public Animator doorAnim;
+    public bool hasPuzzle = false;
     //public bool isOpen = false;
     private NetworkVariable<bool> isOpen = new NetworkVariable<bool>();
 
@@ -15,6 +16,7 @@ public class Door : NetworkBehaviour
     }
     void Update()
     {
+        
         if(isOpen.Value)
         {
             doorAnim.SetBool("isOpen", true);
@@ -22,6 +24,7 @@ public class Door : NetworkBehaviour
         {
             doorAnim.SetBool("isOpen", false);
         }
+        
     }
 
      [Rpc(SendTo.Server)]

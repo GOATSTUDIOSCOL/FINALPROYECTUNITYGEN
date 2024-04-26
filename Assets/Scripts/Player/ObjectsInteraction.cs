@@ -95,14 +95,18 @@ public class ObjectsInteraction : NetworkBehaviour
                     InventoryManager.instance.AddItemToInventory(hit.collider.GetComponent<Item>().inventoryItem);
                     RpcTest.instance.DespawnObjectRpc(hit.collider.GetComponent<NetworkObject>().NetworkObjectId);
                 }
-                else if (hit.collider.CompareTag("BoxPuzzle"))
+                else if (hit.collider.CompareTag("BoxPuzzle") && InventoryManager.instance.hasCard)
                 {
                     hit.collider.GetComponent<BoxActivation>().OpenBoxRpc();
                 }
                 else if (hit.collider.CompareTag("Door"))
                 {
-                    hit.collider.GetComponent<Door>().OpenDoorRpc();
-                    Debug.Log("Se detecto este collider " + hit.collider.gameObject.name);
+                    if(!hit.collider.GetComponent<Door>().hasPuzzle)
+                    {
+                        hit.collider.GetComponent<Door>().OpenDoorRpc();
+                        Debug.Log("Se detecto este collider " + hit.collider.gameObject.name);
+                    }
+                    
                 }
                 else if (hit.collider.CompareTag("PuzzleBrian"))
                 {
