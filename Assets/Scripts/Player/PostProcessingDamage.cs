@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.Rendering.PostProcessing;
 
 public class PostProcessingDamage : MonoBehaviour
@@ -13,6 +14,10 @@ public class PostProcessingDamage : MonoBehaviour
     Vignette _vignette;
     void Start()
     {
+        deadTimeline = GameObject.FindGameObjectWithTag("Timeline");
+        deadTimeline.SetActive(false);
+        deadTimeline.GetComponent<PlayableDirector>().enabled = true;
+        deadTimeline.GetComponentInChildren<Canvas>().enabled = true;
         _volume = GetComponent<PostProcessVolume>();
         _volume.profile.TryGetSettings<Vignette>(out _vignette);
 
@@ -30,15 +35,6 @@ public class PostProcessingDamage : MonoBehaviour
     void FixedUpdate()
     {
         _vignette.intensity.Override(intensity);
-        if(Input.GetMouseButtonDown(0))
-        {
-            FirstDamageState();
-        } 
-        
-        if (Input.GetMouseButtonDown(1))
-        {
-            UltimateDamageState();
-        }
     }
 
     public void FirstDamageState()
