@@ -8,7 +8,10 @@ public class GameManager : NetworkBehaviour
 {
     public static GameManager instance { get; private set; }
     private NetworkVariable<int> keys = new NetworkVariable<int>();
+    private NetworkVariable<float> timeLeft = new NetworkVariable<float>();
+    public float initialTime = 15 * 60;
     private const int initialKeys = 0;
+    public TextMeshProUGUI timeUIText;
 
     [SerializeField] private TextMeshProUGUI keysText;
 
@@ -21,6 +24,18 @@ public class GameManager : NetworkBehaviour
             Destroy(this);
     }
 
+    private void Update()
+    {
+        if (IsServer)
+        {
+            UpdateCounterRpc(timeLeft.Value -= Time.deltaTime);
+
+            if (timeLeft.Value <= 0)
+            {
+                Debug.Log("Game Lost!");
+            }
+        }
+    }
     private void HideCursor()
     {
         Cursor.visible = false;
@@ -32,6 +47,7 @@ public class GameManager : NetworkBehaviour
         if (IsServer)
         {
             keys.Value = initialKeys;
+            timeLeft.Value = initialTime;
             NetworkManager.OnClientConnectedCallback += NetworkManager_OnClientConnectedCallback;
         }
         else
@@ -65,5 +81,19 @@ public class GameManager : NetworkBehaviour
     {
         keys.Value++;
         keysText.text = "Keys: " + keys.Value.ToString();
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    public void UpdateCounterRpc(float time)
+    {
+        timeLeft.Value = time;
+        timeUIText.text = FormatTime(timeLeft.Value);
+    }
+
+    string FormatTime(float totalSeconds)
+    {
+        int minutes = Mathf.FloorToInt(totalSeconds / 60);
+        int seconds = Mathf.FloorToInt(totalSeconds % 60);
+        return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }
