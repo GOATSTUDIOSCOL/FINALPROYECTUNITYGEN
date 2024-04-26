@@ -1667,7 +1667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TransitionStateInfoList: []
-  m_Animator: {fileID: 2423224828752500506, guid: ca5ced9a59e6f9f4894f2bffd9e85a88, type: 3}
+  m_Animator: {fileID: 4460284970973207261}
 --- !u!114 &-6050916620883057845
 MonoBehaviour:
   m_ObjectHideFlags: 0

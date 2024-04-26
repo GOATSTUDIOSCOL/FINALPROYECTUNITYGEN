@@ -1220,7 +1220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TransitionStateInfoList: []
-  m_Animator: {fileID: 2423224828752500506, guid: ca5ced9a59e6f9f4894f2bffd9e85a88, type: 3}
+  m_Animator: {fileID: 5179168646557089482}
 --- !u!114 &-456999231107072616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3712,7 +3712,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2551256585379541015, guid: 0299135a8b7bbdd40ae4564fb6192ed2, type: 3}
       propertyPath: volumeLayer.m_Bits
-      value: 512
+      value: 576
       objectReference: {fileID: 0}
     - target: {fileID: 5560846844830385497, guid: 0299135a8b7bbdd40ae4564fb6192ed2, type: 3}
       propertyPath: m_Follow

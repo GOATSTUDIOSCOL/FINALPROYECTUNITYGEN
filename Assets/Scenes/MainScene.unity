@@ -1986,6 +1986,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b1fbf9c69e5394419cb4581a5e3ac9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialTime: 900
+  timeUIText: {fileID: 345346410}
   keysText: {fileID: 979943120}
 --- !u!4 &1150228592
 Transform:
