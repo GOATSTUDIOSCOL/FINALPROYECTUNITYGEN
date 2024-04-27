@@ -428,7 +428,7 @@ Transform:
   m_GameObject: {fileID: 1058444614145029677}
   m_LocalRotation: {x: -0, y: -0.38595754, z: -0, w: 0.9225166}
   m_LocalPosition: {x: -0.59894013, y: -3.64, z: -0.49904203}
-  m_LocalScale: {x: 1.7500001, y: 1.7500001, z: 1.7500001}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5319733249523231969}
@@ -489,7 +489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2127108638
+  GlobalObjectIdHash: 1589312144
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -632,7 +632,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickUpRange: 5
   interactDistance: 5
-  interactRadius: 0.5
 --- !u!114 &3915891022916988067
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -218,15 +218,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d04b84326b3c2d14eb8ce732b46df2e7, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.7500001
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d04b84326b3c2d14eb8ce732b46df2e7, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.7500001
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d04b84326b3c2d14eb8ce732b46df2e7, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.7500001
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d04b84326b3c2d14eb8ce732b46df2e7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -446,7 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 853002023
+  GlobalObjectIdHash: 3268810073
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -514,7 +514,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickUpRange: 5
   interactDistance: 5
-  interactRadius: 0.5
 --- !u!114 &-178789324796595935
 MonoBehaviour:
   m_ObjectHideFlags: 0
