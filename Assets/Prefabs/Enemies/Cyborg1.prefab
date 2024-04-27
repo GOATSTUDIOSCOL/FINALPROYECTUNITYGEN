@@ -104,7 +104,6 @@ GameObject:
   m_Component:
   - component: {fileID: 640619099453694796}
   - component: {fileID: 640619099453694798}
-  - component: {fileID: 640619099453694797}
   m_Layer: 0
   m_Name: AttackCollider
   m_TagString: Damage
@@ -140,19 +139,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 3.1270325
   m_Center: {x: 0, y: 3.5346954, z: 1.42}
---- !u!114 &640619099453694797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 640619099453694795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46cc492ca60201440a78da02e71c3267, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyMovement: {fileID: 1240680904943499479}
 --- !u!1 &640619099817401021
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,7 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyMovement: {fileID: 1240680904943499479}
   attackCollider: {fileID: 640619099453694795}
-  attackTime: 1
+  attackTime: 0.5
 --- !u!1 &1908426838564414062
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,8 +281,8 @@ MonoBehaviour:
   players: []
   attackRange: 3
   enemyAnim: {fileID: 6451822103041528305}
-  speed: 2
-  waitintgBeforeHuntingTime: 2
+  speed: 4
+  waitintgBeforeHuntingTime: 1.5
 --- !u!195 &1240680904943499478
 NavMeshAgent:
   m_ObjectHideFlags: 0

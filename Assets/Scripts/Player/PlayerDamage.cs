@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerDamage : MonoBehaviour
 {
     [SerializeField] float playerHealth = 3;
-    [SerializeField] float pushForce = 10f;
+   // [SerializeField] float pushForce = 10f;
     public PostProcessingDamage postProcessingDamage;
    void Start() {
     playerHealth = 3;
@@ -19,8 +19,8 @@ public class PlayerDamage : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if(other.CompareTag("Damage"))
         {
-            UnityEngine.Vector3 hitDirection = (transform.position - other.transform.position).normalized;
-            transform.position += hitDirection * pushForce;
+           // UnityEngine.Vector3 hitDirection = (transform.position - other.transform.position).normalized;
+           // transform.position += hitDirection * pushForce;
 
             switch(playerHealth)
             {
