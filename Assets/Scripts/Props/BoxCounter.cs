@@ -36,7 +36,7 @@ public class BoxCounter : NetworkBehaviour
     [Rpc(SendTo.Server)]
     void SendStartValuesRpc()
     {
-        selectedLayer.Value = layers[UnityEngine.Random.Range(0, 1)];//layers.Length)];
+        selectedLayer.Value = layers[UnityEngine.Random.Range(0, layers.Length)];
         int layerIndex = LayerMask.NameToLayer(selectedLayer.Value.ToString());
         totalCount.Value = FindObjectsOfType<GameObject>().Count(g => g.layer == layerIndex);
 
