@@ -33,17 +33,34 @@ public class BoxCounter : NetworkBehaviour
         SendStartValuesRpc();
     }
 
+    private void Start()
+    {
+        SendStartValuesRpc();
+    }
+
     [Rpc(SendTo.Server)]
     void SendStartValuesRpc()
     {
         selectedLayer.Value = layers[UnityEngine.Random.Range(0, layers.Length)];
         int layerIndex = LayerMask.NameToLayer(selectedLayer.Value.ToString());
-        totalCount.Value = FindObjectsOfType<GameObject>().Count(g => g.layer == layerIndex);
-
+        totalCount.Value = FindObject(layerIndex);
         UpdateUI(0);
         SetIconForSelectedLayer();
     }
 
+    public int FindObject(int layerIndex)
+    {
+        GameObject[] pickables = GameObject.FindGameObjectsWithTag("Grabbable");
+        int count = 0;
+        foreach (GameObject pickable in pickables)
+        {
+            if (pickable.layer == layerIndex)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
     void UpdateUI(int currentCount)
     {
         counterText.text = currentCount + "/" + totalCount.Value;
