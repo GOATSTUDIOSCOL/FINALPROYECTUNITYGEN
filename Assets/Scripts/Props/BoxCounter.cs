@@ -33,10 +33,6 @@ public class BoxCounter : NetworkBehaviour
         SendStartValuesRpc();
     }
 
-    private void Start()
-    {
-        SendStartValuesRpc();
-    }
 
     [Rpc(SendTo.Server)]
     void SendStartValuesRpc()
@@ -46,6 +42,7 @@ public class BoxCounter : NetworkBehaviour
         totalCount.Value = FindObject(layerIndex);
         UpdateUI(0);
         SetIconForSelectedLayer();
+        Debug.Log("Set Box Valueesssssssssss: "+ totalCount.Value);
     }
 
     public int FindObject(int layerIndex)
