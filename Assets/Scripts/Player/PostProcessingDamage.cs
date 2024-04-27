@@ -15,9 +15,6 @@ public class PostProcessingDamage : MonoBehaviour
     void Start()
     {
         deadTimeline = GameObject.FindGameObjectWithTag("Timeline");
-        deadTimeline.SetActive(false);
-        deadTimeline.GetComponent<PlayableDirector>().enabled = true;
-        deadTimeline.GetComponentInChildren<Canvas>().enabled = true;
         _volume = GetComponent<PostProcessVolume>();
         _volume.profile.TryGetSettings<Vignette>(out _vignette);
 
@@ -53,6 +50,7 @@ public class PostProcessingDamage : MonoBehaviour
     {
         intensity = 0.42f;
         playerCamera.SetActive(false);
-        deadTimeline.SetActive(true);
+        deadTimeline.GetComponent<PlayableDirector>().enabled = true;
+        deadTimeline.GetComponentInChildren<Canvas>().enabled = true;
     }
 }
