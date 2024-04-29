@@ -317,16 +317,6 @@ CapsuleCollider:
   m_Height: 1.8482469
   m_Direction: 1
   m_Center: {x: -0.024199527, y: 0.9313226, z: 0.18929279}
---- !u!165 &-571636128954905675
-AudioHighPassFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8080092271132238840}
-  m_Enabled: 1
-  m_CutoffFrequency: 1000
-  m_HighpassResonanceQ: 10
 --- !u!82 &1639249687295131221
 AudioSource:
   m_ObjectHideFlags: 0
@@ -348,7 +338,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 50
+  MaxDistance: 80
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -414,31 +404,6 @@ AudioSource:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!169 &9196500973515917985
-AudioLowPassFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8080092271132238840}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_LowpassResonanceQ: 3
-  lowpassLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.09049568
       inSlope: 0
       outSlope: 0
       tangentMode: 0

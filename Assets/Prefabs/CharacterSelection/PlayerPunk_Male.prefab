@@ -1537,8 +1537,6 @@ GameObject:
   - component: {fileID: -7399953114589523315}
   - component: {fileID: -4908881995783299725}
   - component: {fileID: -7945103623948919010}
-  - component: {fileID: -1178894846694535479}
-  - component: {fileID: -8857705673456502503}
   m_Layer: 0
   m_Name: PlayerPunk_Male
   m_TagString: Player
@@ -1807,7 +1805,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 50
+  MaxDistance: 80
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1923,41 +1921,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ChannelUri: 
   m_ChannelName: 
---- !u!169 &-1178894846694535479
-AudioLowPassFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4851939787253525274}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_LowpassResonanceQ: 3
-  lowpassLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.09049568
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!165 &-8857705673456502503
-AudioHighPassFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4851939787253525274}
-  m_Enabled: 1
-  m_CutoffFrequency: 1000
-  m_HighpassResonanceQ: 10
 --- !u!1 &4887886565543523012
 GameObject:
   m_ObjectHideFlags: 0

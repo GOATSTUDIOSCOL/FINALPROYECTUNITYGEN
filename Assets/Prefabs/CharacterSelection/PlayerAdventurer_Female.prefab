@@ -564,8 +564,6 @@ GameObject:
   - component: {fileID: -3895456703671125502}
   - component: {fileID: 7720421592816741470}
   - component: {fileID: -7100582734647176342}
-  - component: {fileID: -5410140851872498171}
-  - component: {fileID: -7984485457356055409}
   m_Layer: 0
   m_Name: PlayerAdventurer_Female
   m_TagString: Player
@@ -834,7 +832,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 50
+  MaxDistance: 80
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -950,41 +948,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ChannelUri: 
   m_ChannelName: 
---- !u!169 &-5410140851872498171
-AudioLowPassFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1737655905036584834}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_LowpassResonanceQ: 3
-  lowpassLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.09049568
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!165 &-7984485457356055409
-AudioHighPassFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1737655905036584834}
-  m_Enabled: 1
-  m_CutoffFrequency: 1000
-  m_HighpassResonanceQ: 10
 --- !u!1 &1773762662310895196
 GameObject:
   m_ObjectHideFlags: 0
