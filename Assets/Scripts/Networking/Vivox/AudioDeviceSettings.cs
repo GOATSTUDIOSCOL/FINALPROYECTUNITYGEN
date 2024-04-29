@@ -56,6 +56,7 @@ public class AudioDeviceSettings : MonoBehaviour
 
         InputDeviceVolume.value = VivoxService.Instance.InputDeviceVolume;
         OutputDeviceVolume.value = VivoxService.Instance.OutputDeviceVolume;
+        GameManager.instance.setAudioDevicesDisplay(true);
     }
 
     void OnDestroy()
@@ -118,5 +119,9 @@ public class AudioDeviceSettings : MonoBehaviour
     private void OnOutputVolumeChanged(float val)
     {
         VivoxService.Instance.SetOutputDeviceVolume((int)val);
+    }
+
+    void OnDisable() {
+        GameManager.instance.setAudioDevicesDisplay(false);
     }
 }
