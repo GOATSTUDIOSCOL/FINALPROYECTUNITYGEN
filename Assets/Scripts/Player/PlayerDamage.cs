@@ -25,6 +25,7 @@ public class PlayerDamage : NetworkBehaviour
     {
         playerHealth = 3;
         playerMovement = GetComponent<PlayerMovement>();
+        enemyMovement = GetComponentInParent<EnemyMovement>();
     }
   
     private void OnTriggerEnter(Collider other) {
@@ -52,7 +53,7 @@ public class PlayerDamage : NetworkBehaviour
                 }
                 if(IsOwner)
                 {
-                    enemyMovement.OnPlayerKilled();
+                    other.GetComponentInParent<EnemyMovement>().OnPlayerKilled();
                     GameManager.instance.losePanel.SetActive(true);
                 }
                 
