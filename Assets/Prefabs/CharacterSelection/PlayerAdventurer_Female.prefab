@@ -563,7 +563,6 @@ GameObject:
   - component: {fileID: -865162036673941720}
   - component: {fileID: -3895456703671125502}
   - component: {fileID: 7720421592816741470}
-  - component: {fileID: -7100582734647176342}
   m_Layer: 0
   m_Name: PlayerAdventurer_Female
   m_TagString: Player
@@ -934,20 +933,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   channelName: 
---- !u!114 &-7100582734647176342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1737655905036584834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4e239a6f9250a94f8074232314da7a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ChannelUri: 
-  m_ChannelName: 
 --- !u!1 &1773762662310895196
 GameObject:
   m_ObjectHideFlags: 0

@@ -1089,7 +1089,6 @@ GameObject:
   - component: {fileID: 7803671564260942720}
   - component: {fileID: -9031744462934001909}
   - component: {fileID: -3743837515760019708}
-  - component: {fileID: 2908382372009115566}
   m_Layer: 0
   m_Name: PlayerAstronaut_Female
   m_TagString: Player
@@ -1460,20 +1459,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   channelName: 
---- !u!114 &2908382372009115566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3279439203714171277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4e239a6f9250a94f8074232314da7a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ChannelUri: 
-  m_ChannelName: 
 --- !u!1 &3838965318801841323
 GameObject:
   m_ObjectHideFlags: 0
