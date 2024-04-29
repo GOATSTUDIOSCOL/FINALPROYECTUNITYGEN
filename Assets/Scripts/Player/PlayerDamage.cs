@@ -11,6 +11,7 @@ public class PlayerDamage : NetworkBehaviour
     [SerializeField] float playerHealth = 3;
    // [SerializeField] float pushForce = 10f;
     public PostProcessingDamage postProcessingDamage;
+    private EnemyMovement enemyMovement;
      private PlayerMovement playerMovement;
     public override void OnNetworkSpawn()
     {
@@ -51,6 +52,7 @@ public class PlayerDamage : NetworkBehaviour
                 }
                 if(IsOwner)
                 {
+                    enemyMovement.OnPlayerKilled();
                     GameManager.instance.losePanel.SetActive(true);
                 }
                 
