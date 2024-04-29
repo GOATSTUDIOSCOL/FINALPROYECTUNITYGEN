@@ -49,7 +49,11 @@ public class PlayerDamage : NetworkBehaviour
                 {
                     playerMovement.enabled = false; // Desactiva el script de movimiento
                 }
-                GameManager.instance.losePanel.SetActive(true);
+                if(IsOwner)
+                {
+                    GameManager.instance.losePanel.SetActive(true);
+                }
+                
                 break;
             }
         }
