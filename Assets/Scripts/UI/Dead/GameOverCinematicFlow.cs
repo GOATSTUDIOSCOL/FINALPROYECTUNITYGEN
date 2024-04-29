@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.UI;
+using Unity.Netcode;
 
-public class GameOverCinematicFlow : MonoBehaviour
+public class GameOverCinematicFlow : NetworkBehaviour
 {
-    public GameObject videoPlayerObject, gameOverPanel; 
-    
+    public GameObject videoPlayerObject, gameOverPanel;
 
+    public override void OnNetworkSpawn()
+    {
+        if (!IsOwner)
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
     void Start()
     {
         gameOverPanel.SetActive(false);
