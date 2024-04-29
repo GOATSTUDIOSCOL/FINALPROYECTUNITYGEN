@@ -14,7 +14,7 @@ public class ObjectRotator : MonoBehaviour
 
     void Update()
     {
-        if (isOnPuzzle && !puzzleSolved)
+        if (isOnPuzzle && !puzzleSolved && !GameManager.instance.shadowPuzle.Value)
         {
             if (Input.GetMouseButton(0))
             {
@@ -37,6 +37,7 @@ public class ObjectRotator : MonoBehaviour
             {
                 Debug.Log("puzzle resuelto");
                 GetComponent<PlaySFX>().Play(0);
+                GameManager.instance.UpdateShadowRpc();
                 puzzleSolved = true;
                 isOnPuzzle = false;
                 door.OpenDoorRpc();
