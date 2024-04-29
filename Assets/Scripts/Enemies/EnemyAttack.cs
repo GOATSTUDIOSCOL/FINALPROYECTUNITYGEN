@@ -12,11 +12,6 @@ public class EnemyAttack : MonoBehaviour
         attackCollider.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
    
     private void OnTriggerEnter(Collider other) {
         PlayerMovement player = other.gameObject.GetComponent<PlayerMovement>();

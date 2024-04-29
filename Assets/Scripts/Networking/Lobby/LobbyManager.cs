@@ -75,6 +75,16 @@ public class LobbyManager : MonoBehaviour
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
         await VivoxService.Instance.InitializeAsync();
     }
+    public async void LoginToVivoxAsync()
+    {
+        if (VivoxService.Instance.IsLoggedIn)
+        {
+            LoginOptions options = new LoginOptions();
+            options.DisplayName = playerName;
+            options.EnableTTS = false;
+            await VivoxService.Instance.LoginAsync(options);
+        }
+    }
 
     private void HandleRefreshLobbyList()
     {

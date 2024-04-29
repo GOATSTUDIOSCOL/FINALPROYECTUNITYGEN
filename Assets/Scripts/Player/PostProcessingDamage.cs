@@ -14,6 +14,7 @@ public class PostProcessingDamage : MonoBehaviour
     Vignette _vignette;
     void Start()
     {
+        enabled = false; // mientras se arreglan los bugs
         deadTimeline = GameObject.FindGameObjectWithTag("Timeline");
         _volume = GetComponent<PostProcessVolume>();
         _volume.profile.TryGetSettings<Vignette>(out _vignette);

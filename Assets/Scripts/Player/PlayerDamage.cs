@@ -26,15 +26,16 @@ public class PlayerDamage : MonoBehaviour
             {
                 case 3: 
                 playerHealth -= 1;
-                postProcessingDamage.FirstDamageState();
+               // postProcessingDamage.FirstDamageState();
                 break;
                 case 2: 
                 playerHealth -= 1;
-                postProcessingDamage.UltimateDamageState();
+                //postProcessingDamage.UltimateDamageState();
                 break;
                 case 1: 
                 playerHealth -= 1;
-                postProcessingDamage.DeadCameraState();
+               // postProcessingDamage.DeadCameraState();
+               GameManager.instance.losePanel.SetActive(true);
                 break;
             }
         }

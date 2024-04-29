@@ -17,9 +17,6 @@ public class EnemyMovement : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         aiNav.speed = speed;
-        //players = FindObjectsOfType<PlayerMovement>();
-        //InvokeRepeating("UpdateNearestPlayer", 0.5f, 2f);
-
         NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnected;
     }
 

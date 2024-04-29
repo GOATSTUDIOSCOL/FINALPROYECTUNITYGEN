@@ -16,17 +16,13 @@ public class VivoxAuthentication : MonoBehaviour
         {
             Instance = this;
         }
-
-        /*joinHostButton.onClick.AddListener(() =>
-        {
-            StartVivox();
-        });*/
     }
 
     public async void StartVivox()
     {
         try
         {
+            LobbyManager.Instance.LoginToVivoxAsync();
             voicePanel.SetActive(true);
             await JoinLobbyChannel();
         }
@@ -36,6 +32,7 @@ public class VivoxAuthentication : MonoBehaviour
         }
     }
 
+    Channel3DProperties props = new Channel3DProperties();
     async Task JoinLobbyChannel()
     {
         try
@@ -44,7 +41,8 @@ public class VivoxAuthentication : MonoBehaviour
             var joinedLobby = LobbyManager.Instance.GetJoinedLobby();
             if (joinedLobby != null)
             {
-                await VivoxService.Instance.JoinGroupChannelAsync(joinedLobby.Name, ChatCapability.AudioOnly);
+                //await VivoxService.Instance.JoinGroupChannelAsync(joinedLobby.Name, ChatCapability.AudioOnly);
+                await VivoxService.Instance.JoinPositionalChannelAsync(joinedLobby.Name, ChatCapability.AudioOnly, props);
             }
             else
             {

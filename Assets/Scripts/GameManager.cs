@@ -4,6 +4,7 @@ using TMPro;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : NetworkBehaviour
 {
@@ -116,5 +117,10 @@ public class GameManager : NetworkBehaviour
         int minutes = Mathf.FloorToInt(totalSeconds / 60);
         int seconds = Mathf.FloorToInt(totalSeconds % 60);
         return string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public void ReloadGame()
+    {
+        SceneManager.LoadScene(1);
     }
 }
