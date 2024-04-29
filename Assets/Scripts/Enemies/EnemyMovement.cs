@@ -64,7 +64,7 @@ public class EnemyMovement : NetworkBehaviour
         StartCoroutine(UpdatePlayersAfterDelay());
     }
 
-     IEnumerator UpdatePlayersAfterDelay()
+    public IEnumerator UpdatePlayersAfterDelay()
     {
         yield return new WaitForSeconds(waitintgBeforeHuntingTime); // Espera hasta el final del frame para asegurar que el jugador esté completamente destruido
         players = FindObjectsOfType<PlayerMovement>();
