@@ -19,6 +19,9 @@ public class GameManager : NetworkBehaviour
     public GameObject winPanel;
     public bool gameStarted = false;
     public bool globalShadowState = false;
+    private bool isPaused;
+    public bool isAudioDevicesDisplayOpen = false;
+    private GameObject pausePanel;
 
     [SerializeField] private TextMeshProUGUI keysText;
     [SerializeField] private TextMeshProUGUI keysGoalText;
@@ -30,6 +33,10 @@ public class GameManager : NetworkBehaviour
             Destroy(this);
         else
             instance = this;
+        isPaused = false;
+        pausePanel = GameObject.FindGameObjectWithTag("PauseMessage");
+        pausePanel.SetActive(isPaused);
+
     }
 
     private void Update()
@@ -44,12 +51,40 @@ public class GameManager : NetworkBehaviour
                 losePanel.SetActive(true);
             }
         }
-
+        if (gameStarted && Input.GetKeyDown(KeyCode.Escape) && pausePanel != null)
+        {
+            if (isPaused)
+            {
+                if (!isAudioDevicesDisplayOpen)
+                {
+                    HideCursor();
+                    isPaused = !isPaused;
+                }
+            }
+            else
+            {
+                EnableCursor();
+                isPaused = !isPaused;
+            }
+            pausePanel.SetActive(isPaused);
+        }
     }
+
+    public void EnableCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void HideCursor()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void setAudioDevicesDisplay(bool value)
+    {
+        isAudioDevicesDisplayOpen = value;
     }
 
     public override void OnNetworkSpawn()

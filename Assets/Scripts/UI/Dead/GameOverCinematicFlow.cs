@@ -29,6 +29,7 @@ public class GameOverCinematicFlow : NetworkBehaviour
         yield return new WaitForSeconds(8f);
         videoPlayerObject.SetActive(false);
         gameOverPanel.SetActive(true);
+        GameManager.instance.EnableCursor();
     }
 }
 
