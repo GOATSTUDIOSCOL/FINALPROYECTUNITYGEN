@@ -18,7 +18,7 @@ public class LightsOn : MonoBehaviour
 
     public void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("Player") && !skull.isOnPuzzle && !skull.puzzleSolved )
+        if (collider.CompareTag("Player") && !skull.isOnPuzzle && !skull.puzzleSolved && !GameManager.instance.shadowPuzle.Value)
         {
             currentPlayer = collider;
             collider.GetComponent<PlayerMovement>().playerCamera.GetComponent<CameraController>().enabled = false;
