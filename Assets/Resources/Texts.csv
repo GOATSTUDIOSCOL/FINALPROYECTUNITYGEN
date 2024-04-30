@@ -1,0 +1,44 @@
+Key,en,es,fr,pt,jp
+PLAY,Play Game,Jugar,Jouer,Jogar,プレイ
+OPTIONS,Options,Opciones,Options,Opções,オプション
+EXIT,Exit,Salir,Sortir,Sair,出口
+RESUME,Resume,Reanudar,Reprendre,Retomar,再開
+RETURNMENU,Return to menu,Volver al menú,Retour au menu,Retornar ao menu,メニューに戻る
+THANKS,Thanks for playing!,¡Gracias por jugar!,Merci d'avoir joué!,Obrigado por jogar!,遊んでくれてありがとう！
+PRESSPICKUP,Press E to pickup,Pulsa E para recoger,Appuyez sur E pour ramasser,Pressione E para pegar,Eを押して拾う
+PRESSOPEN,Press E to open,Pulsa E para abrir,Appuyez sur E pour ouvrir,Pressione E para abrir,Eを押して開く
+SENSITIVITY,Sensitivity,Sensibilidad,Sensibilité,Sensibilidade,感度
+VOLUME,Volume,Volumen,Volume,Volume,ボリューム
+RESOLUTION,Resolution,Resolución,Résolution,Resolução,解像度
+QUALITY,Quality,Calidad,Qualité,Qualidade,品質
+SCREENMODE,Fullscreen,Pantalla completa,Plein écran,Tela cheia,フルスクリーン
+AUDIODEVICES,Audio Devices,Dispositivos de audio,Dispositifs audio,Dispositivos de áudio,オーディオデバイス
+INPUTDEVICE,Input Device,Dispositivo de entrada,Dispositif d'entrée,Dispositivo de entrada,入力デバイス
+OUTPUTDEVICE,Output Device,Dispositivo de salida,Dispositif de sortie,Dispositivo de saída,出力デバイス
+LOBBYNAME,Lobby Name,Nombre del Lobby,Nom du salon,Nome do lobby,ロビー名
+CREATELOBBY,Create Lobby,Crear Lobby,Créer un salon,Criar Lobby,ロビーを作成する
+UPDATE,Update,Actualizar,Mettre à jour,Atualizar,更新
+BACK,Back,Atrás,Retour,Retornar,戻る
+CONTINUE,Continue,Continuar,Continuer,Continuar,続ける
+LOGIN,Login,Iniciar sesión,Connexion,Login,ログイン
+NICKNAME,Nickname,Nombre de usuario,Pseudo,Nome de usuário,ニックネーム
+SERVER,Server,Servidor,Serveur,Servidor,サーバー
+AUDIOSETTINGS,Audio Settings,Configuración de audio,Paramètres audio,Configurações de áudio,オーディオ設定
+OBJECTIVES,Objectives,Objetivos,Objectifs,Objetivos,目標
+MUTE,Mute,Silenciar,Muet,Silenciar,ミュート
+INVENTORY,Inventory,Inventario,Inventaire,Inventário,インベントリ
+LOOKKEYS,Look for the keys,Buscar las llaves,Chercher les clés,Buscar as chaves,鍵を探す
+THROWITEM,Throw item,Lanzar objeto,Lancer l'objet,Lançar item,アイテムを投げる
+DROPTAKEITEM,Drop/Take item,Soltar/Tomar objeto,Lâcher/Prendre l'objet,Soltar/Pegar item,アイテムを置く/取る
+CUREFRIEND,Cure a friend,Curar a un amigo,Soigner un ami,Curar um amigo,友達を治す
+PAUSE,Pause,Pausa,Mettre en pause,Pausar,一時停止
+
+LANGUAGE,Language,Idioma,Langue,Idioma,言語
+SCREENMODE,Screen mode,Modo de pantalla,Mode d'affichage,Modo de tela,画面モード
+LOW,Low,Bajo,Bas,Baixo,低
+MEDIUM,Medium,Medio,Moyen,Médio,中
+HIGH,High,Alto,Haut,Alto,高
+ULTRA,Ultra,Ultra,Ultra,Ultra,超
+FULLSCREEN,Fullscreen,Pantalla completa,Toute l'écran,Tela cheia,フルスクリーン
+WINDOWED,Windowed,Ventana,Vitré,Janela,ウィンドウ
+MAXIMIZEDWINDOW,Maximized window,Ventana maximizada,Fenêtre maximisée,Janela maximizada,最大化されたウィンドウ
