@@ -22,6 +22,7 @@ public class GameManager : NetworkBehaviour
     private bool isPaused;
     public bool isAudioDevicesDisplayOpen = false;
     private GameObject pausePanel;
+    public Canvas vivoxCanvas;
 
     [SerializeField] private TextMeshProUGUI keysText;
     [SerializeField] private TextMeshProUGUI keysGoalText;
@@ -64,6 +65,7 @@ public class GameManager : NetworkBehaviour
             if (!isAudioDevicesDisplayOpen)
             {
                 HideCursor();
+                vivoxCanvas.enabled = false;
                 NetworkManager net = NetworkManager.Singleton;
                 net.LocalClient.PlayerObject.GetComponent<PlayerMovement>().playerCamera.GetComponent<CameraController>().enabled = true;
                 isPaused = !isPaused;
@@ -72,6 +74,7 @@ public class GameManager : NetworkBehaviour
         else
         {
             EnableCursor();
+            vivoxCanvas.enabled = true;
             NetworkManager net = NetworkManager.Singleton;
             net.LocalClient.PlayerObject.GetComponent<PlayerMovement>().playerCamera.GetComponent<CameraController>().enabled = false;
             isPaused = !isPaused;
