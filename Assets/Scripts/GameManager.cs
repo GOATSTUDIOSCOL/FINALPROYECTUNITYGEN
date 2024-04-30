@@ -53,23 +53,31 @@ public class GameManager : NetworkBehaviour
         }
         if (gameStarted && Input.GetKeyDown(KeyCode.Escape) && pausePanel != null)
         {
-            if (isPaused)
-            {
-                if (!isAudioDevicesDisplayOpen)
-                {
-                    HideCursor();
-                    isPaused = !isPaused;
-                }
-            }
-            else
-            {
-                EnableCursor();
-                isPaused = !isPaused;
-            }
-            pausePanel.SetActive(isPaused);
+            ChangePauseState();
         }
     }
 
+    public void ChangePauseState()
+    {
+        if (isPaused)
+        {
+            if (!isAudioDevicesDisplayOpen)
+            {
+                HideCursor();
+                NetworkManager net = NetworkManager.Singleton;
+                net.LocalClient.PlayerObject.GetComponent<PlayerMovement>().playerCamera.GetComponent<CameraController>().enabled = true;
+                isPaused = !isPaused;
+            }
+        }
+        else
+        {
+            EnableCursor();
+            NetworkManager net = NetworkManager.Singleton;
+            net.LocalClient.PlayerObject.GetComponent<PlayerMovement>().playerCamera.GetComponent<CameraController>().enabled = false;
+            isPaused = !isPaused;
+        }
+        pausePanel.SetActive(isPaused);
+    }
     public void EnableCursor()
     {
         Cursor.visible = true;
