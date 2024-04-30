@@ -104,16 +104,30 @@ public class SettingsMenu : MonoBehaviour
                 LanguageSetter.instance.ChangeFont(LanguageSetter.instance.japanFont);
                 break;
         }
-       LanguageSetter.instance.SetLanguage();
+        LanguageSetter.instance.SetLanguage();
     }
-
-    public void SetQuality(int qualityIndex)
+    public void SetScreenMode(int id)
     {
-        QualitySettings.SetQualityLevel(qualityIndex);
+        switch (id)
+        {
+            case 0:
+                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                break;
+            case 1:
+                Screen.fullScreenMode = FullScreenMode.Windowed;
+                break;
+            case 2:
+                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                break;
+        }
     }
+        public void SetQuality(int qualityIndex)
+        {
+            QualitySettings.SetQualityLevel(qualityIndex);
+        }
 
-    public void Quit()
-    {
-        Application.Quit();
+        public void Quit()
+        {
+            Application.Quit();
+        }
     }
-}

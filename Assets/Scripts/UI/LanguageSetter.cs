@@ -1,12 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using static Unity.VisualScripting.Icons;
-using static UnityEngine.Rendering.PostProcessing.SubpixelMorphologicalAntialiasing;
-using UnityEngine.Rendering;
-using WebSocketSharp;
 
 public class LanguageSetter : MonoBehaviour
 {
