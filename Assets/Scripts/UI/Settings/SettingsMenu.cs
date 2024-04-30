@@ -10,6 +10,8 @@ public class SettingsMenu : MonoBehaviour
     Resolution[] resolutions;
     public TMP_Dropdown resolutionDropdown;
     public TMP_Dropdown languajeDropdown;
+    public TMP_Dropdown resolutionDropdownIngame;
+    public TMP_Dropdown languajeDropdownIngame;
     public AudioMixer audioMixer;
 
     private void Start()
@@ -27,6 +29,7 @@ public class SettingsMenu : MonoBehaviour
     {
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
+        resolutionDropdownIngame.ClearOptions();
         List<string> options = new List<string>();
         int currentResolutionIndex = 0;
         for (int i = 0; i < resolutions.Length; i++)
@@ -41,6 +44,9 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
+        resolutionDropdownIngame.AddOptions(options);
+        resolutionDropdownIngame.value = currentResolutionIndex;
+        resolutionDropdownIngame.RefreshShownValue();
     }
 
     public void SetResolution(int resolutionIndex)
@@ -59,22 +65,27 @@ public class SettingsMenu : MonoBehaviour
         {
             case "en":
                 languajeDropdown.value = 0;
+                languajeDropdownIngame.value = 0;
                 LanguageSetter.instance.ChangeFont(LanguageSetter.instance.normalFont);
                 break;
             case "es":
                 languajeDropdown.value = 1;
+                languajeDropdownIngame.value = 1;
                 LanguageSetter.instance.ChangeFont(LanguageSetter.instance.normalFont);
                 break;
             case "fr":
                 languajeDropdown.value = 2;
+                languajeDropdownIngame.value = 2;
                 LanguageSetter.instance.ChangeFont(LanguageSetter.instance.normalFont);
                 break;
             case "pt":
                 languajeDropdown.value = 3;
+                languajeDropdownIngame.value = 3;
                 LanguageSetter.instance.ChangeFont(LanguageSetter.instance.normalFont);
                 break;
             case "jp":
                 languajeDropdown.value = 4;
+                languajeDropdownIngame.value = 4;
                 LanguageSetter.instance.ChangeFont(LanguageSetter.instance.japanFont);
                 break;
         }
