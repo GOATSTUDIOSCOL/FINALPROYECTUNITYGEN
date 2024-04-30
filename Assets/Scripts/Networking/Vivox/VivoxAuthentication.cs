@@ -41,8 +41,8 @@ public class VivoxAuthentication : MonoBehaviour
             var joinedLobby = LobbyManager.Instance.GetJoinedLobby();
             if (joinedLobby != null)
             {
-                //await VivoxService.Instance.JoinGroupChannelAsync(joinedLobby.Name, ChatCapability.AudioOnly);
-                await VivoxService.Instance.JoinPositionalChannelAsync(joinedLobby.Name, ChatCapability.AudioOnly, props);
+                await VivoxService.Instance.JoinGroupChannelAsync(joinedLobby.Name, ChatCapability.AudioOnly);
+               //await VivoxService.Instance.JoinPositionalChannelAsync(joinedLobby.Name, ChatCapability.AudioOnly, props);
             }
             else
             {

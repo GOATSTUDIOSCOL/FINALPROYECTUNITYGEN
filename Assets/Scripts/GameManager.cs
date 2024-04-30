@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using TMPro;
-using Unity.Collections.LowLevel.Unsafe;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +9,7 @@ public class GameManager : NetworkBehaviour
 {
     public static GameManager instance { get; private set; }
     private NetworkVariable<int> keys = new NetworkVariable<int>();
+    public NetworkVariable<bool> shadowPuzle = new NetworkVariable<bool>();
     private NetworkVariable<float> timeLeft = new NetworkVariable<float>();
     public float initialTime = 15 * 60;
     public float localTime;
@@ -18,6 +18,10 @@ public class GameManager : NetworkBehaviour
     public GameObject losePanel;
     public GameObject winPanel;
     public bool gameStarted = false;
+    public bool globalShadowState = false;
+    private bool isPaused;
+    public bool isAudioDevicesDisplayOpen = false;
+    private GameObject pausePanel;
 
     [SerializeField] private TextMeshProUGUI keysText;
     [SerializeField] private TextMeshProUGUI keysGoalText;
@@ -29,6 +33,10 @@ public class GameManager : NetworkBehaviour
             Destroy(this);
         else
             instance = this;
+        isPaused = false;
+        pausePanel = GameObject.FindGameObjectWithTag("PauseMessage");
+        pausePanel.SetActive(isPaused);
+
     }
 
     private void Update()
@@ -43,18 +51,47 @@ public class GameManager : NetworkBehaviour
                 losePanel.SetActive(true);
             }
         }
-
+        if (gameStarted && Input.GetKeyDown(KeyCode.Escape) && pausePanel != null)
+        {
+            if (isPaused)
+            {
+                if (!isAudioDevicesDisplayOpen)
+                {
+                    HideCursor();
+                    isPaused = !isPaused;
+                }
+            }
+            else
+            {
+                EnableCursor();
+                isPaused = !isPaused;
+            }
+            pausePanel.SetActive(isPaused);
+        }
     }
+
+    public void EnableCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void HideCursor()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    public void setAudioDevicesDisplay(bool value)
+    {
+        isAudioDevicesDisplayOpen = value;
+    }
+
     public override void OnNetworkSpawn()
     {
         if (IsServer)
         {
+            shadowPuzle.Value = false;
             keys.Value = initialKeys;
             timeLeft.Value = initialTime;
             NetworkManager.OnClientConnectedCallback += NetworkManager_OnClientConnectedCallback;
@@ -72,7 +109,13 @@ public class GameManager : NetworkBehaviour
             }
             keys.OnValueChanged += OnKeyValueChanged;
             timeLeft.OnValueChanged += OnTimeValueChanged;
+            shadowPuzle.OnValueChanged += OnShadowValueChanged;
         }
+    }
+
+    private void OnShadowValueChanged(bool previousValue, bool newValue)
+    {
+        shadowPuzle.Value = true;
     }
 
     private void OnTimeValueChanged(float previousValue, float newValue)
@@ -88,7 +131,8 @@ public class GameManager : NetworkBehaviour
     private void OnKeyValueChanged(int previous, int current)
     {
         Debug.Log($"Detected NetworkVariable Change: Previous: {previous} | Current: {current}");
-        keysText.text = "Keys: " + current.ToString();
+        keysText.text = current.ToString();
+        keysGoalText.text = keys.Value.ToString() + "/8";
     }
 
     [Rpc(SendTo.Server)]
@@ -108,6 +152,12 @@ public class GameManager : NetworkBehaviour
     {
         timeLeft.Value = time;
         timeUIText.text = FormatTime(time);
+    }
+
+    [Rpc(SendTo.Server)]
+    public void UpdateShadowRpc()
+    {
+        shadowPuzle.Value = true;
     }
 
 

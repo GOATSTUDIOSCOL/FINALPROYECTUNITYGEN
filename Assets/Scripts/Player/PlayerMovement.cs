@@ -23,11 +23,15 @@ public class PlayerMovement : NetworkBehaviour
     #region inputActions
     private InputAction move;
     private InputAction jump;
+    private InputAction pause;
     #endregion
 
     #region States
     private bool isGrounded;
+    private bool isPaused;
     #endregion
+
+    private GameObject pausePanel;
 
     public Transform hand;
 
@@ -41,8 +45,7 @@ public class PlayerMovement : NetworkBehaviour
     }
     private void Awake()
     {
-        playerControls = new PlayerInputActions();
-
+        playerControls = new PlayerInputActions();      
     }
 
     void Start()
@@ -63,6 +66,8 @@ public class PlayerMovement : NetworkBehaviour
     {
         move.Disable();
     }
+
+    
 
     private void FixedUpdate()
     {

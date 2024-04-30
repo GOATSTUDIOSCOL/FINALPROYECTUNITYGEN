@@ -413,7 +413,6 @@ GameObject:
   - component: {fileID: 7608644213433125059}
   - component: {fileID: 1788430155543808632}
   - component: {fileID: 8589541526236311076}
-  - component: {fileID: -6005062179131999579}
   m_Layer: 0
   m_Name: PlayerWitch_Female
   m_TagString: Player
@@ -682,7 +681,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 200
+  MaxDistance: 350
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -778,26 +777,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1058444614145029677}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fa77ce801567a4194aa9da65ce721e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   channelName: 
---- !u!114 &-6005062179131999579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1058444614145029677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4e239a6f9250a94f8074232314da7a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ChannelUri: 
-  m_ChannelName: 
 --- !u!1 &1085945017419436222
 GameObject:
   m_ObjectHideFlags: 0
