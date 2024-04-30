@@ -2,9 +2,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 using Unity.Netcode;
+using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerMovement : NetworkBehaviour
 {
+    public static PlayerMovement Instance { get; private set;}
     #region MovementVariables
     [Header("Movement Settings")]
     public float speed = 5f;
@@ -31,21 +34,20 @@ public class PlayerMovement : NetworkBehaviour
     private bool isPaused;
     #endregion
 
+    public Dictionary<ulong, Transform> heads; 
+    // private NetworkVariable<Dictionary<ulong, Transform>> current = new NetworkVariable<Dictionary<ulong, Transform>>();
+    
+
     private GameObject pausePanel;
 
     public Transform hand;
 
-    public override void OnNetworkSpawn()
-    {
-        if (!IsOwner)
-        {
-            enabled = false; 
-            return;
-        }
-    }
     private void Awake()
     {
-        playerControls = new PlayerInputActions();      
+        Instance = this;
+        playerControls = new PlayerInputActions(); 
+        heads = new Dictionary<ulong, Transform>();
+        UIManager.Instance.PlayerDead();
     }
 
     void Start()
@@ -56,6 +58,73 @@ public class PlayerMovement : NetworkBehaviour
         playerAudio = GetComponent<AudioSource>();
         FixUI();
     }
+
+    public override void OnNetworkSpawn()
+    {
+        if (!IsOwner)
+        {
+            Debug.Log("Networkspawn PlayerMovement not mine" +  NetworkObjectId);
+            enabled = false; 
+            Debug.Log("Connected client ID: " + NetworkObjectId + " size of camera controllers: " + heads.Count);
+        } else {
+            Debug.Log("Networkspawn PlayerMovement mine" +  NetworkObjectId);
+        }
+        heads[NetworkObjectId] = head;
+        UIManager.Instance.SpawnOrDespawnPlayer(heads, NetworkObjectId);
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        Debug.Log("Disconnected client ID: " + NetworkObjectId + " size of camera controllers: " + heads.Count);
+        if (heads.ContainsKey(NetworkObjectId))
+            heads.Remove(NetworkObjectId);
+        Debug.Log("Disconnected client ID: " + NetworkObjectId + " size of camera controllers: " + heads.Count);
+
+        UIManager.Instance.SpawnOrDespawnPlayer(heads, NetworkObjectId);
+    }
+
+    public void SwitchHead(ulong headObjectId, ulong netid) {
+        Debug.Log("CHANGING CAMERA");
+        Debug.Log("SwitchHead " +  NetworkObjectId + " " + headObjectId);
+        Debug.Log("SwitchHead " +  netid + " " + headObjectId);
+        
+        if (heads.ContainsKey(headObjectId)) {
+            // SwitchHeadServerRpc(NetworkObjectId, headObjectId);
+            Transform newHead = heads[headObjectId];
+            FindObjectOfType<CinemachineVirtualCamera>().Follow = newHead;
+        }
+    }  
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SwitchHeadServerRpc(ulong currentObjectId, ulong nextObjectId) {
+        Debug.Log("RPC SwitchHead " +  currentObjectId + " " + nextObjectId);
+        
+        if (currentObjectId == nextObjectId) return;
+
+        
+        
+        NetworkManager.SpawnManager.SpawnedObjects.TryGetValue(currentObjectId, out var currentObj);
+        NetworkManager.SpawnManager.SpawnedObjects.TryGetValue(nextObjectId, out var nextObj);
+        if (currentObj  == null || nextObj == null ) return;
+
+        // if (objectToPickup.TryGetComponent(out NetworkObject networkObject) && networkObject.TrySetParent(transform))
+        // {
+        //     var pickUpObjectRigidbody = objectToPickup.GetComponent<Rigidbody>();
+        //     pickUpObjectRigidbody.isKinematic = true;
+        //     pickUpObjectRigidbody.interpolation = RigidbodyInterpolation.None;
+        //     objectToPickup.GetComponent<NetworkTransform>().InLocalSpace = true;
+        //     objectToPickup.transform.position = new Vector3(objectToPickup.transform.position.x, objectToPickup.transform.position.y + 1.5f, objectToPickup.transform.position.z);
+        // }
+
+        // if (heads.ContainsKey(headObjectId)) {
+
+        //     Transform newHead = heads[headObjectId];
+        //     FindObjectOfType<CinemachineVirtualCamera>().Follow = newHead;
+        // }
+    }  
+
+
+    
 
     private void OnEnable()
     {
@@ -110,4 +179,6 @@ public class PlayerMovement : NetworkBehaviour
         move = playerControls.Player.Move;
         move.Enable();
     }
+
+
 }

@@ -17,7 +17,7 @@ public class RpcTest : NetworkBehaviour
     {
         if (!IsServer && IsOwner) //Only send an RPC to the server on the client that owns the NetworkObject that owns this NetworkBehaviour instance
         {
-            TestServerRpc(0, NetworkObjectId);
+            // TestServerRpc(0, NetworkObjectId);
         }
     }
 
