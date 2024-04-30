@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Rendering.PostProcessing;
+using Unity.Netcode;
 
-public class PostProcessingDamage : MonoBehaviour
+public class PostProcessingDamage : NetworkBehaviour
 {
     public float intensity = 0;
     public GameObject deadTimeline;
@@ -12,21 +13,33 @@ public class PostProcessingDamage : MonoBehaviour
 
     PostProcessVolume _volume;
     Vignette _vignette;
+    public override void OnNetworkSpawn()
+    {
+        if (!IsOwner)
+        {
+            enabled = false; 
+            return;
+        }
+    }
     void Start()
     {
-        enabled = false; // mientras se arreglan los bugs
-        deadTimeline = GameObject.FindGameObjectWithTag("Timeline");
-        _volume = GetComponent<PostProcessVolume>();
-        _volume.profile.TryGetSettings<Vignette>(out _vignette);
+        if(IsOwner)
+        {
+            enabled = false; // mientras se arreglan los bugs
+            //deadTimeline = GameObject.FindGameObjectWithTag("Timeline");
+            _volume = GetComponent<PostProcessVolume>();
+            _volume.profile.TryGetSettings<Vignette>(out _vignette);
 
-        if (!_vignette)
-        {
-            print("vignette empty!!!!");
+            if (!_vignette)
+            {
+                print("vignette empty!!!!");
+            }
+            else
+            {
+                _vignette.enabled.Override(false);
+            }
         }
-        else
-        {
-            _vignette.enabled.Override(false);
-        }
+        
     }
 
     // Update is called once per frame
@@ -38,20 +51,32 @@ public class PostProcessingDamage : MonoBehaviour
 
     public void FirstDamageState()
     {
-        _vignette.enabled.Override(true);
-        intensity = 0.3f;
+        if(IsOwner)
+        {
+            _vignette.enabled.Override(true);
+            intensity = 0.3f;
+        }
+        
     }
 
     public void UltimateDamageState()
     {
-        intensity = 0.42f;
+        if(IsOwner)
+        {
+            intensity = 0.6f;
+        }
+        
     }
 
-    public void DeadCameraState()
-    {
-        intensity = 0.42f;
-        playerCamera.SetActive(false);
-        deadTimeline.GetComponent<PlayableDirector>().enabled = true;
-        deadTimeline.GetComponentInChildren<Canvas>().enabled = true;
-    }
+    // public void DeadCameraState()
+    // {
+    //     if(IsOwner)
+    //     {
+    //         intensity = 0.6f;
+    //         playerCamera.SetActive(false);
+    //         deadTimeline.GetComponent<PlayableDirector>().enabled = true;
+    //         deadTimeline.GetComponentInChildren<Canvas>().enabled = true;
+    //     }
+        
+    // }
 }
