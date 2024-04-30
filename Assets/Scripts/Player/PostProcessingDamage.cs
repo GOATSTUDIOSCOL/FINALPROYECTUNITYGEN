@@ -25,7 +25,8 @@ public class PostProcessingDamage : NetworkBehaviour
     {
         if(IsOwner)
         {
-            enabled = false; // mientras se arreglan los bugs
+            intensity = 0f;
+            //enabled = false; // mientras se arreglan los bugs
             //deadTimeline = GameObject.FindGameObjectWithTag("Timeline");
             _volume = GetComponent<PostProcessVolume>();
             _volume.profile.TryGetSettings<Vignette>(out _vignette);
