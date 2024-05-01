@@ -96,6 +96,7 @@ public class PlayerMovement : NetworkBehaviour
         GameManager.instance.GetComponent<AudioSource>().Play();
         GameManager.instance.gameStarted = true;
         GameManager.instance.HideCursor();
+        GameManager.instance.vivoxCanvas.enabled = false;
     }
 
     public void Move()
