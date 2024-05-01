@@ -5,13 +5,13 @@ using UnityEngine.UI;
 public class PlayerCamObsCardBtn : MonoBehaviour
 {
     public ulong cameraObjectId;
+    public ulong networkIdObj;
     public event EventHandler<PlayerCameraObsEventArgs> OnSwitchCamera;
     public Button btn;
 
     public class PlayerCameraObsEventArgs : EventArgs
     {
         public ulong cameraObjectId;
-        public ulong netid;
     }
 
 
@@ -26,8 +26,8 @@ public class PlayerCamObsCardBtn : MonoBehaviour
         this.cameraObjectId = cameraObjectId;
     }
 
-    public void Click(ulong key, ulong netid)
+    public void Click()
     {
-        OnSwitchCamera?.Invoke(this, new PlayerCameraObsEventArgs{ cameraObjectId = key, netid = netid });
+        OnSwitchCamera?.Invoke(this, new PlayerCameraObsEventArgs{ cameraObjectId = cameraObjectId });
     }
 }

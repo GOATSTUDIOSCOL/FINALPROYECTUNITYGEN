@@ -10,8 +10,9 @@ public class UIManager : MonoBehaviour
     public event EventHandler<SpawnPlayerEventArgs> OnSpawnOrDespawnPlayer;
     public class SpawnPlayerEventArgs : EventArgs
     {
-        public Dictionary<ulong, Transform> heads;
+        public Transform head;
         public ulong networkIdObj;
+        public bool op;
     }
 
     private void Awake() {
@@ -22,8 +23,8 @@ public class UIManager : MonoBehaviour
         OnPlayerDead?.Invoke(this, EventArgs.Empty);
     }
 
-    public void SpawnOrDespawnPlayer(Dictionary<ulong, Transform> heads, ulong nId) {
-        Debug.Log("CAlled and cameras size is " + heads.Count);
-        OnSpawnOrDespawnPlayer?.Invoke(this, new SpawnPlayerEventArgs{heads = heads, networkIdObj = nId});
+    public void SpawnOrDespawnPlayer(Transform head, ulong nId, bool op) {
+        Debug.Log("Called in UIManager and networkId is " + nId);
+        OnSpawnOrDespawnPlayer?.Invoke(this, new SpawnPlayerEventArgs{head = head, networkIdObj = nId, op = op});
     }
 }
