@@ -18,8 +18,12 @@ public class ActiveEnemy : NetworkBehaviour
         NetworkManager.Singleton.OnClientConnectedCallback += ClientConnected;
         NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnected;
     }
-    private void Start() {
-        enemyMovement=FindObjectOfType<EnemyMovement>();
+
+    public void SpawnEnemyRpc()
+    {
+        enemy = Instantiate(enemy);
+        enemy.GetComponent<NetworkObject>().Spawn();
+        enemyMovement =  enemy.GetComponent<EnemyMovement>();
     }
 
     void ClientConnected(ulong u)
@@ -34,7 +38,7 @@ public class ActiveEnemy : NetworkBehaviour
     private void OnTriggerEnter(Collider other) {
         if(other.CompareTag("Player"))
         {
-            enemy.SetActive(true);
+            SpawnEnemyRpc();
         }
     }
 }

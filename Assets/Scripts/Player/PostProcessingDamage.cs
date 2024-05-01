@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Playables;
-using UnityEngine.Rendering.PostProcessing;
 using Unity.Netcode;
 
 public class PostProcessingDamage : NetworkBehaviour

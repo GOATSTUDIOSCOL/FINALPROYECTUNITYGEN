@@ -16,15 +16,16 @@ public class EnemyMovement : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        if (!IsServer)
+        {
+            enabled = false;
+            return;
+        }
         aiNav.speed = speed;
         NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnected;
+        players = FindObjectsOfType<PlayerMovement>();
+        InvokeRepeating("UpdateNearestPlayer", 0.5f, 2f);
     }
-
-    void Start()
-     {
-         players = FindObjectsOfType<PlayerMovement>();
-         InvokeRepeating("UpdateNearestPlayer", 0.5f, 2f); // Actualiza cada 0.5 segundos
-     }
 
     private void ClientDisconnected(ulong u)
     {
@@ -66,9 +67,9 @@ public class EnemyMovement : NetworkBehaviour
 
     public IEnumerator UpdatePlayersAfterDelay()
     {
-        yield return new WaitForSeconds(waitintgBeforeHuntingTime); // Espera hasta el final del frame para asegurar que el jugador esté completamente destruido
+        yield return new WaitForSeconds(waitintgBeforeHuntingTime); 
         players = FindObjectsOfType<PlayerMovement>();
-        UpdateNearestPlayer(); // Busca un nuevo jugador más cercano
+        UpdateNearestPlayer();
     }
 }
 
