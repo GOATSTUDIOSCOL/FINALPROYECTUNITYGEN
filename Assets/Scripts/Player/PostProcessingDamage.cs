@@ -7,77 +7,28 @@ using Unity.Netcode;
 
 public class PostProcessingDamage : NetworkBehaviour
 {
-    public float intensity = 0;
-    public GameObject deadTimeline;
-    public GameObject playerCamera;
+    public static PostProcessingDamage instance { get; private set; }
+    public GameObject damage1, damage2;
 
-    PostProcessVolume _volume;
-    Vignette _vignette;
-    public override void OnNetworkSpawn()
-    {
-        if (!IsOwner)
-        {
-            enabled = false; 
-            return;
-        }
-    }
-    void Start()
-    {
-        if(IsOwner)
-        {
-            intensity = 0f;
-            //enabled = false; // mientras se arreglan los bugs
-            //deadTimeline = GameObject.FindGameObjectWithTag("Timeline");
-            _volume = GetComponent<PostProcessVolume>();
-            _volume.profile.TryGetSettings<Vignette>(out _vignette);
-
-            if (!_vignette)
-            {
-                print("vignette empty!!!!");
-            }
-            else
-            {
-                _vignette.enabled.Override(false);
-            }
-        }
-        
+    private void Awake() {
+        if (instance != null)
+            Destroy(this);
+        else
+            instance = this;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        if (_vignette != null)
-            _vignette.intensity.Override(intensity);
+    private void Start() {
+        damage1.SetActive(false);
+        damage2.SetActive(false);
     }
-
-    public void FirstDamageState()
-    {
-        if(IsOwner)
-        {
-            _vignette.enabled.Override(true);
-            intensity = 0.3f;
-        }
-        
-    }
-
-    public void UltimateDamageState()
-    {
-        if(IsOwner)
-        {
-            intensity = 0.6f;
-        }
-        
-    }
-
-    // public void DeadCameraState()
+    // public void FirstDamageState()
     // {
-    //     if(IsOwner)
-    //     {
-    //         intensity = 0.6f;
-    //         playerCamera.SetActive(false);
-    //         deadTimeline.GetComponent<PlayableDirector>().enabled = true;
-    //         deadTimeline.GetComponentInChildren<Canvas>().enabled = true;
-    //     }
-        
+    //     damage1.SetActive(true);
     // }
+
+    // public void UltimateDamageState()
+    // {
+    //     damage2.SetActive(true);
+    // }
+
 }

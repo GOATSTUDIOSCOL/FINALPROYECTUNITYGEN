@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 public class ActiveEnemy : NetworkBehaviour
 {
     public GameObject enemy;
+    public EnemyMovement enemyMovement;
     public List<GameObject> players;
     public override void OnNetworkSpawn()
     {
@@ -16,6 +17,9 @@ public class ActiveEnemy : NetworkBehaviour
         }
         NetworkManager.Singleton.OnClientConnectedCallback += ClientConnected;
         NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnected;
+    }
+    private void Start() {
+        enemyMovement=FindObjectOfType<EnemyMovement>();
     }
 
     void ClientConnected(ulong u)

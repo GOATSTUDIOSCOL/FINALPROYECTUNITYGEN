@@ -9,8 +9,8 @@ using Unity.Netcode;
 public class PlayerDamage : NetworkBehaviour
 {
     [SerializeField] float playerHealth = 3;
+    public bool isAlive = true;
    // [SerializeField] float pushForce = 10f;
-    public PostProcessingDamage postProcessingDamage;
     private EnemyMovement enemyMovement;
      private PlayerMovement playerMovement;
     public override void OnNetworkSpawn()
@@ -24,6 +24,7 @@ public class PlayerDamage : NetworkBehaviour
     void Start() 
     {
         playerHealth = 3;
+        isAlive = true;
         playerMovement = GetComponent<PlayerMovement>();
         enemyMovement = GetComponentInParent<EnemyMovement>();
     }
@@ -37,25 +38,31 @@ public class PlayerDamage : NetworkBehaviour
             switch(playerHealth)
             {
                 case 3: 
-                playerHealth -= 1;
-                postProcessingDamage.FirstDamageState();
+                    if(IsOwner)
+                    {
+                        playerHealth -= 1;
+                        PostProcessingDamage.instance.damage1.SetActive(true);
+                    }
                 break;
                 case 2: 
-                playerHealth -= 1;
-                postProcessingDamage.UltimateDamageState();
+                    if(IsOwner)
+                    {
+                        playerHealth -= 1;
+                        PostProcessingDamage.instance.damage2.SetActive(true);
+                    }
                 break;
                 case 1: 
-                playerHealth -= 1;
-                //postProcessingDamage.DeadCameraState();
-                if (playerMovement != null)
-                {
-                    playerMovement.enabled = false; // Desactiva el script de movimiento
-                }
-                if(IsOwner)
-                {
-                    other.GetComponentInParent<EnemyMovement>().OnPlayerKilled();
-                    GameManager.instance.losePanel.SetActive(true);
-                }
+                    playerHealth -= 1;
+                    isAlive=false;
+                    if (playerMovement != null)
+                    {
+                        playerMovement.enabled = false; // Desactiva el script de movimiento
+                    }
+                    if(IsOwner)
+                    {
+                        other.GetComponentInParent<EnemyMovement>().OnPlayerKilled();
+                        GameManager.instance.losePanel.SetActive(true);
+                    }
                 
                 break;
             }
