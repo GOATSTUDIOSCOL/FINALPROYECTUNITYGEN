@@ -22,6 +22,7 @@ public class GameManager : NetworkBehaviour
     private bool isPaused;
     public bool isAudioDevicesDisplayOpen = false;
     private GameObject pausePanel;
+    public Canvas vivoxCanvas;
 
     [SerializeField] private TextMeshProUGUI keysText;
     [SerializeField] private TextMeshProUGUI keysGoalText;
@@ -53,23 +54,33 @@ public class GameManager : NetworkBehaviour
         }
         if (gameStarted && Input.GetKeyDown(KeyCode.Escape) && pausePanel != null)
         {
-            if (isPaused)
-            {
-                if (!isAudioDevicesDisplayOpen)
-                {
-                    HideCursor();
-                    isPaused = !isPaused;
-                }
-            }
-            else
-            {
-                EnableCursor();
-                isPaused = !isPaused;
-            }
-            pausePanel.SetActive(isPaused);
+            ChangePauseState();
         }
     }
 
+    public void ChangePauseState()
+    {
+        if (isPaused)
+        {
+            if (!isAudioDevicesDisplayOpen)
+            {
+                HideCursor();
+                vivoxCanvas.enabled = false;
+                NetworkManager net = NetworkManager.Singleton;
+                net.LocalClient.PlayerObject.GetComponent<PlayerMovement>().playerCamera.GetComponent<CameraController>().enabled = true;
+                isPaused = !isPaused;
+            }
+        }
+        else
+        {
+            EnableCursor();
+            vivoxCanvas.enabled = true;
+            NetworkManager net = NetworkManager.Singleton;
+            net.LocalClient.PlayerObject.GetComponent<PlayerMovement>().playerCamera.GetComponent<CameraController>().enabled = false;
+            isPaused = !isPaused;
+        }
+        pausePanel.SetActive(isPaused);
+    }
     public void EnableCursor()
     {
         Cursor.visible = true;
@@ -172,5 +183,10 @@ public class GameManager : NetworkBehaviour
     public void ReloadGame()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
