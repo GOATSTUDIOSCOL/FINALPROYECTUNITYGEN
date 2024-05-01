@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &431797327598131322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 431797327598131323}
+  - component: {fileID: 431797327598131320}
+  - component: {fileID: 431797327598131326}
+  - component: {fileID: 431797327598131321}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &431797327598131323
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431797327598131322}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 513.67413, y: 285.04608, z: -3.2571478}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &431797327598131320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431797327598131322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70813d0ba6d187b49b4621f8b62f7b02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &431797327598131326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431797327598131322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2855b7f3eb6515446b9b31ada018d237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &431797327598131321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431797327598131322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63f8aa496f1946d4ba052c996956472f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playGame: {fileID: 0}
+  options: {fileID: 0}
+  exit: {fileID: 0}
+  optionsTitle: {fileID: 0}
+  language: {fileID: 0}
+  resolution: {fileID: 0}
+  screenMode: {fileID: 0}
+  graphics: {fileID: 0}
+  volume: {fileID: 0}
+  back: {fileID: 0}
+  next: {fileID: 0}
+  login: {fileID: 0}
+  nickname: {fileID: 0}
+  lobbyList: {fileID: 0}
+  updateList: {fileID: 0}
+  lobbyName: {fileID: 0}
+  createLobby: {fileID: 0}
+  playGameCharacter: {fileID: 0}
+  japanFont: {fileID: 11400000, guid: 7cd92838efcd0494ebc2c7cdcffdbf78, type: 2}
+  normalFont: {fileID: 11400000, guid: cc1b1ed92065d094ca12e78cefecb3e0, type: 2}
