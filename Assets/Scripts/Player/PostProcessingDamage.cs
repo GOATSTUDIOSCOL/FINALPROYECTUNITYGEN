@@ -3,55 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Rendering.PostProcessing;
+using Unity.Netcode;
 
-public class PostProcessingDamage : MonoBehaviour
+public class PostProcessingDamage : NetworkBehaviour
 {
-    public float intensity = 0;
-    public GameObject deadTimeline;
-    public GameObject playerCamera;
+    public static PostProcessingDamage instance { get; private set; }
+    public GameObject damage1, damage2;
 
-    PostProcessVolume _volume;
-    Vignette _vignette;
-    void Start()
-    {
-        enabled = false; // mientras se arreglan los bugs
-        deadTimeline = GameObject.FindGameObjectWithTag("Timeline");
-        _volume = GetComponent<PostProcessVolume>();
-        _volume.profile.TryGetSettings<Vignette>(out _vignette);
-
-        if (!_vignette)
-        {
-            print("vignette empty!!!!");
-        }
+    private void Awake() {
+        if (instance != null)
+            Destroy(this);
         else
-        {
-            _vignette.enabled.Override(false);
-        }
+            instance = this;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        if (_vignette != null)
-            _vignette.intensity.Override(intensity);
+    private void Start() {
+        damage1.SetActive(false);
+        damage2.SetActive(false);
     }
+    // public void FirstDamageState()
+    // {
+    //     damage1.SetActive(true);
+    // }
 
-    public void FirstDamageState()
-    {
-        _vignette.enabled.Override(true);
-        intensity = 0.3f;
-    }
+    // public void UltimateDamageState()
+    // {
+    //     damage2.SetActive(true);
+    // }
 
-    public void UltimateDamageState()
-    {
-        intensity = 0.42f;
-    }
-
-    public void DeadCameraState()
-    {
-        intensity = 0.42f;
-        playerCamera.SetActive(false);
-        deadTimeline.GetComponent<PlayableDirector>().enabled = true;
-        deadTimeline.GetComponentInChildren<Canvas>().enabled = true;
-    }
 }
