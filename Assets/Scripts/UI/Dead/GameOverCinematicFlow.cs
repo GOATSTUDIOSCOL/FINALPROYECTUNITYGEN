@@ -7,7 +7,7 @@ using Unity.Netcode;
 
 public class GameOverCinematicFlow : NetworkBehaviour
 {
-    public GameObject videoPlayerObject, gameOverPanel;
+    public GameObject videoPlayerObject, gameOverPanel, observerPanel;
 
     public override void OnNetworkSpawn()
     {
@@ -28,8 +28,11 @@ public class GameOverCinematicFlow : NetworkBehaviour
     {
         yield return new WaitForSeconds(8f);
         videoPlayerObject.SetActive(false);
-        gameOverPanel.SetActive(true);
+        GameManager.instance.losePanel.SetActive(false);
+        //gameOverPanel.SetActive(true);
         GameManager.instance.EnableCursor();
+        observerPanel.GetComponent<Canvas>().enabled = true;
+
     }
 }
 
