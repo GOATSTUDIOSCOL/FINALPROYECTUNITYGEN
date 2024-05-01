@@ -23,6 +23,7 @@ TagManager:
   - Damage
   - Timeline
   - PauseMessage
+  - Notes
   layers:
   - Default
   - TransparentFX
