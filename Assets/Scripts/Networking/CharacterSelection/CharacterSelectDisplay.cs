@@ -23,9 +23,8 @@ public class CharacterSelectDisplay : NetworkBehaviour
     private readonly List<CharacterSelectButton> characterButtons = new();
 
     private NetworkList<CharacterSelectState> players;
-
-
     [SerializeField] private Button startGameButton;
+    
     private void Awake()
     {
         players = new NetworkList<CharacterSelectState>();

@@ -9176,7 +9176,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 899154354796208799}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9650,8 +9650,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6054081007018048752}
   - {fileID: 899154354492033380}
+  - {fileID: 6054081007018048752}
   - {fileID: 6110779590190417711}
   - {fileID: 899154355687683441}
   - {fileID: 2216333096395015189}
@@ -15123,7 +15123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6054081007838777520, guid: 800366e9f795daf41b02edd12b6470ae, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6054081007838777520, guid: 800366e9f795daf41b02edd12b6470ae, type: 3}
       propertyPath: m_AnchorMax.x
@@ -16451,7 +16451,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4217651545417614757, guid: 38086c53c9fd02441a820563c043145d, type: 3}
       propertyPath: m_text
-      value: dfdfdfd
+      value: Error Message
       objectReference: {fileID: 0}
     - target: {fileID: 4217651546117092814, guid: 38086c53c9fd02441a820563c043145d, type: 3}
       propertyPath: m_Pivot.x

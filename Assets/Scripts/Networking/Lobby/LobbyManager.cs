@@ -49,6 +49,8 @@ public class LobbyManager : MonoBehaviour
     }
 
     public event EventHandler OnAuthenticationLobby;
+    public event EventHandler OnInAuthenticatedScreen;
+    public event EventHandler OnChooseCharacter;
 
     private float heartbeatTimer = 0;
     private float lobbyPollTimer;
