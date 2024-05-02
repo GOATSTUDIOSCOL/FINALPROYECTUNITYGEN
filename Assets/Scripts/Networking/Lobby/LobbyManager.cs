@@ -62,19 +62,25 @@ public class LobbyManager : MonoBehaviour
     public async void Authentication(string playerName)
     {
         this.playerName = playerName;
-        InitializationOptions initializationOptions = new InitializationOptions();
-        initializationOptions.SetProfile(playerName);
+        try {
+            InitializationOptions initializationOptions = new InitializationOptions();
+            initializationOptions.SetProfile(playerName);
+        
+            await UnityServices.InitializeAsync(initializationOptions);
 
-        await UnityServices.InitializeAsync(initializationOptions);
+            AuthenticationService.Instance.SignedIn += () =>
+            {
+                RefreshLobbyList();
+            };
 
-        AuthenticationService.Instance.SignedIn += () =>
-        {
-            RefreshLobbyList();
-        };
-
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        } catch (AuthenticationException exc) {
+            Debug.Log("Auth exception");
+            Debug.LogError(exc.Message);
+        }
         await VivoxService.Instance.InitializeAsync();
     }
+
     public async void LoginToVivoxAsync()
     {
         if (VivoxService.Instance.IsLoggedIn)
@@ -83,6 +89,19 @@ public class LobbyManager : MonoBehaviour
             options.DisplayName = playerName;
             options.EnableTTS = false;
             await VivoxService.Instance.LoginAsync(options);
+        }
+    }
+
+
+    public async void LogoutBasicServices() {
+        try {
+
+            if (VivoxService.Instance.IsLoggedIn) {
+                await VivoxService.Instance.LogoutAsync();            
+            }
+            LeaveLobby();    
+        } catch (LobbyServiceException exp) {
+            Debug.Log(exp.Message);
         }
     }
 
@@ -100,36 +119,6 @@ public class LobbyManager : MonoBehaviour
             }
         }
     }
-
-    public void StartGame()
-    {
-        if (IsLobbyHost())
-        {
-            // foreach (Player player in GetJoinedLobby().Players)
-            // {
-            //     if (player.Data[KEY_PLAYER_NAME].Value)
-            //         Debug.Log("Player Name " + player.Data[KEY_PLAYER_NAME].Value + " character " + player.Data[KEY_START_GAME].Value);
-            // }
-            // try
-            // {
-            //     Debug.Log("Started Game");
-            //     string relayCode = await RelayManager.Instance.CreateRelay();
-
-            //     Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
-            //     {
-            //         Data = new Dictionary<string, DataObject> {
-            //             {KEY_START_GAME, new DataObject(DataObject.VisibilityOptions.Member, relayCode)}
-            //         }
-            //     });
-            //     Hide();
-            // }
-            // catch (LobbyServiceException exp)
-            // {
-            //     Debug.Log("Message " + exp.Message);
-            // }
-        }
-    }
-
 
     public async void CreateLobby(string lobbyName, int maxPlayers = 4, bool isPrivate = false)
     {
@@ -262,6 +251,8 @@ public class LobbyManager : MonoBehaviour
             }
             catch (LobbyServiceException e)
             {
+
+                Debug.Log("This is the error   ");
                 Debug.Log(e);
             }
         }

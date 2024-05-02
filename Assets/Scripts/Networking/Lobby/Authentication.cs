@@ -9,12 +9,15 @@ public class Authentication : MonoBehaviour
 
     private void Awake()
     {
+
         authenticateButton.onClick.AddListener(() =>
         {
             LobbyManager.Instance.Authentication(EditPlayerPreferences.Instance.GetPlayerName());
             LobbyListUI.Instance.Show();
             Hide();
+            
         });
+
     }
 
     private void Hide()
