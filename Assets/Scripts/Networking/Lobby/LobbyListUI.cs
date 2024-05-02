@@ -12,6 +12,7 @@ public class LobbyListUI : MonoBehaviour
     [SerializeField] private Transform lobbySingleTemplate;
     [SerializeField] private Transform container;
     [SerializeField] private Button refreshButton;
+    [SerializeField] private Button createLobbyBtn;
     private string lobbyName;
 
     private void Awake()
@@ -19,6 +20,7 @@ public class LobbyListUI : MonoBehaviour
         Instance = this;
         lobbySingleTemplate.gameObject.SetActive(false);
         refreshButton.onClick.AddListener(RefreshButtonClick);
+        createLobbyBtn.onClick.AddListener(CreateLobbyButtonClick);
     }
 
     private void Start()
@@ -78,7 +80,6 @@ public class LobbyListUI : MonoBehaviour
 
     public void CreateLobbyButtonClick()
     {
-        if (lobbyName == null) return;
         LobbyManager.Instance.CreateLobby(this.lobbyName);
     }
 

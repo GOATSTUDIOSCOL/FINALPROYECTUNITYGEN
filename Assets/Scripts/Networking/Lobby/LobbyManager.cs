@@ -133,38 +133,47 @@ public class LobbyManager : MonoBehaviour
 
     public async void CreateLobby(string lobbyName, int maxPlayers = 4, bool isPrivate = false)
     {
-        Player player = GetPlayer();
+        if (lobbyName == null) {
+            OnLobbyUserError?.Invoke(this, new UserErrorEventArgs { errorMessage = "Choose a valid lobby name to continue, it can not be empty." });
+            return;
+        }
 
+        try {
+            Player player = GetPlayer();
 
-        CreateLobbyOptions options = new()
-        {
-            Player = player,
-            IsPrivate = isPrivate,
-            Data = new Dictionary<string, DataObject> {
-                {KEY_START_GAME, new DataObject(DataObject.VisibilityOptions.Member, "0")}
-            },
-        };
+            CreateLobbyOptions options = new()
+            {
+                Player = player,
+                IsPrivate = isPrivate,
+                Data = new Dictionary<string, DataObject> {
+                    {KEY_START_GAME, new DataObject(DataObject.VisibilityOptions.Member, "0")}
+                },
+            };
 
-        Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
+            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
 
-        joinedLobby = lobby;
+            joinedLobby = lobby;
 
-        OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
+            OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
 
-        string relayCode = await RelayManager.Instance.CreateRelay();
+            string relayCode = await RelayManager.Instance.CreateRelay();
 
-        await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
-        {
-            Data = new Dictionary<string, DataObject> {
-                    {KEY_START_GAME, new DataObject(DataObject.VisibilityOptions.Member, relayCode)},
-                    {KEY_PLAYER_CHARACTER, new DataObject(DataObject.VisibilityOptions.Member, "1")}
-                }
-        });
+            await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
+            {
+                Data = new Dictionary<string, DataObject> {
+                        {KEY_START_GAME, new DataObject(DataObject.VisibilityOptions.Member, relayCode)},
+                        {KEY_PLAYER_CHARACTER, new DataObject(DataObject.VisibilityOptions.Member, "1")}
+                    }
+            });
 
-        Debug.Log("Created Lobby " + lobby.Name + " players " + lobby.MaxPlayers);
+            Debug.Log("Created Lobby " + lobby.Name + " players " + lobby.MaxPlayers);
 
-        VivoxAuthentication.Instance.StartVivox();
-        NetworkManager.Singleton.StartHost();
+            VivoxAuthentication.Instance.StartVivox();
+            NetworkManager.Singleton.StartHost();
+        } catch (Exception exc) {
+            Debug.Log("JOIN LOBBY ERRO");
+            OnLobbyUserError?.Invoke(this, new UserErrorEventArgs { errorMessage = exc.Message });
+        }
     }
 
     public async void ListLobbies()
