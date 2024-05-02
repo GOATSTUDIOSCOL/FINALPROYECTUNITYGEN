@@ -112,7 +112,9 @@ public class LobbyManager : MonoBehaviour
             if (VivoxService.Instance.IsLoggedIn) {
                 await VivoxService.Instance.LogoutAsync();            
             }
-            LeaveLobby();    
+            LeaveLobby();  
+            AuthenticationService.Instance.SignOut(true);
+
         } catch (LobbyServiceException exp) {
             Debug.Log(exp.Message);
         }
