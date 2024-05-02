@@ -1761,17 +1761,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f7a6fef5deff6145b56b6a2cd527528, type: 3}
---- !u!114 &335909920 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2416049477923322688, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
-  m_PrefabInstance: {fileID: 1375324393}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &379842833 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5942920489771463677, guid: 24ca6760e5b27d3418fea9f60269bf3e, type: 3}
@@ -4523,6 +4512,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e5952756b9b7514ebad87de95a4d7c6, type: 3}
+--- !u!114 &834315452 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2146997141, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
+  m_PrefabInstance: {fileID: 1375324393}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &852925782 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1938993644, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
@@ -6198,7 +6198,7 @@ MonoBehaviour:
   lobbyList: {fileID: 1585125972}
   updateList: {fileID: 258150016}
   lobbyName: {fileID: 1602965012}
-  createLobby: {fileID: 335909920}
+  createLobby: {fileID: 834315452}
   playGameCharacter: {fileID: 0}
   japanFont: {fileID: 11400000, guid: 7cd92838efcd0494ebc2c7cdcffdbf78, type: 2}
   normalFont: {fileID: 11400000, guid: cc1b1ed92065d094ca12e78cefecb3e0, type: 2}
