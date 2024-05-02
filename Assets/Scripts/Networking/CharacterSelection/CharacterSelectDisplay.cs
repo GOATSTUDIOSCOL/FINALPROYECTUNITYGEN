@@ -6,6 +6,7 @@ using Unity.Services.Authentication;
 using Unity.Services.Lobbies;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class CharacterSelectDisplay : NetworkBehaviour
 {
@@ -24,15 +25,28 @@ public class CharacterSelectDisplay : NetworkBehaviour
 
     private NetworkList<CharacterSelectState> players;
     [SerializeField] private Button startGameButton;
-    
-    private void Awake()
+
+    private void Start()
     {
         players = new NetworkList<CharacterSelectState>();
         startGameButton.onClick.AddListener(() =>
         {
             StartGame();
         });
+
+        LobbyManager.Instance.OnLeftLobby += DisableCharacterSelection;
+        LobbyManager.Instance.OnJoinedLobby += EnableCharacterSelection;
+
+        Hide();
     }
+
+    private void EnableCharacterSelection(object sender, EventArgs e) => Show();
+    private void DisableCharacterSelection(object sender, EventArgs e) => Hide();
+
+    private void Show() => gameObject.SetActive(true);
+    private void Hide() => gameObject.SetActive(false);
+ 
+
     public void StartGame()
     {
         if (IsServer)
@@ -42,7 +56,7 @@ public class CharacterSelectDisplay : NetworkBehaviour
                 var character = characterDataBase.GetCharacterById(client.CharacterId);
                 if (character != null)
                 {
-                    var spawnPos = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
+                    var spawnPos = new Vector3(UnityEngine.Random.Range(-1f, 1f), 0f, UnityEngine.Random.Range(-1f, 1f));
                     var characterInstance = Instantiate(character.PlayerPrefab, spawnPos, Quaternion.identity);
                     characterInstance.GetComponent<NetworkObject>().SpawnAsPlayerObject(client.ClientId);
                     introInstance.SetActive(false);
@@ -50,6 +64,7 @@ public class CharacterSelectDisplay : NetworkBehaviour
             }
         }
     }
+
     public override void OnNetworkSpawn()
     {
         if (IsServer)
