@@ -168,7 +168,9 @@ public class ObjectsInteraction : NetworkBehaviour
                     hit.collider.GetComponent<TileReference>().tile.SetActive(true);
                     hit.collider.enabled = false;
                     break;
-
+                case "Notes":
+                    hit.collider.GetComponent<Notes>().SetNoteState();
+                    break;
             }
         }
     }
@@ -186,7 +188,7 @@ public class ObjectsInteraction : NetworkBehaviour
             pickUpObjectRigidbody.isKinematic = true;
             pickUpObjectRigidbody.interpolation = RigidbodyInterpolation.None;
             objectToPickup.GetComponent<NetworkTransform>().InLocalSpace = true;
-            objectToPickup.transform.position = new Vector3(objectToPickup.transform.position.x, objectToPickup.transform.position.y + 1.5f, objectToPickup.transform.position.z);
+            objectToPickup.transform.position = new Vector3(objectToPickup.transform.position.x, 1.6f, objectToPickup.transform.position.z);
         }
     }
 

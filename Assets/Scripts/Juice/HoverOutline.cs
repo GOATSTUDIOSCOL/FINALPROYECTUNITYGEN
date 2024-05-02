@@ -20,7 +20,7 @@ public class HoverOutline : MonoBehaviour
         if (!isHighlighted)
         {
             isHighlighted = true;
-            outline.OutlineWidth = 6;
+            outline.OutlineWidth = 10;
         }
     }
 

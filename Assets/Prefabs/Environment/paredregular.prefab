@@ -30,8 +30,7 @@ Transform:
   m_LocalPosition: {x: -1.69, y: 2.41, z: 2.08}
   m_LocalScale: {x: 0.28, y: 5.09, z: 6.34}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4376513561083719691}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -98,65 +97,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1001 &894860125579385698
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 8755497485239328679}
-    m_Modifications:
-    - target: {fileID: 3519371168442297193, guid: fe7b99fe6c07889469d947ac01bf9db6, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3519371168442297193, guid: fe7b99fe6c07889469d947ac01bf9db6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 3519371168442297193, guid: fe7b99fe6c07889469d947ac01bf9db6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3519371168442297193, guid: fe7b99fe6c07889469d947ac01bf9db6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3519371168442297193, guid: fe7b99fe6c07889469d947ac01bf9db6, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 3519371168442297193, guid: fe7b99fe6c07889469d947ac01bf9db6, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3519371168442297193, guid: fe7b99fe6c07889469d947ac01bf9db6, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 3519371168442297193, guid: fe7b99fe6c07889469d947ac01bf9db6, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3519371168442297193, guid: fe7b99fe6c07889469d947ac01bf9db6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3519371168442297193, guid: fe7b99fe6c07889469d947ac01bf9db6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 3519371168442297193, guid: fe7b99fe6c07889469d947ac01bf9db6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4295450819080319443, guid: fe7b99fe6c07889469d947ac01bf9db6, type: 3}
-      propertyPath: m_Name
-      value: FuseBox
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fe7b99fe6c07889469d947ac01bf9db6, type: 3}
---- !u!4 &4376513561083719691 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3519371168442297193, guid: fe7b99fe6c07889469d947ac01bf9db6, type: 3}
-  m_PrefabInstance: {fileID: 894860125579385698}
-  m_PrefabAsset: {fileID: 0}

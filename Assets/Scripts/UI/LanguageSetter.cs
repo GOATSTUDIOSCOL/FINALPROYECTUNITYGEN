@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class LanguageSetter : MonoBehaviour
 {
+    #region Main Menu
     [SerializeField] private TextMeshProUGUI playGame;
     [SerializeField] private TextMeshProUGUI options;
     [SerializeField] private TextMeshProUGUI exit;
+    #endregion
+    #region Options Menu
     [SerializeField] private TextMeshProUGUI optionsTitle;
     [SerializeField] private TextMeshProUGUI language;
     [SerializeField] private TextMeshProUGUI resolution;
@@ -21,6 +24,7 @@ public class LanguageSetter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI lobbyName;
     [SerializeField] private TextMeshProUGUI createLobby;
     [SerializeField] private TextMeshProUGUI playGameCharacter;
+    #endregion
 
 
     public TMP_FontAsset japanFont;

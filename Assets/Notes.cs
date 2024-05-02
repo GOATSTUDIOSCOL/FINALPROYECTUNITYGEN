@@ -6,27 +6,24 @@ using UnityEngine;
 public class Notes : MonoBehaviour
 {
     public GameObject notesLore;
-    public bool actived;
+    public bool actived = false;
 
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E ) && actived == true)
-        {
-            notesLore.SetActive(true);
-        }
-        if (Input.GetKeyDown(KeyCode.Escape) && actived == true)
+        if (Input.GetKeyDown(KeyCode.F) && notesLore.activeSelf)
         {
             notesLore.SetActive(false);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void SetNoteState()
     {
-        if (other.tag == "Player")
+        if (!notesLore.activeSelf)
         {
-            actived = true;
+            notesLore.SetActive(true);
         }
     }
+
 }

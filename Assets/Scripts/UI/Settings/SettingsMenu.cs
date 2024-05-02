@@ -22,7 +22,14 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+        if (volume != 0)
+            audioMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+    }
+
+    public void SetSensitivity(float sens)
+    {
+        float sensitivity = Mathf.Lerp(0, 200, sens);
+        FindObjectOfType<PlayerMovement>().playerCamera.GetComponent<CameraController>().mouseSensitivity = sensitivity;
     }
 
     private void GetResolutions()
@@ -132,13 +139,13 @@ public class SettingsMenu : MonoBehaviour
                 break;
         }
     }
-        public void SetQuality(int qualityIndex)
-        {
-            QualitySettings.SetQualityLevel(qualityIndex);
-        }
-
-        public void Quit()
-        {
-            Application.Quit();
-        }
+    public void SetQuality(int qualityIndex)
+    {
+        QualitySettings.SetQualityLevel(qualityIndex);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+}
