@@ -11,7 +11,7 @@ public class conexiones : MonoBehaviour
     {
         if (collision.name == nombre)
         {
-         almacen.GetComponent<Seleccionar>().cantConexiones += 1;
+            almacen.GetComponent<Seleccionar>().cantConexiones += 1;
             GetComponent<SpriteRenderer>().color = Color.white;
         }
     }

@@ -13,44 +13,7 @@ namespace NavKeypad
         [SerializeField] private float buttonPressedTime = 0.1f;
         [Header("Component References")]
         [SerializeField] private Keypad keypad;
-        Outline outline;
-        private bool isHighlighted = false;
-        public Camera cam;
 
-        private void Start()
-        {
-            outline = GetComponent<Outline>();
-        }
-
-        private void Update()
-        {
-            if (isHighlighted)
-            {
-                if (!IsMouseOverButton())
-                {
-                    isHighlighted = false;
-                    GetComponent<Outline>().enabled = false;
-                }
-            }
-            else
-            {
-                if (IsMouseOverButton())
-                {
-                    isHighlighted = true;
-                    GetComponent<Outline>().enabled = true;
-                }
-            }
-        }
-
-        private bool IsMouseOverButton()
-        {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                return hit.collider == GetComponent<Collider>();
-            }
-            return false;
-        }
 
         public void PressButton()
         {

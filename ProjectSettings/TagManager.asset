@@ -23,6 +23,8 @@ TagManager:
   - Damage
   - Timeline
   - PauseMessage
+  - PlayerObserverCard
+  - PuzzleSlider
   layers:
   - Default
   - TransparentFX

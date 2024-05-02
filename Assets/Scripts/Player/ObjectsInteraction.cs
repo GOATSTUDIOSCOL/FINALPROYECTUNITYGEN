@@ -78,53 +78,101 @@ public class ObjectsInteraction : NetworkBehaviour
         }
     }
 
+    /*   public void Interact(InputAction.CallbackContext callbackContext)
+       {
+           if (!isHoldingObject)
+           {
+               RaycastHit[] hits;
+               Vector3 rayOrigin = playerCamera.Follow.position;
+               hits = Physics.SphereCastAll(rayOrigin, interactRadius, playerCamera.transform.forward, interactDistance);
+               foreach (RaycastHit hit in hits)
+               {
+                   if (hit.collider.CompareTag("Grabbable"))
+                   {
+                       GrabObject(hit.collider.gameObject);
+                   }
+                   else if (hit.collider.CompareTag("Item"))
+                   {
+                       InventoryManager.instance.AddItemToInventory(hit.collider.GetComponent<Item>().inventoryItem);
+                       RpcTest.instance.DespawnObjectRpc(hit.collider.GetComponent<NetworkObject>().NetworkObjectId);
+                   }
+                   else if (hit.collider.CompareTag("BoxPuzzle") && InventoryManager.instance.hasCard)
+                   {
+                       hit.collider.GetComponent<BoxActivation>().OpenBoxRpc();
+                   }
+                   else if (hit.collider.CompareTag("Door"))
+                   {
+                       if (!hit.collider.GetComponent<Door>().hasPuzzle)
+                       {
+                           hit.collider.GetComponent<Door>().OpenDoorRpc();                    }
+
+                   }
+                   else if (hit.collider.CompareTag("PuzzleBrian"))
+                   {
+                       hit.collider.GetComponentInChildren<Seleccionar>().isOnPuzzle = true;
+                       hit.collider.GetComponentInChildren<Seleccionar>().playerMovement = GetComponent<PlayerMovement>();
+                       hit.collider.GetComponentInChildren<Seleccionar>().cameraController = GetComponent<PlayerMovement>().playerCamera.GetComponent<CameraController>();
+                       GetComponent<PlayerMovement>().enabled = false;
+                       GetComponent<PlayerMovement>().playerCamera.GetComponent<CameraController>().enabled = false;
+                   }
+               }
+           }
+           else
+           {
+               ReleaseObject();
+           }
+       }
+    */
     public void Interact(InputAction.CallbackContext callbackContext)
     {
-        if (!isHoldingObject)
-        {
-            RaycastHit[] hits;
-            Vector3 rayOrigin = playerCamera.Follow.position;
-            hits = Physics.SphereCastAll(rayOrigin, interactRadius, playerCamera.transform.forward, interactDistance);
-            foreach (RaycastHit hit in hits)
-            {
-                if (hit.collider.CompareTag("Grabbable"))
-                {
-                    GrabObject(hit.collider.gameObject);
-                }
-                else if (hit.collider.CompareTag("Item"))
-                {
-                    InventoryManager.instance.AddItemToInventory(hit.collider.GetComponent<Item>().inventoryItem);
-                    RpcTest.instance.DespawnObjectRpc(hit.collider.GetComponent<NetworkObject>().NetworkObjectId);
-                }
-                else if (hit.collider.CompareTag("BoxPuzzle") && InventoryManager.instance.hasCard)
-                {
-                    hit.collider.GetComponent<BoxActivation>().OpenBoxRpc();
-                }
-                else if (hit.collider.CompareTag("Door"))
-                {
-                    if (!hit.collider.GetComponent<Door>().hasPuzzle)
-                    {
-                        hit.collider.GetComponent<Door>().OpenDoorRpc();
-                        Debug.Log("Se detecto este collider " + hit.collider.gameObject.name);
-                    }
-
-                }
-                else if (hit.collider.CompareTag("PuzzleBrian"))
-                {
-                    Debug.Log("puzzle brian");
-                    hit.collider.GetComponentInChildren<Seleccionar>().isOnPuzzle = true;
-                    hit.collider.GetComponentInChildren<Seleccionar>().playerMovement = GetComponent<PlayerMovement>();
-                    hit.collider.GetComponentInChildren<Seleccionar>().cameraController = GetComponent<PlayerMovement>().playerCamera.GetComponent<CameraController>();
-                    GetComponent<PlayerMovement>().enabled = false;
-                    GetComponent<PlayerMovement>().playerCamera.GetComponent<CameraController>().enabled = false;
-                }
-            }
-        }
-        else
+        if (isHoldingObject)
         {
             ReleaseObject();
+            return;
+        }
+
+        RaycastHit[] hits;
+        Vector3 rayOrigin = playerCamera.Follow.position;
+        hits = Physics.SphereCastAll(rayOrigin, interactRadius, playerCamera.transform.forward, interactDistance);
+
+        foreach (RaycastHit hit in hits)
+        {
+            switch (hit.collider.tag)
+            {
+                case "Grabbable":
+                    GrabObject(hit.collider.gameObject);
+                    break;
+
+                case "Item":
+                    InventoryItem item = hit.collider.GetComponent<Item>().inventoryItem;
+                    InventoryManager.instance.AddItemToInventory(item);
+                    RpcTest.instance.DespawnObjectRpc(hit.collider.GetComponent<NetworkObject>().NetworkObjectId);
+                    break;
+
+                case "BoxPuzzle":
+                    if (InventoryManager.instance.hasCard)
+                    {
+                        hit.collider.GetComponent<BoxActivation>().OpenBoxRpc();
+                    }
+                    break;
+
+                case "Door":
+                    Door door = hit.collider.GetComponent<Door>();
+                    if (door != null && !door.hasPuzzle)
+                    {
+                        door.OpenDoorRpc();
+                    }
+                    break;
+
+                case "PuzzleSlider":
+                    hit.collider.GetComponent<TileReference>().tile.SetActive(true);
+                    hit.collider.enabled = false;
+                    break;
+
+            }
         }
     }
+
 
     [ServerRpc]
     public void PickupObjectServerRpc(ulong objToPickupID)
