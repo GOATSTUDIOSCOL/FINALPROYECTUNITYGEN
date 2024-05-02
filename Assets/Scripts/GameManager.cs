@@ -52,7 +52,7 @@ public class GameManager : NetworkBehaviour
                 losePanel.SetActive(true);
             }
         }
-        if (gameStarted && Input.GetKeyDown(KeyCode.Escape) && pausePanel != null)
+        if (gameStarted && Input.GetKeyDown(KeyCode.P) && pausePanel != null)
         {
             ChangePauseState();
         }

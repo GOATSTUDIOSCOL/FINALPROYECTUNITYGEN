@@ -53,9 +53,12 @@ public class ObjectsInteraction : NetworkBehaviour
 
     void GrabObject(GameObject obj)
     {
-        isHoldingObject = true;
-        heldObject = obj;
-        PickupObjectServerRpc(obj.GetComponent<NetworkObject>().NetworkObjectId);
+        if (!isHoldingObject)
+        {
+            isHoldingObject = true;
+            heldObject = obj;
+            PickupObjectServerRpc(obj.GetComponent<NetworkObject>().NetworkObjectId);
+        }
     }
 
     void ReleaseObject()
@@ -180,7 +183,7 @@ public class ObjectsInteraction : NetworkBehaviour
     public void PickupObjectServerRpc(ulong objToPickupID)
     {
         NetworkManager.SpawnManager.SpawnedObjects.TryGetValue(objToPickupID, out var objectToPickup);
-        if (objectToPickup == null ) return;
+        if (objectToPickup == null) return;
 
         if (objectToPickup.TryGetComponent(out NetworkObject networkObject) && networkObject.TrySetParent(transform))
         {
