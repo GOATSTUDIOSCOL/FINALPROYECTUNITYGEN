@@ -26,6 +26,13 @@ public class LobbyManager : MonoBehaviour
 
     public event EventHandler OnLeftLobby;
     public event EventHandler OnCompletedPlayers;
+    public event EventHandler<UserErrorEventArgs> OnLobbyUserError;
+    public class UserErrorEventArgs : EventArgs
+    {
+        public string errorMessage;
+    }
+
+
     public event EventHandler<LobbyEventArgs> OnJoinedLobby;
     public event EventHandler<LobbyEventArgs> OnJoinedLobbyUpdate;
     public event EventHandler<LobbyEventArgs> OnKickedFromLobby;
@@ -34,11 +41,16 @@ public class LobbyManager : MonoBehaviour
         public Lobby lobby;
     }
 
+
     public event EventHandler<OnLobbyListChangedEventArgs> OnLobbyListChanged;
     public class OnLobbyListChangedEventArgs : EventArgs
     {
         public List<Lobby> lobbyList;
     }
+
+    public event EventHandler OnAuthenticationLobby;
+    public event EventHandler OnInAuthenticatedScreen;
+    public event EventHandler OnChooseCharacter;
 
     private float heartbeatTimer = 0;
     private float lobbyPollTimer;
@@ -62,19 +74,26 @@ public class LobbyManager : MonoBehaviour
     public async void Authentication(string playerName)
     {
         this.playerName = playerName;
-        InitializationOptions initializationOptions = new InitializationOptions();
-        initializationOptions.SetProfile(playerName);
+        try {
+            InitializationOptions initializationOptions = new InitializationOptions();
+            initializationOptions.SetProfile(playerName);
+        
+            await UnityServices.InitializeAsync(initializationOptions);
 
-        await UnityServices.InitializeAsync(initializationOptions);
+            AuthenticationService.Instance.SignedIn += () =>
+            {
+                RefreshLobbyList();
+            };
 
-        AuthenticationService.Instance.SignedIn += () =>
-        {
-            RefreshLobbyList();
-        };
-
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
-        await VivoxService.Instance.InitializeAsync();
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            await VivoxService.Instance.InitializeAsync();
+            OnAuthenticationLobby?.Invoke(this, new EventArgs{});
+        } catch (AuthenticationException exc) {
+            OnLobbyUserError?.Invoke(this, new UserErrorEventArgs { errorMessage = exc.Message });
+        }
+        
     }
+
     public async void LoginToVivoxAsync()
     {
         if (VivoxService.Instance.IsLoggedIn)
@@ -83,6 +102,19 @@ public class LobbyManager : MonoBehaviour
             options.DisplayName = playerName;
             options.EnableTTS = false;
             await VivoxService.Instance.LoginAsync(options);
+        }
+    }
+
+
+    public async void LogoutBasicServices() {
+        try {
+
+            if (VivoxService.Instance.IsLoggedIn) {
+                await VivoxService.Instance.LogoutAsync();            
+            }
+            LeaveLobby();    
+        } catch (LobbyServiceException exp) {
+            Debug.Log(exp.Message);
         }
     }
 
@@ -101,70 +133,49 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    public void StartGame()
-    {
-        if (IsLobbyHost())
-        {
-            // foreach (Player player in GetJoinedLobby().Players)
-            // {
-            //     if (player.Data[KEY_PLAYER_NAME].Value)
-            //         Debug.Log("Player Name " + player.Data[KEY_PLAYER_NAME].Value + " character " + player.Data[KEY_START_GAME].Value);
-            // }
-            // try
-            // {
-            //     Debug.Log("Started Game");
-            //     string relayCode = await RelayManager.Instance.CreateRelay();
-
-            //     Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
-            //     {
-            //         Data = new Dictionary<string, DataObject> {
-            //             {KEY_START_GAME, new DataObject(DataObject.VisibilityOptions.Member, relayCode)}
-            //         }
-            //     });
-            //     Hide();
-            // }
-            // catch (LobbyServiceException exp)
-            // {
-            //     Debug.Log("Message " + exp.Message);
-            // }
-        }
-    }
-
-
     public async void CreateLobby(string lobbyName, int maxPlayers = 4, bool isPrivate = false)
     {
-        Player player = GetPlayer();
+        if (lobbyName == null) {
+            OnLobbyUserError?.Invoke(this, new UserErrorEventArgs { errorMessage = "Choose a valid lobby name to continue, it can not be empty." });
+            return;
+        }
 
+        try {
+            Player player = GetPlayer();
 
-        CreateLobbyOptions options = new()
-        {
-            Player = player,
-            IsPrivate = isPrivate,
-            Data = new Dictionary<string, DataObject> {
-                {KEY_START_GAME, new DataObject(DataObject.VisibilityOptions.Member, "0")}
-            },
-        };
+            CreateLobbyOptions options = new()
+            {
+                Player = player,
+                IsPrivate = isPrivate,
+                Data = new Dictionary<string, DataObject> {
+                    {KEY_START_GAME, new DataObject(DataObject.VisibilityOptions.Member, "0")}
+                },
+            };
 
-        Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
+            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
 
-        joinedLobby = lobby;
+            joinedLobby = lobby;
 
-        OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
+            OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
 
-        string relayCode = await RelayManager.Instance.CreateRelay();
+            string relayCode = await RelayManager.Instance.CreateRelay();
 
-        await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
-        {
-            Data = new Dictionary<string, DataObject> {
-                    {KEY_START_GAME, new DataObject(DataObject.VisibilityOptions.Member, relayCode)},
-                    {KEY_PLAYER_CHARACTER, new DataObject(DataObject.VisibilityOptions.Member, "1")}
-                }
-        });
+            await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
+            {
+                Data = new Dictionary<string, DataObject> {
+                        {KEY_START_GAME, new DataObject(DataObject.VisibilityOptions.Member, relayCode)},
+                        {KEY_PLAYER_CHARACTER, new DataObject(DataObject.VisibilityOptions.Member, "1")}
+                    }
+            });
 
-        Debug.Log("Created Lobby " + lobby.Name + " players " + lobby.MaxPlayers);
+            Debug.Log("Created Lobby " + lobby.Name + " players " + lobby.MaxPlayers);
 
-        VivoxAuthentication.Instance.StartVivox();
-        NetworkManager.Singleton.StartHost();
+            VivoxAuthentication.Instance.StartVivox();
+            NetworkManager.Singleton.StartHost();
+        } catch (Exception exc) {
+            Debug.Log("JOIN LOBBY ERRO");
+            OnLobbyUserError?.Invoke(this, new UserErrorEventArgs { errorMessage = exc.Message });
+        }
     }
 
     public async void ListLobbies()
@@ -262,6 +273,8 @@ public class LobbyManager : MonoBehaviour
             }
             catch (LobbyServiceException e)
             {
+
+                Debug.Log("This is the error   ");
                 Debug.Log(e);
             }
         }
@@ -370,6 +383,11 @@ public class LobbyManager : MonoBehaviour
         {
             try
             {
+                if (joinedLobby.HostId ==  AuthenticationService.Instance.PlayerId) {
+                    Debug.Log("Left Host");
+                } else {
+                    Debug.Log("Left Client");
+                }
                 await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
                 joinedLobby = null;
                 OnLeftLobby?.Invoke(this, EventArgs.Empty);
