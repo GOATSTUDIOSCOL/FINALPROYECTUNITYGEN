@@ -39,6 +39,7 @@ public class ActiveEnemy : NetworkBehaviour
         if(other.CompareTag("Player"))
         {
             SpawnEnemyRpc();
+            Destroy(gameObject);
         }
     }
 }
