@@ -383,6 +383,11 @@ public class LobbyManager : MonoBehaviour
         {
             try
             {
+                if (joinedLobby.HostId ==  AuthenticationService.Instance.PlayerId) {
+                    Debug.Log("Left Host");
+                } else {
+                    Debug.Log("Left Client");
+                }
                 await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
                 joinedLobby = null;
                 OnLeftLobby?.Invoke(this, EventArgs.Empty);
