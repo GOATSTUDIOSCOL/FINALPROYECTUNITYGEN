@@ -26,6 +26,13 @@ public class LobbyManager : MonoBehaviour
 
     public event EventHandler OnLeftLobby;
     public event EventHandler OnCompletedPlayers;
+    public event EventHandler<UserErrorEventArgs> OnLobbyUserError;
+    public class UserErrorEventArgs : EventArgs
+    {
+        public string errorMessage;
+    }
+
+
     public event EventHandler<LobbyEventArgs> OnJoinedLobby;
     public event EventHandler<LobbyEventArgs> OnJoinedLobbyUpdate;
     public event EventHandler<LobbyEventArgs> OnKickedFromLobby;
@@ -34,11 +41,14 @@ public class LobbyManager : MonoBehaviour
         public Lobby lobby;
     }
 
+
     public event EventHandler<OnLobbyListChangedEventArgs> OnLobbyListChanged;
     public class OnLobbyListChangedEventArgs : EventArgs
     {
         public List<Lobby> lobbyList;
     }
+
+    public event EventHandler OnAuthenticationLobby;
 
     private float heartbeatTimer = 0;
     private float lobbyPollTimer;
@@ -74,11 +84,12 @@ public class LobbyManager : MonoBehaviour
             };
 
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            await VivoxService.Instance.InitializeAsync();
+            OnAuthenticationLobby?.Invoke(this, new EventArgs{});
         } catch (AuthenticationException exc) {
-            Debug.Log("Auth exception");
-            Debug.LogError(exc.Message);
+            OnLobbyUserError?.Invoke(this, new UserErrorEventArgs { errorMessage = exc.Message });
         }
-        await VivoxService.Instance.InitializeAsync();
+        
     }
 
     public async void LoginToVivoxAsync()

@@ -27,6 +27,7 @@ public class LobbyListUI : MonoBehaviour
         LobbyManager.Instance.OnJoinedLobby += LobbyManager_OnJoinedLobby;
         LobbyManager.Instance.OnLeftLobby += LobbyManager_OnLeftLobby;
         LobbyManager.Instance.OnKickedFromLobby += LobbyManager_OnKickedFromLobby;
+        LobbyManager.Instance.OnAuthenticationLobby += LobbyManager_OnLeftLobby;
 
         Hide();
     }
@@ -35,6 +36,7 @@ public class LobbyListUI : MonoBehaviour
     {
         Show();
     }
+
 
     private void LobbyManager_OnLeftLobby(object sender, EventArgs e)
     {
