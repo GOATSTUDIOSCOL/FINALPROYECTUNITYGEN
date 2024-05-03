@@ -43,8 +43,14 @@ public class CharacterSelectDisplay : NetworkBehaviour
     private void EnableCharacterSelection(object sender, EventArgs e) => Show();
     private void DisableCharacterSelection(object sender, EventArgs e) => Hide();
 
-    private void Show() => gameObject.SetActive(true);
-    private void Hide() => gameObject.SetActive(false);
+    private void Show() {
+        Debug.Log("Enable character display");
+        gameObject.SetActive(true);
+    }
+    private void Hide() {
+        Debug.Log("Disable character display");
+        gameObject.SetActive(false);    
+    } 
  
 
     public void StartGame()
