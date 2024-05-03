@@ -952,9 +952,9 @@ RectTransform:
   m_Father: {fileID: 3056237663978529953}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 166.54462, y: -25}
   m_SizeDelta: {x: 253.2987, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &246822198
@@ -3966,9 +3966,9 @@ RectTransform:
   m_Father: {fileID: 3056237663978529953}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 166.54462, y: -168.57661}
   m_SizeDelta: {x: 253.2987, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &930302917
@@ -6346,9 +6346,9 @@ RectTransform:
   m_Father: {fileID: 3056237663978529953}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 166.54462, y: -96.78831}
   m_SizeDelta: {x: 253.2987, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1643268116
@@ -9093,7 +9093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1245338156
+  GlobalObjectIdHash: 1661775073
   InScenePlacedSourceGlobalObjectIdHash: 3310509174
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -9711,7 +9711,7 @@ MonoBehaviour:
   container: {fileID: 899154356045967841}
   lobbyNameText: {fileID: 899154354836973376}
   playerCountText: {fileID: 899154354281360220}
-  leaveLobbyButton: {fileID: 0}
+  leaveLobbyButton: {fileID: 7728471393232869340}
   startGameButton: {fileID: 899154355311142790}
 --- !u!1 &899154356045967842
 GameObject:
@@ -9851,11 +9851,11 @@ RectTransform:
   m_Father: {fileID: 899154355687683441}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -177}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 1, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!222 &7944592432857190540
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9886,7 +9886,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.46226418, g: 0.4600837, b: 0.4600837, a: 0.68235296}
+    m_HighlightedColor: {r: 0.5377358, g: 0.50476146, b: 0.50476146, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -9904,7 +9904,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 3546302420584088503}
+  m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -10844,10 +10844,10 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -50, y: 0}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0, y: 0}
 --- !u!222 &7113523289263683478
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10885,8 +10885,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10903,8 +10903,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42
-  m_fontSizeBase: 42
+  m_fontSize: 56
+  m_fontSizeBase: 56
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -14248,7 +14248,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1094195869, guid: 800366e9f795daf41b02edd12b6470ae, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1245338156
+      value: 3195535043
       objectReference: {fileID: 0}
     - target: {fileID: 1094195869, guid: 800366e9f795daf41b02edd12b6470ae, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
@@ -14654,7 +14654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4364488060640007715, guid: a9ab66cb68a6cba4a81cc6fa382021c6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9ab66cb68a6cba4a81cc6fa382021c6, type: 3}
