@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 using Unity.Netcode;
 
@@ -56,7 +55,9 @@ public class PlayerDamage : NetworkBehaviour
                     isAlive=false;
                     if (playerMovement != null)
                     {
-                        playerMovement.enabled = false; // Desactiva el script de movimiento
+                        playerMovement.enabled = false;
+                        playerMovement.transform.position = new Vector3(-1969,5,318);
+
                     }
                     if(IsOwner)
                     {

@@ -10,20 +10,24 @@ public class ActiveEnemy : NetworkBehaviour
     public List<GameObject> players;
     public override void OnNetworkSpawn()
     {
-        if(!IsServer)
+        if (!IsServer)
         {
-            enabled=false;
+            enabled = false;
             return;
         }
         NetworkManager.Singleton.OnClientConnectedCallback += ClientConnected;
         NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnected;
     }
 
+    [Rpc(SendTo.Server)]
     public void SpawnEnemyRpc()
     {
-        enemy = Instantiate(enemy);
-        enemy.GetComponent<NetworkObject>().Spawn();
-        enemyMovement =  enemy.GetComponent<EnemyMovement>();
+        if (!FindObjectOfType<EnemyMovement>() && IsServer)
+        {
+            enemy = Instantiate(enemy);
+            enemy.GetComponent<NetworkObject>().Spawn();
+            enemyMovement = enemy.GetComponent<EnemyMovement>();
+        }
     }
 
     void ClientConnected(ulong u)
@@ -35,11 +39,12 @@ public class ActiveEnemy : NetworkBehaviour
         await Task.Yield();
         players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
     }
-    private void OnTriggerEnter(Collider other) {
-        if(other.CompareTag("Player"))
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
         {
+            enabled = false;
             SpawnEnemyRpc();
-            Destroy(gameObject);
         }
     }
 }
