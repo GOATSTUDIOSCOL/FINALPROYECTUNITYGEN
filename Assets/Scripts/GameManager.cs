@@ -11,7 +11,7 @@ public class GameManager : NetworkBehaviour
     private NetworkVariable<int> keys = new NetworkVariable<int>();
     public NetworkVariable<bool> shadowPuzle = new NetworkVariable<bool>();
     private NetworkVariable<float> timeLeft = new NetworkVariable<float>();
-    public float initialTime = 15 * 60;
+    private float initialTime = 2 * 60;
     public float localTime;
     private const int initialKeys = 0;
     public TextMeshProUGUI timeUIText;
@@ -136,7 +136,11 @@ public class GameManager : NetworkBehaviour
     {
         timeUIText.text = FormatTime(newValue);
         if (newValue <= 0)
+        {
             losePanel.SetActive(true);
+            EnableCursor();
+        }
+
     }
 
     private void NetworkManager_OnClientConnectedCallback(ulong obj)
@@ -178,6 +182,7 @@ public class GameManager : NetworkBehaviour
         else
         {
             losePanel.SetActive(true);
+            EnableCursor();
         }
     }
 
