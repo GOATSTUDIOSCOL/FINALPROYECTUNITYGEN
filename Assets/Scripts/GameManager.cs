@@ -17,6 +17,7 @@ public class GameManager : NetworkBehaviour
     public TextMeshProUGUI timeUIText;
     public GameObject losePanel;
     public GameObject winPanel;
+    public GameObject diePanel;
     public bool gameStarted = false;
     public bool globalShadowState = false;
     private bool isPaused;

@@ -62,7 +62,7 @@ public class PlayerDamage : NetworkBehaviour
                     if(IsOwner)
                     {
                         other.GetComponentInParent<EnemyMovement>().OnPlayerKilled();
-                        GameManager.instance.losePanel.SetActive(true);
+                        GameManager.instance.diePanel.SetActive(true);
                     }
                 
                 break;

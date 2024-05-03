@@ -4978,6 +4978,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c686f89f38c932648bb4806bba8522ee, type: 3}
+--- !u!1 &782105162 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1947583953602971090, guid: c686f89f38c932648bb4806bba8522ee, type: 3}
+  m_PrefabInstance: {fileID: 782105161}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &783164274
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6243,6 +6248,7 @@ MonoBehaviour:
   timeUIText: {fileID: 1669240142}
   losePanel: {fileID: 1890582076}
   winPanel: {fileID: 247917223}
+  diePanel: {fileID: 782105162}
   gameStarted: 0
   globalShadowState: 0
   isAudioDevicesDisplayOpen: 0
