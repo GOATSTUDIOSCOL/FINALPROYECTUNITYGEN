@@ -15,6 +15,7 @@ public class BoxCounter : NetworkBehaviour
     public NetworkVariable<bool> IsCup = new NetworkVariable<bool>(false);
     public NetworkVariable<bool> IsPicture = new NetworkVariable<bool>(false);
     private NetworkVariable<FixedString64Bytes> selectedLayer = new NetworkVariable<FixedString64Bytes>();
+    private NetworkVariable<FixedString64Bytes> removeTag = new NetworkVariable<FixedString64Bytes>("Untagged");
     private NetworkVariable<int> count = new NetworkVariable<int>();
     private NetworkVariable<int> totalCount = new NetworkVariable<int>(3);
     public Door door;
@@ -63,6 +64,8 @@ public class BoxCounter : NetworkBehaviour
     {
         if (IsServer && other.gameObject.layer == LayerMask.NameToLayer(selectedLayer.Value.ToString()))
         {
+            
+            other.gameObject.tag = removeTag.Value.ToString();
             count.Value += 1;
             if (count.Value == totalCount.Value)
             {

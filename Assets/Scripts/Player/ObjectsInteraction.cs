@@ -156,6 +156,10 @@ public class ObjectsInteraction : NetworkBehaviour
                     if (InventoryManager.instance.hasCard)
                     {
                         hit.collider.GetComponent<BoxActivation>().OpenBoxRpc();
+                    } 
+                    else if (!InventoryManager.instance.hasCard)
+                    {
+                        hit.collider.GetComponent<BoxActivation>().NoCardRpc();
                     }
                     break;
 
