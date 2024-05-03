@@ -1246,7 +1246,7 @@ PrefabInstance:
     - target: {fileID: 1936096740099702473, guid: 5f6856505f5326845bb316d789a330fb, type: 3}
       propertyPath: door
       value: 
-      objectReference: {fileID: 2968259492178459833}
+      objectReference: {fileID: 676467787}
     - target: {fileID: 1936096741196316844, guid: 5f6856505f5326845bb316d789a330fb, type: 3}
       propertyPath: m_Name
       value: ShadowPuzzle
@@ -3136,6 +3136,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e5952756b9b7514ebad87de95a4d7c6, type: 3}
+--- !u!114 &676467787 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9028799094130383381, guid: 37121f71645b5d346a7db15d9b183e34, type: 3}
+  m_PrefabInstance: {fileID: 2968259492178459831}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470197e1670c48941a16bf9044373ada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &680357359
 GameObject:
   m_ObjectHideFlags: 0
@@ -6803,7 +6814,6 @@ MonoBehaviour:
   updateList: {fileID: 258150016}
   lobbyName: {fileID: 1602965012}
   createLobby: {fileID: 834315452}
-  playGameCharacter: {fileID: 0}
   japanFont: {fileID: 11400000, guid: 7cd92838efcd0494ebc2c7cdcffdbf78, type: 2}
   normalFont: {fileID: 11400000, guid: cc1b1ed92065d094ca12e78cefecb3e0, type: 2}
 --- !u!114 &1336994340 stripped
@@ -15624,22 +15634,12 @@ PrefabInstance:
       propertyPath: hasPuzzle
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1314262246, guid: 37121f71645b5d346a7db15d9b183e34, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 37121f71645b5d346a7db15d9b183e34, type: 3}
 --- !u!114 &2968259492178459832 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8539412513417798067, guid: 37121f71645b5d346a7db15d9b183e34, type: 3}
-  m_PrefabInstance: {fileID: 2968259492178459831}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 470197e1670c48941a16bf9044373ada, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2968259492178459833 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5194002811608304166, guid: 37121f71645b5d346a7db15d9b183e34, type: 3}
   m_PrefabInstance: {fileID: 2968259492178459831}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
