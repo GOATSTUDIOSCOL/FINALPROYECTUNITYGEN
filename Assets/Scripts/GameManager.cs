@@ -11,7 +11,7 @@ public class GameManager : NetworkBehaviour
     private NetworkVariable<int> keys = new NetworkVariable<int>();
     public NetworkVariable<bool> shadowPuzle = new NetworkVariable<bool>();
     private NetworkVariable<float> timeLeft = new NetworkVariable<float>();
-    private float initialTime = 1 * 30;
+    private float initialTime = 15 * 60;
     public float localTime;
     private const int initialKeys = 0;
     public TextMeshProUGUI timeUIText;
@@ -155,7 +155,7 @@ public class GameManager : NetworkBehaviour
         Debug.Log($"Detected NetworkVariable Change: Previous: {previous} | Current: {current}");
         keysText.text = current.ToString();
         keysGoalText.text = keys.Value.ToString() + "/8";
-        if (current >= 1)
+        if (current >= 8)
         {
             mainDoor.OpenDoorRpc();
         }
@@ -167,7 +167,7 @@ public class GameManager : NetworkBehaviour
         keys.Value++;
         keysText.text = keys.Value.ToString();
         keysGoalText.text = keys.Value.ToString() + "/8";
-        if (keys.Value >= 1)
+        if (keys.Value >= 8)
         {
             mainDoor.OpenDoorRpc();
         }
@@ -205,7 +205,7 @@ public class GameManager : NetworkBehaviour
 
     public void ReloadGame()
     {
-        SceneManager.LoadScene(1);
+        Application.Quit();
     }
 
     public void QuitGame()
