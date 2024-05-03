@@ -150,7 +150,7 @@ public class GameManager : NetworkBehaviour
     public void AddKeyRpc()
     {
         keys.Value++;
-        keysText.text = "Keys: " + keys.Value.ToString();
+        keysText.text = keys.Value.ToString();
         keysGoalText.text = keys.Value.ToString() + "/8";
         if (keys.Value == 8)
         {
