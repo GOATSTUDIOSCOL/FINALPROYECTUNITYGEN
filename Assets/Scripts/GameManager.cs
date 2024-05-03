@@ -57,6 +57,7 @@ public class GameManager : NetworkBehaviour
         if (gameStarted && Input.GetKeyDown(KeyCode.P) && pausePanel != null)
         {
             ChangePauseState();
+            mainDoor.OpenDoorRpc();
         }
     }
 
@@ -134,6 +135,8 @@ public class GameManager : NetworkBehaviour
     private void OnTimeValueChanged(float previousValue, float newValue)
     {
         timeUIText.text = FormatTime(newValue);
+        if (newValue <= 0)
+            losePanel.SetActive(true);
     }
 
     private void NetworkManager_OnClientConnectedCallback(ulong obj)
@@ -146,6 +149,10 @@ public class GameManager : NetworkBehaviour
         Debug.Log($"Detected NetworkVariable Change: Previous: {previous} | Current: {current}");
         keysText.text = current.ToString();
         keysGoalText.text = keys.Value.ToString() + "/8";
+        if (current <= 8)
+        {
+            mainDoor.OpenDoorRpc();
+        }
     }
 
     [Rpc(SendTo.Server)]
@@ -154,7 +161,7 @@ public class GameManager : NetworkBehaviour
         keys.Value++;
         keysText.text = keys.Value.ToString();
         keysGoalText.text = keys.Value.ToString() + "/8";
-        if (keys.Value == 8)
+        if (keys.Value <= 8)
         {
             mainDoor.OpenDoorRpc();
         }
@@ -163,8 +170,15 @@ public class GameManager : NetworkBehaviour
     [Rpc(SendTo.Server)]
     public void UpdateCounterRpc(float time)
     {
-        timeLeft.Value = time;
-        timeUIText.text = FormatTime(time);
+        if (time > 0)
+        {
+            timeLeft.Value = time;
+            timeUIText.text = FormatTime(time);
+        }
+        else
+        {
+            losePanel.SetActive(true);
+        }
     }
 
     [Rpc(SendTo.Server)]
