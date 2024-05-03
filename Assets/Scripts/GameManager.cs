@@ -11,7 +11,7 @@ public class GameManager : NetworkBehaviour
     private NetworkVariable<int> keys = new NetworkVariable<int>();
     public NetworkVariable<bool> shadowPuzle = new NetworkVariable<bool>();
     private NetworkVariable<float> timeLeft = new NetworkVariable<float>();
-    private float initialTime = 2 * 60;
+    private float initialTime = 1 * 30;
     public float localTime;
     private const int initialKeys = 0;
     public TextMeshProUGUI timeUIText;
