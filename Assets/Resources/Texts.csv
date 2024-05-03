@@ -16,6 +16,7 @@ AUDIODEVICES,Audio Devices,Dispositivos de audio,Dispositifs audio,Dispositivos 
 INPUTDEVICE,Input Device,Dispositivo de entrada,Dispositif d'entrée,Dispositivo de entrada,入力デバイス
 OUTPUTDEVICE,Output Device,Dispositivo de salida,Dispositif de sortie,Dispositivo de saída,出力デバイス
 LOBBYNAME,Lobby Name,Nombre del Lobby,Nom du salon,Nome do lobby,ロビー名
+LOBBYTITLE,Lobbies,Lobbies,Lobbys,Salones,ロビー
 CREATELOBBY,Create Lobby,Crear Lobby,Créer un salon,Criar Lobby,ロビーを作成する
 UPDATE,Update,Actualizar,Mettre à jour,Atualizar,更新
 BACK,Back,Atrás,Retour,Retornar,戻る

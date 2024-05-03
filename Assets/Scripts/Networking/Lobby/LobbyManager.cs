@@ -107,11 +107,7 @@ public class LobbyManager : MonoBehaviour
 
 
     public async void LogoutBasicServices() {
-        try {
-
-            if (VivoxService.Instance.IsLoggedIn) {
-                await VivoxService.Instance.LogoutAsync();            
-            }
+        try {            
             LeaveLobby();  
             AuthenticationService.Instance.SignOut(true);
 
@@ -387,8 +383,12 @@ public class LobbyManager : MonoBehaviour
             {
                 if (joinedLobby.HostId ==  AuthenticationService.Instance.PlayerId) {
                     Debug.Log("Left Host");
+                    // NetworkManager.Singleton.Shutdown();
                 } else {
                     Debug.Log("Left Client");
+                }
+                if (VivoxService.Instance.IsLoggedIn) {
+                    await VivoxService.Instance.LogoutAsync();       
                 }
                 await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
                 joinedLobby = null;

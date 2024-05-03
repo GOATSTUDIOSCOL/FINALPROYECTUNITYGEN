@@ -68,7 +68,7 @@ public class LanguageSetter : MonoBehaviour
         next.text = LanguageManager.instance.GetText("CONTINUE");
         login.text = LanguageManager.instance.GetText("LOGIN");
         nickname.text = LanguageManager.instance.GetText("NICKNAME");
-        lobbyList.text = LanguageManager.instance.GetText("SERVER");
+        lobbyList.text = LanguageManager.instance.GetText("LOBBYTITLE");
         updateList.text = LanguageManager.instance.GetText("UPDATE");
         lobbyName.text = LanguageManager.instance.GetText("LOBBYNAME");
         createLobby.text = LanguageManager.instance.GetText("CREATELOBBY");
