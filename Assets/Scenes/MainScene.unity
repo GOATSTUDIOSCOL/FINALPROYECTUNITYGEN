@@ -5318,11 +5318,6 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!1 &940634210 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1947583953602971090, guid: c686f89f38c932648bb4806bba8522ee, type: 3}
-  m_PrefabInstance: {fileID: 782105161}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &972880322
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6236,10 +6231,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowPuzle:
     m_InternalValue: 0
-  initialTime: 900
   localTime: 0
   timeUIText: {fileID: 1669240142}
-  losePanel: {fileID: 940634210}
+  losePanel: {fileID: 1890582076}
   winPanel: {fileID: 247917223}
   gameStarted: 0
   globalShadowState: 0
@@ -9310,6 +9304,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 48
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1890582076 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3728630899402602165, guid: c686f89f38c932648bb4806bba8522ee, type: 3}
+  m_PrefabInstance: {fileID: 782105161}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1891105274
 PrefabInstance:
   m_ObjectHideFlags: 0
