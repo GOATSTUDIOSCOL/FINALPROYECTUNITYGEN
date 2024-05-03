@@ -1336,7 +1336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3009370515687889141, guid: 61982cab0fd68af42aafa4dbbaf68397, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3009370515687889142, guid: 61982cab0fd68af42aafa4dbbaf68397, type: 3}
       propertyPath: enemy
@@ -7516,7 +7516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 899154355687683441, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -58.99994
+      value: -58.999878
       objectReference: {fileID: 0}
     - target: {fileID: 2289298855440984934, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -7576,7 +7576,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3772636091967311429, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -59.000183
+      value: -59.000122
       objectReference: {fileID: 0}
     - target: {fileID: 4754185262425288170, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
       propertyPath: OutputAudioMixerGroup
