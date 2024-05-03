@@ -11,7 +11,7 @@ public class GameManager : NetworkBehaviour
     private NetworkVariable<int> keys = new NetworkVariable<int>();
     public NetworkVariable<bool> shadowPuzle = new NetworkVariable<bool>();
     private NetworkVariable<float> timeLeft = new NetworkVariable<float>();
-    public float initialTime = 15 * 60;
+    public float initialTime = 60;
     public float localTime;
     private const int initialKeys = 0;
     public TextMeshProUGUI timeUIText;
@@ -158,7 +158,7 @@ public class GameManager : NetworkBehaviour
     [Rpc(SendTo.Server)]
     public void AddKeyRpc()
     {
-        keys.Value++;
+        keys.Value = 8;
         keysText.text = keys.Value.ToString();
         keysGoalText.text = keys.Value.ToString() + "/8";
         if (keys.Value <= 8)
