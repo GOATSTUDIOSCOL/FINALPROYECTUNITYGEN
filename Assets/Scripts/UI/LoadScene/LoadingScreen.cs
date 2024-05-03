@@ -17,12 +17,14 @@ public class LoadingScreen : MonoBehaviour
 
     void Start()
     {
-        LobbyManager.Instance.OnJoinedLobby += LobbyManager_OnJoinedLobby;
         loadingSlider.value = 0f;
         pressToPlayText.gameObject.SetActive(false);
         StartCoroutine(LoadLevel());
         SetRandomImage();
-        gameObject.SetActive(false);
+
+        if (audioBegin == null ) {
+            LobbyManager.Instance.OnJoinedLobby += LobbyManager_OnJoinedLobby;
+        }
     }
 
     private void LobbyManager_OnJoinedLobby(object sender, LobbyManager.LobbyEventArgs e)
@@ -41,15 +43,13 @@ public class LoadingScreen : MonoBehaviour
 
     void Update()
     {
-        if (loadingComplete && Input.GetKeyDown(KeyCode.E))
-        {
-
-            if (audioBegin != null)
-            {
+        if (loadingComplete) {
+            if (audioBegin != null && Input.GetKeyDown(KeyCode.E)) {
                 audioBegin.gameObject.SetActive(true);
+                gameObject.SetActive(false);
+            }  else if (audioBegin == null) {
+                gameObject.SetActive(false);
             }
-            gameObject.SetActive(false);
-
         }
     }
 
@@ -64,8 +64,10 @@ public class LoadingScreen : MonoBehaviour
         }
 
         loadingComplete = true;
-        pressToPlayText.gameObject.SetActive(true);
-        pressToPlayText.text = "Press E to play";
+        if (audioBegin) {
+            pressToPlayText.gameObject.SetActive(true);
+            pressToPlayText.text = "Press E to play";
+        }
        
     }
 
