@@ -9,6 +9,7 @@ public class PortalEndGame : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameManager.instance.winPanel.SetActive(true);
+            GameManager.instance.EnableCursor();
         }
     }
 }
