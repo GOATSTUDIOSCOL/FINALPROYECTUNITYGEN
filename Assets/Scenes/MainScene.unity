@@ -4810,11 +4810,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1947583953469691982, guid: c686f89f38c932648bb4806bba8522ee, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1947583953602971090, guid: c686f89f38c932648bb4806bba8522ee, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3069245850508614692, guid: c686f89f38c932648bb4806bba8522ee, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -4902,7 +4902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5525118224776701152, guid: c686f89f38c932648bb4806bba8522ee, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5687848500574667240, guid: c686f89f38c932648bb4806bba8522ee, type: 3}
       propertyPath: observerPanel
