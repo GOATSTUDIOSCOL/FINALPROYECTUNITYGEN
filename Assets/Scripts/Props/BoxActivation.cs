@@ -9,17 +9,18 @@ public class BoxActivation : NetworkBehaviour
     public GameObject noCardPanel;
     private NetworkVariable<bool> isOpen = new NetworkVariable<bool>();
     [SerializeField] Animator boxAnim;
-    
-    private void Start() 
+
+    private void Start()
     {
         noCardPanel.SetActive(false);
     }
     void Update()
     {
-        if(isOpen.Value)
+        if (isOpen.Value)
         {
             boxAnim.SetBool("isOpen", true);
-        } else
+        }
+        else
         {
             boxAnim.SetBool("isOpen", false);
         }
@@ -31,21 +32,16 @@ public class BoxActivation : NetworkBehaviour
         GetComponent<PlaySFX>().Play(0);
     }
 
-    [Rpc(SendTo.Server)]
     public void NoCardRpc()
     {
-        if(IsServer)
-        {
-            StartCoroutine(NoCardCoroutine());
-        }
-        
+        StartCoroutine(NoCardCoroutine());
     }
     IEnumerator NoCardCoroutine()
-    {   
-        GetComponent<PlaySFX>().Play(1);    
+    {
+        GetComponent<PlaySFX>().Play(1);
         noCardPanel.SetActive(true);
-        yield return new WaitForSeconds(2); 
+        yield return new WaitForSeconds(2);
         noCardPanel.SetActive(false);
-        
+
     }
 }
