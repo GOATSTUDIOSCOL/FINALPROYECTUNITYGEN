@@ -16,7 +16,6 @@ public class LanguageSetter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI graphics;
     [SerializeField] private TextMeshProUGUI volume;
     [SerializeField] private TextMeshProUGUI back;
-    [SerializeField] private TextMeshProUGUI next;
     [SerializeField] private TextMeshProUGUI login;
     [SerializeField] private TextMeshProUGUI nickname;
     [SerializeField] private TextMeshProUGUI lobbyList;
@@ -65,7 +64,6 @@ public class LanguageSetter : MonoBehaviour
         graphics.text = LanguageManager.instance.GetText("QUALITY");
         volume.text = LanguageManager.instance.GetText("VOLUME");
         back.text = LanguageManager.instance.GetText("BACK");
-        next.text = LanguageManager.instance.GetText("CONTINUE");
         login.text = LanguageManager.instance.GetText("LOGIN");
         nickname.text = LanguageManager.instance.GetText("NICKNAME");
         lobbyList.text = LanguageManager.instance.GetText("LOBBYTITLE");
@@ -87,7 +85,6 @@ public class LanguageSetter : MonoBehaviour
         graphics.font = newFont;
         volume.font = newFont;
         back.font = newFont;
-        next.font = newFont;
         login.font = newFont;
         nickname.font = newFont;
         lobbyList.font = newFont;
