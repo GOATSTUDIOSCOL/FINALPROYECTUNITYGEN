@@ -16,11 +16,19 @@ public class LoadingScreen : MonoBehaviour
 
     void Start()
     {
+        LobbyManager.Instance.OnJoinedLobby += LobbyManager_OnJoinedLobby;
         loadingSlider.value = 0f;
         pressToPlayText.gameObject.SetActive(false);
         StartCoroutine(LoadLevel());
         SetRandomImage();
+        gameObject.SetActive(false);
     }
+
+    private void LobbyManager_OnJoinedLobby(object sender, LobbyManager.LobbyEventArgs e)
+    {
+        gameObject.SetActive(true);
+    }
+
 
     private void OnEnable()
     {
@@ -62,7 +70,7 @@ public class LoadingScreen : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No se han asignado imágenes a la lista de imágenes de carga o el objeto de imagen no está asignado.");
+            Debug.LogWarning("No se han asignado imï¿½genes a la lista de imï¿½genes de carga o el objeto de imagen no estï¿½ asignado.");
         }
     }
 }
