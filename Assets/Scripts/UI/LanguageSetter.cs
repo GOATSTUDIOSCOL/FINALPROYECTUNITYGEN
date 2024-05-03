@@ -22,7 +22,6 @@ public class LanguageSetter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI updateList;
     [SerializeField] private TextMeshProUGUI lobbyName;
     [SerializeField] private TextMeshProUGUI createLobby;
-    [SerializeField] private TextMeshProUGUI playGameCharacter;
     #endregion
 
 
@@ -70,7 +69,7 @@ public class LanguageSetter : MonoBehaviour
         updateList.text = LanguageManager.instance.GetText("UPDATE");
         lobbyName.text = LanguageManager.instance.GetText("LOBBYNAME");
         createLobby.text = LanguageManager.instance.GetText("CREATELOBBY");
-        playGameCharacter.text = LanguageManager.instance.GetText("PLAY");
+
     }
 
     public void ChangeFont(TMP_FontAsset newFont)
