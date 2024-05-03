@@ -44,18 +44,22 @@ public class GameManager : NetworkBehaviour
 
     private void Update()
     {
-        if (gameStarted && IsHost)
+
+        if (gameStarted)
         {
-            localTime = timeLeft.Value - Time.deltaTime;
-            UpdateCounterRpc(localTime);
+            if (IsHost)
+            {
+                localTime = timeLeft.Value - Time.deltaTime;
+                UpdateCounterRpc(localTime);
+            }
+            else if (timeLeft.Value <= 0)
+            {
+                losePanel.SetActive(true);
+            }
         }
         if (gameStarted && Input.GetKeyDown(KeyCode.P) && pausePanel != null)
         {
             ChangePauseState();
-        }
-        if (timeLeft.Value <= 0)
-        {
-            losePanel.SetActive(true);
         }
     }
 
@@ -160,7 +164,7 @@ public class GameManager : NetworkBehaviour
     [Rpc(SendTo.Server)]
     public void AddKeyRpc()
     {
-        keys.Value ++;
+        keys.Value++;
         keysText.text = keys.Value.ToString();
         keysGoalText.text = keys.Value.ToString() + "/8";
         if (keys.Value >= 1)
