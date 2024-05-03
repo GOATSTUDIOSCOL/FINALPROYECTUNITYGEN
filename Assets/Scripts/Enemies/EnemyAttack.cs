@@ -6,29 +6,30 @@ public class EnemyAttack : MonoBehaviour
 {
     public EnemyMovement enemyMovement;
     public GameObject attackCollider;
-    [SerializeField] float attackTime = 2f;
+    [SerializeField] float attackCooldown = 1f;
+    private float lastAttackTime;
+
     void Start()
     {
         attackCollider.SetActive(false);
+        lastAttackTime = -attackCooldown;
     }
 
-   
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerStay(Collider other)
+    {
         PlayerMovement player = other.gameObject.GetComponent<PlayerMovement>();
-        if (player != null)
+        if (player != null && Time.time - lastAttackTime >= attackCooldown)
         {
+            lastAttackTime = Time.time;
             enemyMovement.enemyAnim.SetTrigger("isAttacking");
             StartCoroutine(AttackTimer());
-            
         }
     }
 
     IEnumerator AttackTimer()
     {
-        yield return new WaitForSeconds(attackTime); 
         attackCollider.SetActive(true);
-        yield return new WaitForSeconds(attackTime); 
+        yield return new WaitForSeconds(attackCooldown);
         attackCollider.SetActive(false);
     }
-     
 }

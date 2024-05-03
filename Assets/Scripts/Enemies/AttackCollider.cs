@@ -6,7 +6,7 @@ public class AttackCollider : MonoBehaviour
 {
     public EnemyMovement enemyMovement;
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerStay(Collider other) {
         PlayerMovement player = other.gameObject.GetComponent<PlayerMovement>();
         if (player != null)
         {
