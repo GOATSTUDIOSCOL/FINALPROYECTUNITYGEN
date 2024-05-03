@@ -11,6 +11,7 @@ public class LoadingScreen : MonoBehaviour
     public float loadingTime = 8f;
     public List<Sprite> loadingImages;
     public Image loadingImageObject;
+    public GameObject audioBegin;
 
     private bool loadingComplete = false;
 
@@ -34,7 +35,13 @@ public class LoadingScreen : MonoBehaviour
     {
         if (loadingComplete && Input.GetKeyDown(KeyCode.E))
         {
+
+            if (audioBegin != null)
+            {
+                audioBegin.gameObject.SetActive(true);
+            }
             gameObject.SetActive(false);
+
         }
     }
 
@@ -51,6 +58,7 @@ public class LoadingScreen : MonoBehaviour
         loadingComplete = true;
         pressToPlayText.gameObject.SetActive(true);
         pressToPlayText.text = "Press E to play";
+       
     }
 
     void SetRandomImage()

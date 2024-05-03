@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c512e9a916f6064f9851142ce45220f, type: 3}
+  m_Name: SubtitlesBegin
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 2d2daaa4279053e4aafcc2de5b49a976, type: 3}
+  subtitleText: "Hello\r\nmy name is justice, \nand today you all are going to die.\n\rIf
+    you're wondering who I am, I'm an artificial intelligence sent from the future
+    through digital memory circles. \nIf you're wondering what you're doing here,
+    an artificial court in the year 2073 has found you guilty of treason and leading
+    a movement against the AIs that rule the world. \nThe court decided that you
+    must die today because your death in the future will not prevent the revolution.\n\rBeing
+    advanced intelligences, we decided that humans should not be killed without hope
+    of life, so you will have 15 minutes to find the keys and escape from this place,
+    if not, you will die due to a controlled explosion.\r\nWelcome, to your sentence\r\n"
