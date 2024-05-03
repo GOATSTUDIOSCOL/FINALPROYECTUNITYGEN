@@ -6,8 +6,14 @@ using UnityEngine;
 public class BoxActivation : NetworkBehaviour
 {
     [SerializeField] bool isOpenLocal;
+    public GameObject noCardPanel;
     private NetworkVariable<bool> isOpen = new NetworkVariable<bool>();
     [SerializeField] Animator boxAnim;
+    
+    private void Start() 
+    {
+        noCardPanel.SetActive(false);
+    }
     void Update()
     {
         if(isOpen.Value)
@@ -23,5 +29,23 @@ public class BoxActivation : NetworkBehaviour
     {
         isOpen.Value = true;
         GetComponent<PlaySFX>().Play(0);
+    }
+
+    [Rpc(SendTo.Server)]
+    public void NoCardRpc()
+    {
+        if(IsServer)
+        {
+            StartCoroutine(NoCardCoroutine());
+        }
+        
+    }
+    IEnumerator NoCardCoroutine()
+    {   
+        GetComponent<PlaySFX>().Play(1);    
+        noCardPanel.SetActive(true);
+        yield return new WaitForSeconds(2); 
+        noCardPanel.SetActive(false);
+        
     }
 }

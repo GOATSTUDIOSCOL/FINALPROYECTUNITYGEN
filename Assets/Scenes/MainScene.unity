@@ -6555,18 +6555,6 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 1763451604
       objectReference: {fileID: 0}
-    - target: {fileID: 273075583, guid: 6623d3f2da670cb4d8f9429de022b0f8, type: 3}
-      propertyPath: SyncScaleX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 273075583, guid: 6623d3f2da670cb4d8f9429de022b0f8, type: 3}
-      propertyPath: SyncScaleY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 273075583, guid: 6623d3f2da670cb4d8f9429de022b0f8, type: 3}
-      propertyPath: SyncScaleZ
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 943285605, guid: 6623d3f2da670cb4d8f9429de022b0f8, type: 3}
       propertyPath: door
       value: 
@@ -7481,7 +7469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 899154355687683441, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -58.999756
+      value: -58.999695
       objectReference: {fileID: 0}
     - target: {fileID: 2289298855440984934, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -7541,7 +7529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3772636091967311429, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -59
+      value: -58.99994
       objectReference: {fileID: 0}
     - target: {fileID: 4754185262425288170, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
       propertyPath: OutputAudioMixerGroup
@@ -9103,34 +9091,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 1526381360
       objectReference: {fileID: 0}
-    - target: {fileID: 273075582, guid: 6623d3f2da670cb4d8f9429de022b0f8, type: 3}
-      propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 3440517352
-      objectReference: {fileID: 0}
-    - target: {fileID: 273075583, guid: 6623d3f2da670cb4d8f9429de022b0f8, type: 3}
-      propertyPath: SyncScaleX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 273075583, guid: 6623d3f2da670cb4d8f9429de022b0f8, type: 3}
-      propertyPath: SyncScaleY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 273075583, guid: 6623d3f2da670cb4d8f9429de022b0f8, type: 3}
-      propertyPath: SyncScaleZ
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 943285605, guid: 6623d3f2da670cb4d8f9429de022b0f8, type: 3}
       propertyPath: door
       value: 
       objectReference: {fileID: 2968259492178459834}
-    - target: {fileID: 943285605, guid: 6623d3f2da670cb4d8f9429de022b0f8, type: 3}
-      propertyPath: IsCup.m_InternalValue
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 943285605, guid: 6623d3f2da670cb4d8f9429de022b0f8, type: 3}
-      propertyPath: IsPicture.m_InternalValue
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4781043257412985190, guid: 6623d3f2da670cb4d8f9429de022b0f8, type: 3}
       propertyPath: m_RootOrder
       value: 53
