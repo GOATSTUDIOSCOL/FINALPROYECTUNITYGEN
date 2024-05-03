@@ -233,6 +233,7 @@ public class ST_PuzzleDisplay : MonoBehaviour
 		if(Complete)
 		{
 			Debug.Log("Puzzle Complete!");
+			GameManager.instance.slidePuzzleDoor.OpenDoorRpc();
 		}
 
 		yield return null;

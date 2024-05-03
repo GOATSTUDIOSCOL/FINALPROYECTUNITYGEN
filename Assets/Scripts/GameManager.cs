@@ -23,6 +23,8 @@ public class GameManager : NetworkBehaviour
     public bool isAudioDevicesDisplayOpen = false;
     private GameObject pausePanel;
     public Canvas vivoxCanvas;
+    public Door slidePuzzleDoor;
+    public Door mainDoor;
 
     [SerializeField] private TextMeshProUGUI keysText;
     [SerializeField] private TextMeshProUGUI keysGoalText;
@@ -154,7 +156,7 @@ public class GameManager : NetworkBehaviour
         keysGoalText.text = keys.Value.ToString() + "/8";
         if (keys.Value == 8)
         {
-            winPanel.SetActive(true);
+            mainDoor.OpenDoorRpc();
         }
     }
 

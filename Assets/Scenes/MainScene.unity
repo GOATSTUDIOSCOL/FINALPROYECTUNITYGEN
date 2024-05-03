@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731715, g: 0.13414735, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -915,6 +915,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 107725132}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &108392732 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9028799094130383381, guid: 37121f71645b5d346a7db15d9b183e34, type: 3}
+  m_PrefabInstance: {fileID: 2968259492178459831}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470197e1670c48941a16bf9044373ada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &111827330
 GameObject:
   m_ObjectHideFlags: 0
@@ -1246,7 +1257,7 @@ PrefabInstance:
     - target: {fileID: 1936096740099702473, guid: 5f6856505f5326845bb316d789a330fb, type: 3}
       propertyPath: door
       value: 
-      objectReference: {fileID: 2968259492178459833}
+      objectReference: {fileID: 108392732}
     - target: {fileID: 1936096741196316844, guid: 5f6856505f5326845bb316d789a330fb, type: 3}
       propertyPath: m_Name
       value: ShadowPuzzle
@@ -1325,7 +1336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3009370515687889141, guid: 61982cab0fd68af42aafa4dbbaf68397, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3009370515687889142, guid: 61982cab0fd68af42aafa4dbbaf68397, type: 3}
       propertyPath: enemy
@@ -3664,6 +3675,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6123730251832511806, guid: 45b0e8c1420a3ec47b90fdb71b7a3cbd, type: 3}
   m_PrefabInstance: {fileID: 717907700}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &718417466 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5642706567464186833, guid: 37121f71645b5d346a7db15d9b183e34, type: 3}
+  m_PrefabInstance: {fileID: 2968259492178459831}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470197e1670c48941a16bf9044373ada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &734727486 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1713083863810078740, guid: c686f89f38c932648bb4806bba8522ee, type: 3}
@@ -5189,6 +5211,17 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 1375324395, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
   m_PrefabInstance: {fileID: 1375324393}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &992765353 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1314262242, guid: 37121f71645b5d346a7db15d9b183e34, type: 3}
+  m_PrefabInstance: {fileID: 2968259492178459831}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470197e1670c48941a16bf9044373ada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1032908653
 GameObject:
   m_ObjectHideFlags: 0
@@ -5772,6 +5805,8 @@ MonoBehaviour:
   globalShadowState: 0
   isAudioDevicesDisplayOpen: 0
   vivoxCanvas: {fileID: 833259598485959977}
+  slidePuzzleDoor: {fileID: 718417466}
+  mainDoor: {fileID: 992765353}
   keysText: {fileID: 979943120}
   keysGoalText: {fileID: 2048242004}
 --- !u!4 &1150228592
@@ -7481,7 +7516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 899154355687683441, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -58.999756
+      value: -58.99994
       objectReference: {fileID: 0}
     - target: {fileID: 2289298855440984934, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -7541,7 +7576,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3772636091967311429, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -59
+      value: -59.000183
       objectReference: {fileID: 0}
     - target: {fileID: 4754185262425288170, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
       propertyPath: OutputAudioMixerGroup
@@ -8594,6 +8629,36 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1642129169222259248, guid: 4ccf2cdf115b6e94dbb560cf775e8784, type: 3}
   m_PrefabInstance: {fileID: 771375880}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1772090264 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5607819269926399345, guid: 45e0f06c750176947862c10346226439, type: 3}
+  m_PrefabInstance: {fileID: 972880322}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1772090268
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772090264}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.294731, y: 2.841, z: 0.45551723}
+  m_Center: {x: -0.05712117, y: 0.00049996714, z: -0.20817932}
+--- !u!114 &1772090269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772090264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a1bbffeb7577f14ba628fb3a6cdce4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1772576999 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1772576999, guid: 3269db507f06bf54aa944e3099da3d1c, type: 3}
@@ -8968,6 +9033,14 @@ PrefabInstance:
     - target: {fileID: 481646, guid: 7c531463e5044824c86b226a31199d41, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427478, guid: 7c531463e5044824c86b226a31199d41, type: 3}
+      propertyPath: Width
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427478, guid: 7c531463e5044824c86b226a31199d41, type: 3}
+      propertyPath: Height
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1631819761, guid: 7c531463e5044824c86b226a31199d41, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -15640,7 +15713,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Environment
       objectReference: {fileID: 0}
+    - target: {fileID: 5194002811608304166, guid: 37121f71645b5d346a7db15d9b183e34, type: 3}
+      propertyPath: hasPuzzle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7024842551619915329, guid: 37121f71645b5d346a7db15d9b183e34, type: 3}
+      propertyPath: hasPuzzle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9028799094130383381, guid: 37121f71645b5d346a7db15d9b183e34, type: 3}
       propertyPath: hasPuzzle
       value: 1
       objectReference: {fileID: 0}
@@ -15649,17 +15730,6 @@ PrefabInstance:
 --- !u!114 &2968259492178459832 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8539412513417798067, guid: 37121f71645b5d346a7db15d9b183e34, type: 3}
-  m_PrefabInstance: {fileID: 2968259492178459831}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 470197e1670c48941a16bf9044373ada, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2968259492178459833 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5194002811608304166, guid: 37121f71645b5d346a7db15d9b183e34, type: 3}
   m_PrefabInstance: {fileID: 2968259492178459831}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
