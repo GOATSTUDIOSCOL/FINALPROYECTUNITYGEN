@@ -59,6 +59,11 @@ public class GameManager : NetworkBehaviour
             ChangePauseState();
             mainDoor.OpenDoorRpc();
         }
+        if (localTime  < 0)
+        {
+            losePanel.SetActive(true );
+            EnableCursor();
+        }
     }
 
     public void ChangePauseState()
